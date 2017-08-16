@@ -1,0 +1,97 @@
+{
+  "rules": {
+    "ban": [
+      true,
+      [ "_", "extend" ],
+      [ "_", "isNull" ],
+      [ "_", "isDefined" ]
+    ],
+    "class-name": true,
+    "comment-format": [
+      true,
+      "check-space",
+      "check-lowercase"
+    ],
+    "curly": true,
+    "eofline": false,
+    "forin": false,
+    "indent": [ true, 4 ],
+    "interface-name": [ true, "always-prefix" ],
+    "jsdoc-format": true,
+    "label-position": true,
+    "max-line-length": [ true, 140 ],
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
+    "no-construct": true,
+    "no-debugger": true,
+    "no-duplicate-variable": true,
+    "no-consecutive-blank-lines": true,
+    "no-unnecessary-qualifier": true,
+    "no-empty": true,
+    "no-eval": true,
+    "no-string-literal": false,
+    "no-trailing-comma": false,
+    "no-trailing-whitespace": true,
+    "no-unused-expression": true,
+    "no-unused-variable": true,
+    "no-use-before-declare": true,
+    "newline-before-return": true,
+    "linebreak-style": [ true, "CRLF" ],
+    "one-line": [
+      true,
+      "check-open-brace",
+      "check-catch",
+      "check-else",
+      "check-whitespace"
+    ],
+    "quotemark": [ true, "single" ],
+    "radix": false,
+    "semicolon": [ true, "ignore-interfaces" ],
+    "triple-equals": [ true ],
+    "typedef": [
+      true,
+      "call-signature",
+      "parameter",
+      "property-declaration"
+    ],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "onespace",
+        "index-signature": "onespace",
+        "parameter": "onespace",
+        "property-declaration": "onespace",
+        "variable-declaration": "onespace"
+      }
+    ],
+    "use-strict": [
+      false
+    ],
+    "variable-name": [
+      true
+    ],
+    "whitespace": [
+      false,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type"
+    ]
+  }
+}

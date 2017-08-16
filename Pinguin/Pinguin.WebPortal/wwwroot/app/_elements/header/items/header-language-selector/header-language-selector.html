@@ -1,0 +1,10 @@
+﻿<ui-select ng-model="selectLanguage"
+           ng-model-options="{ getterSetter: true }"
+           theme="bootstrap"
+           search-enabled="false"
+           remove-selected="false">
+    <ui-select-match>{{ $select.selected.label }}</ui-select-match>
+    <ui-select-choices repeat="language in languages">
+        <div ng-bind-html="language.label"></div>
+    </ui-select-choices>
+</ui-select>

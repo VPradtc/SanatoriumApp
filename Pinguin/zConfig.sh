@@ -1,0 +1,7 @@
+OldName='PortalApi'
+NewName='WebPortal'
+RootSHA='1abcc8d4e431ebb8c5ee4fd22e3db7cf47b85aab'
+ReleaseBranch='master'
+DevBranch='master'
+ConfigBranch='localbuild_config'
+Version='0.0.0.0'
