@@ -123,7 +123,7 @@ namespace Pinguin.IOC
                 Kernel.Bind<IErrorPolicyBootstrapper>().To<ErrorPolicyBootstrapper>().InSingletonScope();
 
                 Kernel.BindHttpFilter<ExceptionInfoDecoratorAttribute>(FilterScope.Controller)
-                    .WhenActionMethodHas<ExceptionDetailAttribute>();
+                    .WhenControllerHas<ExceptionDetailAttribute>();
             }
         }
 

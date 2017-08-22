@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 using System.Web.Http.Filters;
 using Core.Logging;
 
@@ -16,7 +15,7 @@ namespace Pinguin.WebPortal.Filters.Errors
 
         public override void OnException(HttpActionExecutedContext ctx)
         {
-            _logger.Error("An error occurred:\r\n Exception: {Exception}\r\nRequest: {Request}", ctx.Exception, HttpContext.Current.Request);
+            _logger.Error(ctx.Exception, "An error has occurred.");
 
             base.OnException(ctx);
         }
