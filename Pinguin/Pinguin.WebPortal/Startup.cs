@@ -9,6 +9,7 @@ using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
 using Pinguin.IOC;
+using Pinguin.WebPortal.App_Start.ErrorPolicy;
 using Pinguin.WebPortal.Handlers;
 
 [assembly: OwinStartup(typeof(Pinguin.WebPortal.Startup))]
@@ -42,6 +43,9 @@ namespace Pinguin.WebPortal
 
             var traceMessageHandler = NinjectHttpContainer.Resolve<TraceMessageHandler>();
             config.MessageHandlers.Add(traceMessageHandler);
+
+            var errorPolicyBootstrapper = NinjectHttpContainer.Resolve<IErrorPolicyBootstrapper>();
+            errorPolicyBootstrapper.Bootstrap(config);
 
             config.EnsureInitialized();
         }

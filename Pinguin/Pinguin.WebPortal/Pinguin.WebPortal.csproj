@@ -178,6 +178,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ErrorPolicy\ErrorPolicyBootstrapper.cs" />
+    <Compile Include="App_Start\ErrorPolicy\IErrorPolicyBootstrapper.cs" />
     <Compile Include="App_Start\IOC\NInjectConfig.cs" />
     <Compile Include="App_Start\IOC\NinjectHttpModules.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -186,6 +188,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Core\BaseApiController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Filters\Errors\ExceptionDetailAttribute.cs" />
+    <Compile Include="Filters\Errors\ExceptionInfoDecoratorAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
