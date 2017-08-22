@@ -195,7 +195,7 @@
     </Compile>
     <Compile Include="Handlers\TraceMessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Seed\Core\ISeedService_TEntity.cs" />
+    <Compile Include="Seed\Core\ISeedService.cs" />
     <Compile Include="Seed\Core\SeedService_TEntity.cs" />
     <Compile Include="Seed\Users\UserSeedService.cs" />
     <Compile Include="Startup.cs" />

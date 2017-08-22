@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Pinguin.API.Seed.Core
 {
-    public abstract class SeedService<TEntity> : ISeedService<TEntity>
+    public abstract class SeedService<TEntity> : ISeedService
     {
         protected abstract ICollection<TEntity> CreateSeedData();
 
