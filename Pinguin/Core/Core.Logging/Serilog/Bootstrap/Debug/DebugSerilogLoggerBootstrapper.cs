@@ -11,13 +11,13 @@ namespace Core.Logging.Serilog.Bootstrap.Debug
     public class DebugSerilogLoggerBootstrapper : ILoggerBootstrapper
     {
         private readonly string _pathPrefix = "logs";
-        private readonly string _errorMessageTemplate = "{NewLine}{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}"
-                                                 + "Exception: {Exception}{NewLine}"
-                                                 + "Stack Trace: {NewLine}{StackTrace}{NewLine}"
+        private readonly string _errorMessageTemplate = "{NewLine}{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}{NewLine}"
                                                  + "Host: {_Host}{NewLine}"
                                                  + "Method: {_HTTPMethod}{NewLine}"
                                                  + "URL: {_Url}{NewLine}"
-                                                 + "Status Code: {_StatusCode}{NewLine}";
+                                                 + "Status Code: {_StatusCode}{NewLine}"
+                                                 + "[{Level}] {Message}{NewLine}"
+                                                 + "Exception: {Exception}{NewLine}";
 
         private readonly SerilogLoggerFactory _logFactory;
 

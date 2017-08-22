@@ -3,9 +3,9 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Pinguin.WebPortal.Controllers.Core;
 using Pinguin.Services.Auth.Users;
 using Pinguin.Viewmodels.Users;
+using Pinguin.WebPortal.Controllers.Core;
 
 namespace Pinguin.WebPortal.Controllers
 {

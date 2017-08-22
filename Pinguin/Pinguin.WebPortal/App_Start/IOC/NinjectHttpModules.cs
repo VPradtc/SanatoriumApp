@@ -22,6 +22,10 @@ using Pinguin.ExternalServices.Email.Core.Messages;
 using Pinguin.ExternalServices.Email.SendGrid;
 using Pinguin.WebPortal.Auth;
 using Pinguin.Services.Auth.Users;
+using Pinguin.WebPortal.App_Start.ErrorPolicy;
+using Ninject.Web.WebApi.FilterBindingSyntax;
+using Pinguin.WebPortal.Filters.Errors;
+using System.Web.Http.Filters;
 
 namespace Pinguin.IOC
 {
@@ -116,6 +120,10 @@ namespace Pinguin.IOC
         {
             public override void Load()
             {
+                Kernel.Bind<IErrorPolicyBootstrapper>().To<ErrorPolicyBootstrapper>().InSingletonScope();
+
+                Kernel.BindHttpFilter<ExceptionInfoDecoratorAttribute>(FilterScope.Controller)
+                    .WhenControllerHas<ExceptionDetailAttribute>();
             }
         }
 

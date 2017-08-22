@@ -7,5 +7,6 @@ namespace Pinguin.Services.Auth.Users
     public interface IUserService
     {
         Task Create(UserCreateModel model);
+        Task<bool> Exists(string email);
     }
 }
