@@ -34,5 +34,12 @@ namespace Pinguin.Services.Auth.Users
 
             await _userRepository.Create(user);
         }
+
+        public async Task<bool> Exists(string email)
+        {
+            var user = await _userRepository.GetByEmail(email);
+
+            return user == null;
+        }
     }
 }

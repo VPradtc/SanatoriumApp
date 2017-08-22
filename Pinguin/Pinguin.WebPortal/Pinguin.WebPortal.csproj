@@ -197,6 +197,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seed\Core\ISeedService_TEntity.cs" />
     <Compile Include="Seed\Core\SeedService_TEntity.cs" />
+    <Compile Include="Seed\Users\UserSeedService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

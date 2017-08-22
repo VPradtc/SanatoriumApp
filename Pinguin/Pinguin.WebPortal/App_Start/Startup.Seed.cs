@@ -1,4 +1,6 @@
 ﻿using System;
+using Pinguin.IOC;
+using Pinguin.WebPortal.Seed.Users;
 
 namespace Pinguin.WebPortal
 {
@@ -6,6 +8,8 @@ namespace Pinguin.WebPortal
     {
         public void Seed()
         {
+            var userSeedService = NinjectHttpContainer.Resolve<UserSeedService>();
+            userSeedService.ExecuteAsync().Wait();
         }
     }
 }
