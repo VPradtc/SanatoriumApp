@@ -60,6 +60,10 @@
       <Project>{14cb9fce-4fc5-4a07-a590-e6d6ca12dae1}</Project>
       <Name>Core.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SanatoriumApp.Domain\SanatoriumApp.Domain.csproj">
+      <Project>{b9543cec-32f3-4d64-8663-786c10c5c4ea}</Project>
+      <Name>SanatoriumApp.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SanatoriumApp.Repositories\SanatoriumApp.Repositories.csproj">
       <Project>{16D6A372-E638-4C54-B82A-3D2296524D06}</Project>
       <Name>SanatoriumApp.Repositories</Name>

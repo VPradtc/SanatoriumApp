@@ -13,15 +13,13 @@ function BaseController($scope, $loading, $state, dialogService, $localStorage, 
             dataSourceFactory.createRemoteDataSource($scope.options.grid.getDataUrl, $scope.options.grid.params),
             {
                 data: $scope.options.grid.data,
-                filter: $scope.options.grid.dataSource ? $scope.options.grid.dataSource.filter : [],
+                filter: [],
                 batch: true,
                 pageSize: 10,
                 serverPaging: true,
                 serverSorting: true,
                 serverFiltering: true,
-                sortable: {
-                    mode: 'multiple'
-                },
+                sortable: false,
                 schema: {
                     model: $scope.options.grid.model,
                     data: function (response) {
@@ -43,7 +41,7 @@ function BaseController($scope, $loading, $state, dialogService, $localStorage, 
                     console.log(e.xhr.responseText);
                 }
             }),
-        sortable: true,
+        sortable: false,
         resizable: true,
         scrollable: false,
         editable: false,
@@ -57,9 +55,7 @@ function BaseController($scope, $loading, $state, dialogService, $localStorage, 
                 itemsPerPage: ""
             }
         },
-        filterable: {
-            extra: false
-        },
+        filterable: false,
         dataBound: function () {
             this.expandRow(this.tbody.find('tr.k-master-row').first());
         },

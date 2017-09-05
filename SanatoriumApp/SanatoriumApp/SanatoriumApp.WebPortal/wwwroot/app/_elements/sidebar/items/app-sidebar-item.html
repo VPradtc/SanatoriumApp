@@ -1,0 +1,33 @@
+<li ng-class="getClass()">
+    <a ng-if="item.sref"
+       class="nav-link nav-toggle"
+       ui-sref="{{ item.sref }}">
+        <i ng-class="item.icon"></i>
+        <span class="title">{{ item.text | i18n }}</span>
+        <span class="arrow"
+              ng-if="item.subItems">
+        </span>
+        <span ng-if="isSelected()"
+              class="selected"></span>
+    </a>
+    <a ng-if="!item.sref"
+       class="nav-link nav-toggle"
+       ng-href="{{ item.href }}">
+        <i ng-class="item.icon"></i>
+        <span class="title">{{ item.text | i18n }}</span>
+        <span class="arrow"
+              ng-if="item.subItems">
+        </span>
+        <span ng-if="isSelected()"
+              class="selected"></span>
+    </a>
+    <ul class="sub-menu"
+        ng-if="item.subItems">
+        <li ng-repeat="subItem in item.subItems">
+            <a ui-sref="{{ subItem.sref }}">
+                <i ng-class="subItem.icon"></i>
+                <span>{{ subItem.text | i18n }}</span>
+            </a>
+        </li>
+    </ul>
+</li>

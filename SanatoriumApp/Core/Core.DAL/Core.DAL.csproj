@@ -56,7 +56,7 @@
     <Compile Include="Parameters\IParameterFactory.cs" />
     <Compile Include="Parameters\Collections\IdCollectionSqlParameterFactory.cs" />
     <Compile Include="Parameters\KeyValuePairCollection\KeyValuePairCollectionSqlParameterFactory.cs" />
-    <Compile Include="Parameters\Paging\PagingParameterCollectionFactory.cs" />
+    <Compile Include="Parameters\Kendo\KendoGridRequestParameterCollectionFactory.cs" />
     <Compile Include="Parameters\Collections\StringCollectionSqlParameterFactory.cs" />
     <Compile Include="Parameters\UDTSqlParameterFactory.cs" />
     <Compile Include="StoredProcedures\Base\SqlStoredProcedure.cs" />

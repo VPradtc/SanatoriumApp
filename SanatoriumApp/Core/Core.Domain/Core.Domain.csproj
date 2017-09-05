@@ -50,10 +50,9 @@
     <Compile Include="Auth\User.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="BaseEntity_T.cs" />
+    <Compile Include="Common\KendoGridRequest.cs" />
+    <Compile Include="Common\KendoGridResponse.cs" />
     <Compile Include="Definition\IDefinitionProvider_T.cs" />
-    <Compile Include="Paging\PagingRequest.cs" />
-    <Compile Include="Sorting\SortDirection.cs" />
-    <Compile Include="Sorting\SortRequest.cs" />
     <Compile Include="TrackableEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

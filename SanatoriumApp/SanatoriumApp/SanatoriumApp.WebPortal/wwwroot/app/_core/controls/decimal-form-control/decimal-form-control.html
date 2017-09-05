@@ -1,0 +1,16 @@
+﻿<div class="form-group">
+    <label class="control-label"
+           ng-class="showLabel ? '' : 'visible-ie8 visible-ie9'">
+        {{ label | i18n }}
+    </label>
+    <input class="form-control placeholder-no-fix"
+           type="text"
+           ng-attr-i18n-attr="showLabel && {} || { placeholder: label }"
+           name="{{ field }}"
+           ng-model="entity[field]"
+           ui-number-mask="digitsAfterPoint"
+           ix-validators="createValidators()" />
+    <ix-form-control-validation-block field="{{ field }}"
+                                      validations="validations">
+    </ix-form-control-validation-block>
+</div>

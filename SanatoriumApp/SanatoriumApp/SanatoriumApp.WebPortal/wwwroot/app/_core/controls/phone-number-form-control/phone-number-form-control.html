@@ -1,0 +1,15 @@
+﻿<div class="form-group">
+    <label class="control-label visible-ie8 visible-ie9">
+        {{ label | i18n }}
+    </label>
+    <input class="form-control placeholder-no-fix"
+           ng-intl-tel-input
+           type="text"
+           i18n-attr="{ placeholder: label }"
+           name="{{ field }}"
+           ng-model="entity[field]"
+           ix-validators="createValidators()" />
+    <ix-form-control-validation-block field="{{ field }}"
+                                      validations="validations">
+    </ix-form-control-validation-block>
+</div>

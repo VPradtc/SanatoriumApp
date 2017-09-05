@@ -42,6 +42,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4DABCC
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanatoriumApp.Domain", "SanatoriumApp.Domain\SanatoriumApp.Domain.csproj", "{B9543CEC-32F3-4D64-8663-786C10C5C4EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,10 @@ Global
 		{27C34C82-1319-43C8-99ED-B98E7E72ED37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27C34C82-1319-43C8-99ED-B98E7E72ED37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27C34C82-1319-43C8-99ED-B98E7E72ED37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9543CEC-32F3-4D64-8663-786C10C5C4EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9543CEC-32F3-4D64-8663-786C10C5C4EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9543CEC-32F3-4D64-8663-786C10C5C4EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9543CEC-32F3-4D64-8663-786C10C5C4EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

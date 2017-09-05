@@ -1,0 +1,11 @@
+﻿<section class="has-error"
+         ng-if="form.$submitted">
+    <div ng-messages="form[field].$error"
+         ng-if="validations">
+        <div ng-repeat="validation in validations"
+             ng-message="{{ validation.validator.name }}"
+             class="help-block">
+            {{ validation.message | i18n:(validation.args)}}
+        </div>
+    </div>
+</section>

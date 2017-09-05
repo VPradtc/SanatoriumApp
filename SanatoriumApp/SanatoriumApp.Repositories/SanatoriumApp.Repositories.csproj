@@ -68,6 +68,14 @@
       <Project>{D64D2CF2-E919-4FF7-8F5D-B1CBB68B6BA8}</Project>
       <Name>SanatoriumApp.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SanatoriumApp.Domain\SanatoriumApp.Domain.csproj">
+      <Project>{b9543cec-32f3-4d64-8663-786c10c5c4ea}</Project>
+      <Name>SanatoriumApp.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SanatoriumApp.Viewmodels\SanatoriumApp.Viewmodels.csproj">
+      <Project>{27c34c82-1319-43c8-99ed-b98e7e72ed37}</Project>
+      <Name>SanatoriumApp.Viewmodels</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

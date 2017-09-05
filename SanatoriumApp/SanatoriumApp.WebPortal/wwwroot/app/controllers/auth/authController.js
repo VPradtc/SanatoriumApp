@@ -14,10 +14,6 @@ function AuthController($scope, $state, authService) {
         password: ""
     };
 
-    vm.register = function () {
-        $state.go('app.auth.register');
-    }
-
     vm.login = function () {
         vm.$applyAsync(function () {
             vm.isLoading = true;

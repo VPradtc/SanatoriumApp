@@ -2,7 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Domain.Auth;
+using Core.Domain.Common;
 using SanatoriumApp.DAL.Users;
+using SanatoriumApp.Domain.Users;
+using SanatoriumApp.Viewmodels.Users;
 
 namespace SanatoriumApp.Repositories.Users
 {
@@ -29,6 +32,27 @@ namespace SanatoriumApp.Repositories.Users
         {
             var result = await _getByEmailCommand.ExecuteAsync(email);
             return result.FirstOrDefault();
+        }
+
+
+        public Task<UserEditModel> GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<KendoGridResponse<UserGetByPageModel>> GetByPage(KendoGridRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Update(UserEditModel request)
+        {
+            throw new NotImplementedException();
         }
     }
 }
