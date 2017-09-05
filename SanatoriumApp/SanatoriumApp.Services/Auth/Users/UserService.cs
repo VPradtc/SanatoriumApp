@@ -39,7 +39,7 @@ namespace SanatoriumApp.Services.Auth.Users
         {
             var user = await _userRepository.GetByEmail(email);
 
-            return user == null;
+            return user != null;
         }
     }
 }

@@ -1,50 +1,46 @@
-﻿<html lang="en"
-      ng-strict-di
-      ng-app="pinguinPortal">
-<head>
-    <title>{{ 'app.appName' | i18n }}</title>
-
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
-
+﻿<!DOCtype html>
+<html data-ng-app="DataAccessApp">
+<head head>
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+    <title i18n="store.hardwareWebStore"></title>
     <base href="/SanatoriumApp.WebPortal/" />
-
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all"
-          rel="stylesheet"
-          type="text/css" />
-    <link href="lib/ng-dialog/css/ngDialog.min.css" rel="stylesheet" />
-    <link href="lib/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet" />
-    <link href="lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link href="app/content/css/loader.min.css" rel="stylesheet" type="text/css" />
+    <link href="app/content/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
     <div ui-view></div>
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular-sanitize/angular-sanitize.js"></script>
-    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="lib/oclazyload/dist/ocLazyLoad.js"></script>
-    <script src="lib/angular-cookies/angular-cookies.js"></script>
-    <script src="lib/angular-localization/angular-localization.js"></script>
-    <script src="lib/ngstorage/ngStorage.js"></script>
-    <script src="lib/angular-messages/angular-messages.js"></script>
-    <script src="lib/ng-dialog/js/ngDialog.js"></script>
-    <script src="lib/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
 
-    <script src="app.js"></script>
-    <script src="app/_services/routeHistoryService.js"></script>
-    <script src="config/lazyload.config.js"></script>
-    <script src="config/route.config.js"></script>
-    <script src="config/routeEvents.config.js"></script>
-    <script src="config/url.config.js"></script>
-    <script src="app/auth/models/authData.js"></script>
-    <script src="app/auth/models/requests/authRequest.js"></script>
-    <script src="app/auth/models/requests/passwordAuthRequest.js"></script>
-    <script src="app/auth/models/requests/refreshTokenAuthRequest.js"></script>
-    <script src="app/auth/services/authService.js"></script>
-    <script src="config/security/routeSecurityInterceptor.js"></script>
-    <script src="config/security/httpSecurityInterceptor.js"></script>
+    <script src="app/scripts/extensions/stringExtensions.js"></script>
+    <script src="app/scripts/mobile-detect/mobile-detect.js"></script>
+
+    <!-- Angular Js -->
+    <script type="text/javascript" src="app/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="app/scripts/angular.js"></script>
+    <script type="text/javascript" src="app/scripts/angular-ui-router.js"></script>
+    <script type="text/javascript" src="app/scripts/ocLazyLoad.min.js"></script>
+    <script type="text/javascript" src="app/scripts/ngStorage.min.js"></script>
+    <script type="text/javascript" src="app/scripts/loader.js"></script>
+    <script src="app/scripts/angular-cookies/angular-cookies.js"></script>
+    <script src="app/scripts/angular-sanitize/angular-sanitize.js"></script>
+    <script src="app/scripts/angular-localization/angular-localization.js"></script>
+    <script src="app/scripts/angular-messages/angular-messages.js"></script>
+    <script src="app/scripts/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
+    <script src="app/scripts/angular-validation-match/angular-validation-match.js"></script>
+    <!-- App Module Load -->
+    <script type="text/javascript" src="app/app.js"></script>
+
+    <!-- Debug -->
+    <script type="text/javascript" src="app/config/lazyLoad.config.js"></script>
+    <script type="text/javascript" src="app/config/url.debug.config.js"></script>
+
+    <!-- Publish -->
+    <!--<script type="text/javascript" src="app/config/lazyLoad.config.min.js"></script>
+    <script type="text/javascript" src="app/config/url.publish.config.min.js"></script>-->
+
+    <script type="text/javascript" src="app/config/route.config.js"></script>
+    <script type="text/javascript" src="app/factory/promiseFactory.js"></script>
+    <script type="text/javascript" src="app/services/authService.js"></script>
+    <script type="text/javascript" src="app/services/authInterceptorService.js"></script>
 </body>
 </html>

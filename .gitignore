@@ -257,7 +257,5 @@ paket-files/
 
 #Exclude tsc generated files
 *.map
-**/wwwroot/**/*.js
 
 #Exclude scss generated files
-*.css

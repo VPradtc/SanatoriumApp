@@ -16,10 +16,6 @@ using Core.Logging.Serilog.Bootstrap.Debug;
 using Microsoft.Owin.Security.OAuth;
 using Ninject.Modules;
 using SanatoriumApp.Repositories.Users;
-using SanatoriumApp.ExternalServices.Email.Core;
-using SanatoriumApp.ExternalServices.Email.Core.Configuration;
-using SanatoriumApp.ExternalServices.Email.Core.Messages;
-using SanatoriumApp.ExternalServices.Email.SendGrid;
 using SanatoriumApp.WebPortal.Auth;
 using SanatoriumApp.Services.Auth.Users;
 using SanatoriumApp.WebPortal.App_Start.ErrorPolicy;
@@ -84,9 +80,6 @@ namespace SanatoriumApp.IOC
         {
             public override void Load()
             {
-                Kernel.Bind<IEmailConfigurationFactory>().To<EmailConfigurationFactory>();
-                Kernel.Bind<IEmailMessageBuilder>().To<EmailMessageBuilder>();
-                Kernel.Bind<IEmailService>().To<SendGridEmailService>();
             }
         }
 

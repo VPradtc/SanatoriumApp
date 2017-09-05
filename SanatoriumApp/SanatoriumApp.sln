@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanatoriumApp.WebPortal", "SanatoriumApp.WebPortal\SanatoriumApp.WebPortal.csproj", "{35B5517C-F5AB-4B6A-8467-C04DA4E71D6E}"
 EndProject
@@ -36,6 +36,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanatoriumApp.Services", "SanatoriumApp.Services\SanatoriumApp.Services.csproj", "{23A41BBA-22CC-496D-91F7-F501668B24D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SanatoriumApp.Viewmodels", "SanatoriumApp.Viewmodels\SanatoriumApp.Viewmodels.csproj", "{27C34C82-1319-43C8-99ED-B98E7E72ED37}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4DABCCF5-48E6-4F85-BA4E-ACAB5253E90F}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
