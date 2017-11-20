@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MedicalProcedures\IMedicalProcedureRepository.cs" />
+    <Compile Include="MedicalProcedures\MedicalProcedureRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RefreshTokens\RefreshTokenRepository.cs" />
     <Compile Include="Users\IUserRepository.cs" />
