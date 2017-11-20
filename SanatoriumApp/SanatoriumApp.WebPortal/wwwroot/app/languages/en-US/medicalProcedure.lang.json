@@ -1,0 +1,11 @@
+﻿{
+  "medicalProcedures": "Medical Procedures",
+  "medicalProcedure": "Medical Procedure",
+  "name": "Name",
+  "baseCost": "Base Cost",
+  "deleteThisMedicalProcedure": "Delete this medical procedure?",
+  "nameIsRequired": "Name is required.",
+  "baseCostIsRequired": "Base Cost is required.",
+  "createMedicalProcedure": "Create Medical Procedure",
+  "editMedicalProcedure": "Edit Medical Procedure"
+}

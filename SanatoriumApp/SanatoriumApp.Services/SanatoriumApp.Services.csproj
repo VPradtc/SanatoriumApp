@@ -42,9 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth\MedicalProcedures\IMedicalProcedureService.cs" />
+    <Compile Include="Auth\MedicalProcedures\MedicalProcedureService.cs" />
     <Compile Include="Auth\SanatoriumAppAuthUserManager.cs" />
-    <Compile Include="Auth\Users\UserService.cs" />
     <Compile Include="Auth\Users\IUserService.cs" />
+    <Compile Include="Auth\Users\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

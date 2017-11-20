@@ -46,6 +46,12 @@
     <Compile Include="RefreshTokens\RefreshTokensCreateSqlStoredProcedureCommand.cs" />
     <Compile Include="RefreshTokens\RefreshTokensDeleteSqlStoredProcedureCommand.cs" />
     <Compile Include="RefreshTokens\RefreshTokensGetByTokenValueSqlStoredProcedureQuery.cs" />
+    <Compile Include="MedicalProcedures\MedicalProceduresCreateSqlStoredProcedureCommand.cs" />
+    <Compile Include="MedicalProcedures\MedicalProceduresDeleteSqlStoredProcedureCommand.cs" />
+    <Compile Include="MedicalProcedures\MedicalProceduresGetByIdSqlStoredProcedureQuery.cs" />
+    <Compile Include="MedicalProcedures\MedicalProceduresGetByPageSqlStoredProcedureQuery.cs" />
+    <Compile Include="MedicalProcedures\MedicalProceduresGetTotalSqlStoredProcedureScalar.cs" />
+    <Compile Include="MedicalProcedures\MedicalProceduresUpdateSqlStoredProcedureCommand.cs" />
     <Compile Include="Users\UsersGetTotalSqlStoredProcedureScalar.cs" />
     <Compile Include="Users\UsersUpdateSqlStoredProcedureCommand.cs" />
     <Compile Include="Users\UsersCreateSqlStoredProcedureCommand.cs" />

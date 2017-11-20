@@ -176,10 +176,19 @@ angular.module('DataAccessApp').config(['$ocLazyLoadProvider', function ($ocLazy
                 ]
             },
             {
+                name: 'medicalProcedureModule',
+                files: [
+                    'app/controllers/medicalProcedure/medicalProcedureController.js',
+                    'app/controllers/medicalProcedure/medicalProcedureEditController.js',
+                    'app/services/medicalProcedure/medicalProcedureService.js',
+                    'app/kendo/models/medicalProcedureModel.js',
+                    'app/factory/forms/medicalProcedure/medicalProcedureFormFactory.js',
+                ]
+            },
+            {
                 name: 'loadingModule',
                 files: [
                     'app/services/loading/loadingService.js',
-
                 ]
             }
         ]

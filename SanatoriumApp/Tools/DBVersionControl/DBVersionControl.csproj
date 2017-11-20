@@ -151,6 +151,27 @@
     <Content Include="Scripts\0.0.3\2_usp_Users_Create_ALTER.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\0.0.4\0_TABLE_MedicalProcedures_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.4\1_usp_MedicalProcedures_GetById_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.4\1_usp_MedicalProcedures_GetByPage_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.4\1_usp_MedicalProcedures_GetTotal_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.4\2_usp_MedicalProcedures_Create_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.4\2_usp_MedicalProcedures_Delete_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.4\2_usp_MedicalProcedures_Update_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\_init\Init.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -21,6 +21,16 @@
                 public const string Delete = "usp_RefreshTokens_Delete";
                 public const string GetByTokenValue = "usp_RefreshTokens_GetByTokenValue";
             }
+
+            public static class MedicalProcedures
+            {
+                public const string Create = "usp_MedicalProcedures_Create";
+                public const string Delete = "usp_MedicalProcedures_Delete";
+                public const string Update = "usp_MedicalProcedures_Update";
+                public const string GetByPage = "usp_MedicalProcedures_GetByPage";
+                public const string GetTotal = "usp_MedicalProcedures_GetTotal";
+                public const string GetById = "usp_MedicalProcedures_GetById";
+            }
         }
 
         public static class UDT
