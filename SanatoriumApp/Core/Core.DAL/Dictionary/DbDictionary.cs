@@ -41,6 +41,17 @@
                 public const string GetTotal = "usp_Rooms_GetTotal";
                 public const string GetById = "usp_Rooms_GetById";
             }
+
+            public static class Clients
+            {
+                public const string Create = "usp_Clients_Create";
+                public const string Delete = "usp_Clients_Delete";
+                public const string Update = "usp_Clients_Update";
+                public const string GetByPage = "usp_Clients_GetByPage";
+                public const string GetTotal = "usp_Clients_GetTotal";
+                public const string GetById = "usp_Clients_GetById";
+                public const string GetByPassport = "usp_Clients_GetByPassport";
+            }
         }
 
         public static class UDT

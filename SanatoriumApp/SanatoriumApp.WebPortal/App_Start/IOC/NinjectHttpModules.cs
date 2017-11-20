@@ -17,11 +17,13 @@ using Core.Logging.Serilog.Bootstrap.Debug;
 using Microsoft.Owin.Security.OAuth;
 using Ninject.Modules;
 using Ninject.Web.WebApi.FilterBindingSyntax;
+using SanatoriumApp.Repositories.Clients;
 using SanatoriumApp.Repositories.MedicalProcedures;
 using SanatoriumApp.Repositories.Rooms;
 using SanatoriumApp.Repositories.Users;
 using SanatoriumApp.Services.Auth.MedicalProcedures;
 using SanatoriumApp.Services.Auth.Users;
+using SanatoriumApp.Services.Clients;
 using SanatoriumApp.Services.Rooms;
 using SanatoriumApp.WebPortal.App_Start.ErrorPolicy;
 using SanatoriumApp.WebPortal.Auth;
@@ -71,6 +73,7 @@ namespace SanatoriumApp.IOC
                 Kernel.Bind<IUserRepository>().To<UserRepository>();
                 Kernel.Bind<IRoomRepository>().To<RoomRepository>();
                 Kernel.Bind<IMedicalProcedureRepository>().To<MedicalProcedureRepository>();
+                Kernel.Bind<IClientRepository>().To<ClientRepository>();
                 Kernel.Bind<IRefreshTokenRepository>().To<RefreshTokenRepository>();
             }
         }
@@ -114,6 +117,7 @@ namespace SanatoriumApp.IOC
                 Kernel.Bind<IUserService>().To<UserService>().InSingletonScope();
                 Kernel.Bind<IMedicalProcedureService>().To<MedicalProcedureService>().InSingletonScope();
                 Kernel.Bind<IRoomService>().To<RoomService>();
+                Kernel.Bind<IClientService>().To<ClientService>();
             }
         }
 

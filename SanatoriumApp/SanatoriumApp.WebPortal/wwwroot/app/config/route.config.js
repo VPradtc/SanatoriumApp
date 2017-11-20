@@ -137,6 +137,40 @@ angular.module('DataAccessApp').config(['$stateProvider', '$urlRouterProvider',
                 controller: 'roomEditController'
             })
 
+            .state('app.main.client', {
+                url: '/client',
+                controller: 'baseController',
+                abstract: true,
+                template: '<div ui-view> </div>',
+                resolve: {
+                    lazyLoadModule: [
+                        '$ocLazyLoad', function ($ocLazyLoad) {
+                            $ocLazyLoad.load('BootstrapUiModule');
+                            $ocLazyLoad.load('BaseModule');
+                            return $ocLazyLoad.load(['kendoModule', 'clientModule']);
+                        }
+                    ]
+                }
+            })
+            .state('app.main.client.index', {
+                url: '/index',
+                templateUrl: 'app/views/client/index.html',
+                controller: 'clientController'
+            })
+            .state('app.main.client.edit', {
+                url: '/edit?id',
+                mode: 'edit',
+                templateUrl: 'app/views/client/edit.html',
+                controller: 'clientEditController'
+            })
+            .state('app.main.client.create', {
+                url: '/create',
+                mode: 'create',
+                templateUrl: 'app/views/client/edit.html',
+                controller: 'clientEditController'
+            })
+
+
             /// app Main
             .state('app.main', {
                 abstract: true,

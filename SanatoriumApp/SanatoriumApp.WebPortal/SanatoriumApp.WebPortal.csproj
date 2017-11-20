@@ -192,6 +192,7 @@
     <Compile Include="App_Start\Startup.Seed.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Core\BaseApiController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\MedicalProcedureController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -334,6 +335,8 @@
     <Content Include="wwwroot\app\controllers\base\baseController.js" />
     <Content Include="wwwroot\app\controllers\dialogs\dialogController.js" />
     <Content Include="wwwroot\app\controllers\home\homeController.js" />
+    <Content Include="wwwroot\app\controllers\client\clientController.js" />
+    <Content Include="wwwroot\app\controllers\client\clientEditController.js" />
     <Content Include="wwwroot\app\controllers\room\roomController.js" />
     <Content Include="wwwroot\app\controllers\room\roomEditController.js" />
     <Content Include="wwwroot\app\controllers\medicalProcedure\medicalProcedureController.js" />
@@ -392,11 +395,13 @@
     <Content Include="wwwroot\app\factory\details\detailsStrategyFactory.js" />
     <Content Include="wwwroot\app\factory\details\strategies\createDetailsStrategy.js" />
     <Content Include="wwwroot\app\factory\details\strategies\editDetailsStrategy.js" />
+    <Content Include="wwwroot\app\factory\forms\client\validators\uniquePassportValidator.js" />
     <Content Include="wwwroot\app\factory\forms\common\editControlLocator.js" />
     <Content Include="wwwroot\app\factory\forms\common\indexFieldDecorator.js" />
     <Content Include="wwwroot\app\factory\forms\common\readonlyFieldDecorator.js" />
     <Content Include="wwwroot\app\factory\forms\common\validationConfigFactory.js" />
     <Content Include="wwwroot\app\factory\forms\common\validationTriggerFactory.js" />
+    <Content Include="wwwroot\app\factory\forms\client\clientFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\room\roomFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\medicalProcedure\medicalProcedureFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\user\detailsUserFormFactory.js" />
@@ -420,6 +425,7 @@
     <Content Include="wwwroot\app\factory\promiseFactory.min.js" />
     <Content Include="wwwroot\app\factory\room\roomTypeDefinitionProvider.js" />
     <Content Include="wwwroot\app\factory\urlBuilder.js" />
+    <Content Include="wwwroot\app\kendo\models\clientModel.js" />
     <Content Include="wwwroot\app\kendo\models\medicalProcedureModel.js" />
     <Content Include="wwwroot\app\kendo\models\roomModel.js" />
     <Content Include="wwwroot\app\kendo\models\userModel.js" />
@@ -535,6 +541,7 @@
     <Content Include="wwwroot\app\services\core\roleSpecificViewLocator.js" />
     <Content Include="wwwroot\app\services\dialogs\dialogService.js" />
     <Content Include="wwwroot\app\services\loading\loadingService.js" />
+    <Content Include="wwwroot\app\services\client\clientService.js" />
     <Content Include="wwwroot\app\services\room\roomService.js" />
     <Content Include="wwwroot\app\services\mobile\mobileService.js" />
     <Content Include="wwwroot\app\services\medicalProcedure\medicalProcedureService.js" />
@@ -577,6 +584,8 @@
     <Content Include="wwwroot\app\views\dialogs\successDialog.html" />
     <Content Include="wwwroot\app\views\home.html" />
     <Content Include="wwwroot\app\views\main.html" />
+    <Content Include="wwwroot\app\views\client\edit.html" />
+    <Content Include="wwwroot\app\views\client\index.html" />
     <Content Include="wwwroot\app\views\room\edit.html" />
     <Content Include="wwwroot\app\views\room\index.html" />
     <Content Include="wwwroot\app\views\navbar\navbar-item.html" />
@@ -685,6 +694,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="wwwroot\app\languages\uk\room.lang.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\app\languages\en-US\client.lang.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
