@@ -151,6 +151,33 @@
     <Content Include="Scripts\0.0.3\2_usp_Users_Create_ALTER.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\0.0.5\1_TABLE_RoomTypes_SEED.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.5\0_TABLE_RoomTypes_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.5\1_TABLE_Rooms_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.5\1_usp_Rooms_GetById_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.5\1_usp_Rooms_GetByPage_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.5\1_usp_Rooms_GetTotal_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.5\2_usp_Rooms_Create_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.5\2_usp_Rooms_Delete_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.5\2_usp_Rooms_Update_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\0.0.4\0_TABLE_MedicalProcedures_CREATE.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

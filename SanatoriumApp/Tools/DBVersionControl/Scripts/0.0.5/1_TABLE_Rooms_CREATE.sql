@@ -1,0 +1,32 @@
+IF (
+	NOT EXISTS (
+		SELECT * 
+		FROM INFORMATION_SCHEMA.TABLES 
+		WHERE TABLE_SCHEMA = 'dbo' 
+		AND TABLE_NAME = 'Rooms'
+	)
+)
+BEGIN
+	CREATE TABLE Rooms (
+		[Id] INT PRIMARY KEY IDENTITY(1,1)
+		,[Name] NVARCHAR(128)
+		,[RoomTypeId] INT NOT NULL
+		,[Capacity] INT NOT NULL
+
+		, CONSTRAINT FK_Rooms_RoomTypeId_RoomTypes_Id
+		FOREIGN KEY([RoomTypeId]) REFERENCES RoomTypes(Id)
+
+		,[CreatedBy] INT NOT NULL
+		,[ModifiedBy] INT NOT NULL
+		,[CreatedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[ModifiedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[IsDeleted] BIT NOT NULL DEFAULT(0)
+
+		, CONSTRAINT FK_Rooms_CreatedBy_Users_Id
+		FOREIGN KEY(CreatedBy) REFERENCES Users(Id)
+
+		, CONSTRAINT FK_Rooms_ModifiedBy_Users_Id
+		FOREIGN KEY(ModifiedBy) REFERENCES Users(Id)
+	)
+END
+GO
