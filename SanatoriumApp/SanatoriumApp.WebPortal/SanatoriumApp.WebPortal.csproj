@@ -192,6 +192,7 @@
     <Compile Include="App_Start\Startup.Seed.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Core\BaseApiController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\MedicalProcedureController.cs" />
     <Compile Include="Controllers\UserController.cs" />
