@@ -40,6 +40,19 @@ function DetailsUserFormFactory(roleDefinitionProvider, userFormFactory) {
                     ],
                 }
             },
+            {
+                insertAfter: 'roleId',
+                field: {
+                    field: 'salary',
+                    label: 'user.salary',
+                    attrs: {
+                        type: 'number',
+                        name: 'salary',
+                    },
+                    messages: [
+                    ],
+                }
+            },
         ];
 
         return _fieldEntries;

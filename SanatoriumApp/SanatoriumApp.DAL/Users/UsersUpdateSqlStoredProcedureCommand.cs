@@ -24,6 +24,7 @@ namespace SanatoriumApp.DAL.Users
                 new SqlParameter("@FirstName", SqlDbType.NVarChar, 256) { Value = args.FirstName },
                 new SqlParameter("@LastName", SqlDbType.NVarChar, 256) { Value = args.LastName },
                 new SqlParameter("@RoleId", SqlDbType.Int ) { Value = args.RoleId },
+                new SqlParameter("@Salary", SqlDbType.Decimal ) { Value = args.Salary },
             };
         }
     }

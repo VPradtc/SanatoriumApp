@@ -21,10 +21,6 @@ function UserController($controller, $scope, userService, userModel) {
                     title: 'user.email'
                 },
                 {
-                    field: 'phoneNumber',
-                    title: 'user.phoneNumber'
-                },
-                {
                     field: 'role()',
                     title: 'user.role',
                     sortable: {

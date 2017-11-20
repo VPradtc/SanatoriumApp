@@ -17,5 +17,5 @@
   "invalidEmailFormat": "Invalid email format.",
   "roleIsRequired": "Role is required.",
   "userWithSuchEmailAlreadyExists": "User with such email already exists.",
-  "deleteThisUser": "Delete this User?"
+  "salary": "Salary"
 }

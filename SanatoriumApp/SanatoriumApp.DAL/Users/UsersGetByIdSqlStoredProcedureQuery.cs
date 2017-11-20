@@ -37,6 +37,7 @@ namespace SanatoriumApp.DAL.Users
                 RoleId = (RoleIdentifier)reader.StructField<int>("RoleId"),
                 ApiPasswordHash = reader.Field<string>("ApiPasswordHash"),
                 ApiPasswordSalt = reader.Field<string>("ApiPasswordSalt"),
+                Salary = reader.StructField<decimal>("Salary"),
 
                 CreatedBy = reader.StructField<int>("CreatedBy"),
                 ModifiedBy = reader.StructField<int>("CreatedBy"),

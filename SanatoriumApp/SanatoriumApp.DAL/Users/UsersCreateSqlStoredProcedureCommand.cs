@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 using Core.DAL.Connections;
 using Core.DAL.Dictionary;
@@ -27,6 +26,7 @@ namespace SanatoriumApp.DAL.Users
                 new SqlParameter("@FirstName", SqlDbType.NVarChar, 256) { Value = args.FirstName },
                 new SqlParameter("@LastName", SqlDbType.NVarChar, 256) { Value = args.LastName },
                 new SqlParameter("@RoleId", SqlDbType.Int ) { Value = args.RoleId },
+                new SqlParameter("@Salary", SqlDbType.Decimal ) { Value = args.Salary },
             };
         }
     }

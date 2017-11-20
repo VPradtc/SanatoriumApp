@@ -1,5 +1,4 @@
-﻿using System;
-using Core.Domain.Auth.Roles;
+﻿using Core.Domain.Auth.Roles;
 
 namespace Core.Domain.Auth
 {
@@ -11,6 +10,7 @@ namespace Core.Domain.Auth
         public string Email { get; set; }
         public string ApiPasswordHash { get; set; }
         public string ApiPasswordSalt { get; set; }
+        public decimal Salary { get; set; }
 
         public RoleIdentifier RoleId { get; set; }
     }
