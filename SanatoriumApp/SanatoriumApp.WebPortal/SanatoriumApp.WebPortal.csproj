@@ -332,6 +332,8 @@
     <Content Include="wwwroot\app\controllers\base\baseController.js" />
     <Content Include="wwwroot\app\controllers\dialogs\dialogController.js" />
     <Content Include="wwwroot\app\controllers\home\homeController.js" />
+    <Content Include="wwwroot\app\controllers\procedure\procedureController.js" />
+    <Content Include="wwwroot\app\controllers\procedure\procedureEditController.js" />
     <Content Include="wwwroot\app\controllers\user\userController.js" />
     <Content Include="wwwroot\app\controllers\user\userEditController.js" />
     <Content Include="wwwroot\app\directives\common\breadcrumb-directive.js" />
@@ -390,6 +392,7 @@
     <Content Include="wwwroot\app\factory\forms\common\readonlyFieldDecorator.js" />
     <Content Include="wwwroot\app\factory\forms\common\validationConfigFactory.js" />
     <Content Include="wwwroot\app\factory\forms\common\validationTriggerFactory.js" />
+    <Content Include="wwwroot\app\factory\forms\procedure\medicalProcedureFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\user\detailsUserFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\user\registerUserFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\user\userFormFactory.js" />
@@ -410,6 +413,7 @@
     <Content Include="wwwroot\app\factory\promiseFactory.js" />
     <Content Include="wwwroot\app\factory\promiseFactory.min.js" />
     <Content Include="wwwroot\app\factory\urlBuilder.js" />
+    <Content Include="wwwroot\app\kendo\models\medicalProcedureModel.js" />
     <Content Include="wwwroot\app\kendo\models\userModel.js" />
     <Content Include="wwwroot\app\scripts\angular-cookies\angular-cookies.js" />
     <Content Include="wwwroot\app\scripts\angular-drag-and-drop-lists\angular-drag-and-drop-lists.js" />
@@ -524,6 +528,7 @@
     <Content Include="wwwroot\app\services\dialogs\dialogService.js" />
     <Content Include="wwwroot\app\services\loading\loadingService.js" />
     <Content Include="wwwroot\app\services\mobile\mobileService.js" />
+    <Content Include="wwwroot\app\services\procedure\medicalProcedureService.js" />
     <Content Include="wwwroot\app\services\user\userService.js" />
     <Content Include="wwwroot\app\views\auth\login.html" />
     <Content Include="wwwroot\app\views\auth\register.html" />
@@ -647,15 +652,10 @@
     <Content Include="wwwroot\app\languages\uk\store.lang.json" />
     <Content Include="wwwroot\app\languages\uk\user.lang.json" />
     <Content Include="wwwroot\app\scripts\angular-messages\angular-messages.min.js.map" />
-    <Content Include="wwwroot\app\scripts\angular.min.js.map" />
     <Content Include="wwwroot\app\scripts\inspinia\inspinia.min.js.map" />
     <Content Include="wwwroot\app\scripts\inspinia\plugins\dataTables\jquery.dataTables.min.js.map" />
-    <Content Include="wwwroot\app\scripts\jquery.min.map" />
     <Content Include="wwwroot\app\scripts\kendo\kendo.all.min.js.map" />
     <Content Include="wwwroot\app\scripts\keyboard\css\images\keyboard.svg" />
-    <Content Include="wwwroot\app\scripts\loader.min.js.map" />
-    <Content Include="wwwroot\app\scripts\select.min.js.map" />
-    <Content Include="wwwroot\app\services\authService.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="wwwroot\languages\en-US\app.lang.json" />
