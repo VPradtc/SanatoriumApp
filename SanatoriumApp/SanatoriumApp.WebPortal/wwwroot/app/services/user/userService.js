@@ -18,11 +18,10 @@ function UserService(ngUrlSettings, baseService) {
             return baseService.callPost(api + 'Create', entity);
         },
         delete: function (id) {
-            return baseService.callPost(api + 'Delete', { id: id });
+            return baseService.callPost(api + 'Delete', id);
         },
         isUniqueEmail: function (email) {
             return baseService.callGet(api + 'IsUniqueEmail', { 'email': email });
         },
     };
 }
-

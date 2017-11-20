@@ -17,5 +17,5 @@
   "invalidEmailFormat": "Невірний формат.",
   "roleIsRequired": "Вкажіть роль.",
   "userWithSuchEmailAlreadyExists": "Користувач з такою поштою вже існує.",
-  "deleteThisUser": "Видалити Користувача?"
+  "salary": "Ставка(З/П)"
 }
