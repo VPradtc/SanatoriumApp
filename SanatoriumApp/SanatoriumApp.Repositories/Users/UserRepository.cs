@@ -63,6 +63,7 @@ namespace SanatoriumApp.Repositories.Users
                 FirstName = dbUser.FirstName,
                 LastName = dbUser.LastName,
                 RoleId = dbUser.RoleId,
+                Salary = dbUser.Salary,
             };
         }
 
