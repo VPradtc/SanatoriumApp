@@ -70,6 +70,40 @@ angular.module('DataAccessApp').config(['$stateProvider', '$urlRouterProvider',
                 templateUrl: 'app/views/user/edit.html',
                 controller: 'userEditController'
             })
+
+            .state('app.main.medicalProcedure', {
+                url: '/medicalProcedure',
+                controller: 'baseController',
+                abstract: true,
+                template: '<div ui-view> </div>',
+                resolve: {
+                    lazyLoadModule: [
+                        '$ocLazyLoad', function ($ocLazyLoad) {
+                            $ocLazyLoad.load('BootstrapUiModule');
+                            $ocLazyLoad.load('BaseModule');
+                            return $ocLazyLoad.load(['kendoModule', 'medicalProcedureModule']);
+                        }
+                    ]
+                }
+            })
+            .state('app.main.medicalProcedure.index', {
+                url: '/index',
+                templateUrl: 'app/views/medicalProcedure/index.html',
+                controller: 'medicalProcedureController'
+            })
+            .state('app.main.medicalProcedure.edit', {
+                url: '/edit?id',
+                mode: 'edit',
+                templateUrl: 'app/views/medicalProcedure/edit.html',
+                controller: 'medicalProcedureEditController'
+            })
+            .state('app.main.medicalProcedure.create', {
+                url: '/create',
+                mode: 'create',
+                templateUrl: 'app/views/medicalProcedure/edit.html',
+                controller: 'medicalProcedureEditController'
+            })
+
             /// app Main
             .state('app.main', {
                 abstract: true,

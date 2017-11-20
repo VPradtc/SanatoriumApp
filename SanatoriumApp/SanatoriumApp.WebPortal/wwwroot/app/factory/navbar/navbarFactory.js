@@ -14,7 +14,12 @@ function NavbarFactory(enumRoleIdentifier) {
                     restrict: {
                         roles: [enumRoleIdentifier.admin],
                     },
-                }
+                },
+                {
+                    title: 'common.medicalProcedures',
+                    state: 'app.main.medicalProcedure.index',
+                    icon: 'fa fa-user',
+                },
             ]
         };
 

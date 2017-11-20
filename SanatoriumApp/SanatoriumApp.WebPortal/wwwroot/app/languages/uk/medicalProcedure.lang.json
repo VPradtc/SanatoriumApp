@@ -1,0 +1,11 @@
+﻿{
+  "medicalProcedures": "Медичні Процедури",
+  "medicalProcedure": "Медична Процедура",
+  "name": "Назва",
+  "baseCost": "Базова вартість",
+  "deleteThisMedicalProcedure": "Видалити Медичну Процедуру?",
+  "nameIsRequired": "Вкажіть назву.",
+  "baseCostIsRequired": "Вкажіть базову вартість.",
+  "createMedicalProcedure": "Створити Медичну Процедуру",
+  "editMedicalProcedure": "Редагувати Медичну Процедуру"
+}

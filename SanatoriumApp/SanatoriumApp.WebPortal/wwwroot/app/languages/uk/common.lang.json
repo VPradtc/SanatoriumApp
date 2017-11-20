@@ -18,5 +18,6 @@
   "anErrorHasOccured": "Помилка",
   "unableToDelete": "Неможливо видалити. Спробуйте пізніше.",
   "activate": "Активувати",
-  "deactivate": "Деактивувати"
+  "deactivate": "Деактивувати",
+  "medicalProcedures": "Медичні Процедури"
 }

@@ -18,5 +18,6 @@
   "anErrorHasOccured": "An error has occured on the server",
   "unableToDelete": "Unable to delete. Please try again later.",
   "activate": "Activate",
-  "deactivate": "Deactivate"
+  "deactivate": "Deactivate",
+  "medicalProcedures": "Medical Procedures"
 }

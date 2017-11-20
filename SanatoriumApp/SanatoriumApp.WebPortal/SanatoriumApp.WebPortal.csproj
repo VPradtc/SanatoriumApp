@@ -333,8 +333,8 @@
     <Content Include="wwwroot\app\controllers\base\baseController.js" />
     <Content Include="wwwroot\app\controllers\dialogs\dialogController.js" />
     <Content Include="wwwroot\app\controllers\home\homeController.js" />
-    <Content Include="wwwroot\app\controllers\procedure\procedureController.js" />
-    <Content Include="wwwroot\app\controllers\procedure\procedureEditController.js" />
+    <Content Include="wwwroot\app\controllers\medicalProcedure\medicalProcedureController.js" />
+    <Content Include="wwwroot\app\controllers\medicalProcedure\medicalProcedureEditController.js" />
     <Content Include="wwwroot\app\controllers\user\userController.js" />
     <Content Include="wwwroot\app\controllers\user\userEditController.js" />
     <Content Include="wwwroot\app\directives\common\breadcrumb-directive.js" />
@@ -393,7 +393,7 @@
     <Content Include="wwwroot\app\factory\forms\common\readonlyFieldDecorator.js" />
     <Content Include="wwwroot\app\factory\forms\common\validationConfigFactory.js" />
     <Content Include="wwwroot\app\factory\forms\common\validationTriggerFactory.js" />
-    <Content Include="wwwroot\app\factory\forms\procedure\medicalProcedureFormFactory.js" />
+    <Content Include="wwwroot\app\factory\forms\medicalProcedure\medicalProcedureFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\user\detailsUserFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\user\registerUserFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\user\userFormFactory.js" />
@@ -529,7 +529,7 @@
     <Content Include="wwwroot\app\services\dialogs\dialogService.js" />
     <Content Include="wwwroot\app\services\loading\loadingService.js" />
     <Content Include="wwwroot\app\services\mobile\mobileService.js" />
-    <Content Include="wwwroot\app\services\procedure\medicalProcedureService.js" />
+    <Content Include="wwwroot\app\services\medicalProcedure\medicalProcedureService.js" />
     <Content Include="wwwroot\app\services\user\userService.js" />
     <Content Include="wwwroot\app\views\auth\login.html" />
     <Content Include="wwwroot\app\views\auth\register.html" />
@@ -664,7 +664,12 @@
     <Content Include="wwwroot\languages\en-US\app.lang.json" />
     <Content Include="wwwroot\languages\en-US\common.lang.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="wwwroot\app\languages\en-US\medicalProcedure.lang.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\app\languages\uk\medicalProcedure.lang.json" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
