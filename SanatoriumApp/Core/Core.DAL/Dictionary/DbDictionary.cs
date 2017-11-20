@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Core.DAL.Dictionary
+﻿namespace Core.DAL.Dictionary
 {
     public static class DbDictionary
     {
@@ -10,6 +8,11 @@ namespace Core.DAL.Dictionary
             {
                 public const string GetByEmail = "usp_Users_GetByEmail";
                 public const string Create = "usp_Users_Create";
+                public const string Delete = "usp_Users_Delete";
+                public const string Update = "usp_Users_Update";
+                public const string GetByPage = "usp_Users_GetByPage";
+                public const string GetTotal = "usp_Users_GetTotal";
+                public const string GetById = "usp_Users_GetById";
             }
 
             public static class RefreshTokens

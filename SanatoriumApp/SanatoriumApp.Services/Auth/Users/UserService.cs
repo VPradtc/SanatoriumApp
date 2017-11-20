@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Core.Auth.Services.OAuth2.Users.Security;
 using Core.Domain.Common;
 using SanatoriumApp.Domain.Users;
@@ -44,7 +43,6 @@ namespace SanatoriumApp.Services.Auth.Users
             return user != null;
         }
 
-
         public async Task Update(UserEditModel request)
         {
             await _userRepository.Update(request);
@@ -63,7 +61,8 @@ namespace SanatoriumApp.Services.Auth.Users
 
         public async Task<UserEditModel> GetById(int id)
         {
-            throw new NotImplementedException();
+            var result = await _userRepository.GetById(id);
+            return result;
         }
     }
 }

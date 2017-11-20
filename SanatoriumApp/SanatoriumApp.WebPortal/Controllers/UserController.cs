@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Core.Domain.Common;
+using SanatoriumApp.Domain.Users;
 using SanatoriumApp.Services.Auth.Users;
 using SanatoriumApp.Viewmodels.Users;
 using SanatoriumApp.WebPortal.Controllers.Core;
@@ -19,7 +20,7 @@ namespace SanatoriumApp.WebPortal.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<HttpResponseMessage> GetById(int id)
         {
             var entity = await _userService.GetById(id);

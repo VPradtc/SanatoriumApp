@@ -46,8 +46,13 @@
     <Compile Include="RefreshTokens\RefreshTokensCreateSqlStoredProcedureCommand.cs" />
     <Compile Include="RefreshTokens\RefreshTokensDeleteSqlStoredProcedureCommand.cs" />
     <Compile Include="RefreshTokens\RefreshTokensGetByTokenValueSqlStoredProcedureQuery.cs" />
-    <Compile Include="Users\UsersCreateSqlStoredProcedureQuery.cs" />
+    <Compile Include="Users\UsersGetTotalSqlStoredProcedureScalar.cs" />
+    <Compile Include="Users\UsersUpdateSqlStoredProcedureCommand.cs" />
+    <Compile Include="Users\UsersCreateSqlStoredProcedureCommand.cs" />
+    <Compile Include="Users\UsersDeleteSqlStoredProcedureCommand.cs" />
     <Compile Include="Users\UsersGetByEmailSqlStoredProcedureQuery.cs" />
+    <Compile Include="Users\UsersGetByPageSqlStoredProcedureQuery.cs" />
+    <Compile Include="Users\UsersGetByIdSqlStoredProcedureQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.DAL\Core.DAL.csproj">
@@ -57,6 +62,10 @@
     <ProjectReference Include="..\Core\Core.Domain\Core.Domain.csproj">
       <Project>{14CB9FCE-4FC5-4A07-A590-E6D6CA12DAE1}</Project>
       <Name>Core.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SanatoriumApp.Domain\SanatoriumApp.Domain.csproj">
+      <Project>{B9543CEC-32F3-4D64-8663-786C10C5C4EA}</Project>
+      <Name>SanatoriumApp.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

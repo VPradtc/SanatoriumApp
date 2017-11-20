@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -23,7 +22,9 @@ namespace SanatoriumApp.WebPortal.Handlers
             LogRequest(request, correlationId);
 
             var response = await base.SendAsync(request, cancellationToken);
-            var responseBody = await response.Content.ReadAsStringAsync();
+            var responseBody = response.Content == null
+                ? null
+                : await response.Content.ReadAsStringAsync();
 
             LogResponse(response, responseBody, correlationId);
 

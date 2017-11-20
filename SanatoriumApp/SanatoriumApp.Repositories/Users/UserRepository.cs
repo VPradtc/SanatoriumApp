@@ -1,26 +1,39 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Core.Domain.Auth;
 using Core.Domain.Common;
 using SanatoriumApp.DAL.Users;
 using SanatoriumApp.Domain.Users;
-using SanatoriumApp.Viewmodels.Users;
 
 namespace SanatoriumApp.Repositories.Users
 {
     public class UserRepository : IUserRepository
     {
         private readonly UsersGetByEmailSqlStoredProcedureQuery _getByEmailCommand;
-        private readonly UsersCreateSqlStoredProcedureQuery _createCommand;
+        private readonly UsersCreateSqlStoredProcedureCommand _createCommand;
+        private readonly UsersGetByIdSqlStoredProcedureQuery _getByIdCommand;
+        private readonly UsersGetByPageSqlStoredProcedureQuery _getByPageCommand;
+        private readonly UsersDeleteSqlStoredProcedureCommand _deleteCommand;
+        private readonly UsersUpdateSqlStoredProcedureCommand _updateCommand;
+        private readonly UsersGetTotalSqlStoredProcedureScalar _getTotalCommand;
 
         public UserRepository(
             UsersGetByEmailSqlStoredProcedureQuery getByEmailCommand
-            , UsersCreateSqlStoredProcedureQuery createCommand
+            , UsersCreateSqlStoredProcedureCommand createCommand
+            , UsersGetByIdSqlStoredProcedureQuery getByIdCommand
+            , UsersGetByPageSqlStoredProcedureQuery getByPageCommand
+            , UsersGetTotalSqlStoredProcedureScalar getTotalCommand
+            , UsersDeleteSqlStoredProcedureCommand deleteCommand
+            , UsersUpdateSqlStoredProcedureCommand updateCommand
             )
         {
             _getByEmailCommand = getByEmailCommand;
             _createCommand = createCommand;
+            _getByIdCommand = getByIdCommand;
+            _getByPageCommand = getByPageCommand;
+            _deleteCommand = deleteCommand;
+            _updateCommand = updateCommand;
+            _getTotalCommand = getTotalCommand;
         }
 
         public Task Create(User user)
@@ -34,25 +47,47 @@ namespace SanatoriumApp.Repositories.Users
             return result.FirstOrDefault();
         }
 
-
-        public Task<UserEditModel> GetById(int id)
+        public async Task<UserEditModel> GetById(int id)
         {
-            throw new NotImplementedException();
+            var dbResult = await _getByIdCommand.ExecuteAsync(id);
+            var dbUser = dbResult.FirstOrDefault();
+
+            if (dbUser == null)
+            {
+                return null;
+            }
+
+            return new UserEditModel
+            {
+                Email = dbUser.Email,
+                FirstName = dbUser.FirstName,
+                LastName = dbUser.LastName,
+                RoleId = dbUser.RoleId,
+            };
         }
 
-        public Task<KendoGridResponse<UserGetByPageModel>> GetByPage(KendoGridRequest request)
+        public async Task<KendoGridResponse<UserGetByPageModel>> GetByPage(KendoGridRequest request)
         {
-            throw new NotImplementedException();
+            var users = await _getByPageCommand.ExecuteAsync(request);
+            var total = await _getTotalCommand.ExecuteAsync();
+
+            var result = new KendoGridResponse<UserGetByPageModel>
+            {
+                Data = users,
+                Total = total,
+            };
+
+            return result;
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            await _deleteCommand.ExecuteAsync(id);
         }
 
-        public Task Update(UserEditModel request)
+        public async Task Update(UserEditModel request)
         {
-            throw new NotImplementedException();
+            await _updateCommand.ExecuteAsync(request);
         }
     }
 }

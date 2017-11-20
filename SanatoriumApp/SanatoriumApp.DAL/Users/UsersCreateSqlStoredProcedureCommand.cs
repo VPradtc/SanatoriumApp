@@ -9,9 +9,9 @@ using Core.Domain.Auth;
 
 namespace SanatoriumApp.DAL.Users
 {
-    public class UsersCreateSqlStoredProcedureQuery : SqlStoredProcedureCommand<User>
+    public class UsersCreateSqlStoredProcedureCommand : SqlStoredProcedureCommand<User>
     {
-        public UsersCreateSqlStoredProcedureQuery(IConnectionFactory connectionFactory, IDbCommandInvoker commandInvoker) : base(connectionFactory, commandInvoker)
+        public UsersCreateSqlStoredProcedureCommand(IConnectionFactory connectionFactory, IDbCommandInvoker commandInvoker) : base(connectionFactory, commandInvoker)
         {
         }
 

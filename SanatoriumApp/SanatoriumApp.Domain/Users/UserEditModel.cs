@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Core.Domain;
 using Core.Domain.Auth.Roles;
 
-namespace SanatoriumApp.Viewmodels.Users
+namespace SanatoriumApp.Domain.Users
 {
-    public class UserEditModel
+    public class UserEditModel : BaseEntity
     {
         public string Email { get; set; }
         public string FirstName { get; set; }

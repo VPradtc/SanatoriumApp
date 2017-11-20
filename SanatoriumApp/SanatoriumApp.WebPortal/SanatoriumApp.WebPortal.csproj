@@ -61,9 +61,8 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
@@ -226,7 +225,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -408,7 +409,6 @@
     <Content Include="wwwroot\app\factory\navbar\navbarFactory.js" />
     <Content Include="wwwroot\app\factory\promiseFactory.js" />
     <Content Include="wwwroot\app\factory\promiseFactory.min.js" />
-    <Content Include="wwwroot\app\factory\roleDefinitionProvider.js" />
     <Content Include="wwwroot\app\factory\urlBuilder.js" />
     <Content Include="wwwroot\app\kendo\models\userModel.js" />
     <Content Include="wwwroot\app\scripts\angular-cookies\angular-cookies.js" />
@@ -638,7 +638,6 @@
     <Content Include="wwwroot\app\content\fonts\Roboto\Roboto_400.woff2" />
     <Content Include="wwwroot\app\content\fonts\Roboto\Roboto_500.woff2" />
     <Content Include="wwwroot\app\content\fonts\Roboto\Roboto_700.woff2" />
-    <Content Include="wwwroot\app\factory\promiseFactory.min.js.map" />
     <Content Include="wwwroot\app\languages\en-US\auth.lang.json" />
     <Content Include="wwwroot\app\languages\en-US\common.lang.json" />
     <Content Include="wwwroot\app\languages\en-US\store.lang.json" />

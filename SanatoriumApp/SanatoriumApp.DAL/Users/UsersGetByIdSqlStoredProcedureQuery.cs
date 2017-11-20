@@ -10,19 +10,19 @@ using Core.Domain.Auth.Roles;
 
 namespace SanatoriumApp.DAL.Users
 {
-    public class UsersGetByEmailSqlStoredProcedureQuery : SqlStoredProcedureQuery<string, User>
+    public class UsersGetByIdSqlStoredProcedureQuery : SqlStoredProcedureQuery<int, User>
     {
-        public UsersGetByEmailSqlStoredProcedureQuery(IConnectionFactory connectionFactory, IDbCommandInvoker commandInvoker) : base(connectionFactory, commandInvoker)
+        public UsersGetByIdSqlStoredProcedureQuery(IConnectionFactory connectionFactory, IDbCommandInvoker commandInvoker) : base(connectionFactory, commandInvoker)
         {
         }
 
-        public override string Name => DbDictionary.SP.Users.GetByEmail;
+        public override string Name => DbDictionary.SP.Users.GetById;
 
-        public override SqlParameter[] CreateSqlParameters(string args)
+        public override SqlParameter[] CreateSqlParameters(int args)
         {
             return new SqlParameter[]
             {
-                new SqlParameter("@Email", SqlDbType.NVarChar, 256) { Value = args },
+                new SqlParameter("@Id", SqlDbType.Int) { Value = args },
             };
         }
 
