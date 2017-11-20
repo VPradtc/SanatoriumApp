@@ -14,7 +14,11 @@ namespace Core.Domain.Auth.Roles.Definition
                 },
                 new RoleDefinition
                 {
-                    Identifier = RoleIdentifier.User,
+                    Identifier = RoleIdentifier.MedicalStaff,
+                },
+                new RoleDefinition
+                {
+                    Identifier = RoleIdentifier.UtilityStaff,
                 },
             };
 

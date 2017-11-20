@@ -1,0 +1,50 @@
+﻿<html lang="en"
+      ng-strict-di
+      ng-app="pinguinPortal">
+<head>
+    <title>{{ 'app.appName' | i18n }}</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <base href="/SanatoriumApp.WebPortal/" />
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all"
+          rel="stylesheet"
+          type="text/css" />
+    <link href="lib/ng-dialog/css/ngDialog.min.css" rel="stylesheet" />
+    <link href="lib/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet" />
+    <link href="lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<body>
+    <div ui-view></div>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-sanitize/angular-sanitize.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="lib/oclazyload/dist/ocLazyLoad.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.js"></script>
+    <script src="lib/angular-localization/angular-localization.js"></script>
+    <script src="lib/ngstorage/ngStorage.js"></script>
+    <script src="lib/angular-messages/angular-messages.js"></script>
+    <script src="lib/ng-dialog/js/ngDialog.js"></script>
+    <script src="lib/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
+
+    <script src="app.js"></script>
+    <script src="app/_services/routeHistoryService.js"></script>
+    <script src="config/lazyload.config.js"></script>
+    <script src="config/route.config.js"></script>
+    <script src="config/routeEvents.config.js"></script>
+    <script src="config/url.config.js"></script>
+    <script src="app/auth/models/authData.js"></script>
+    <script src="app/auth/models/requests/authRequest.js"></script>
+    <script src="app/auth/models/requests/passwordAuthRequest.js"></script>
+    <script src="app/auth/models/requests/refreshTokenAuthRequest.js"></script>
+    <script src="app/auth/services/authService.js"></script>
+    <script src="config/security/routeSecurityInterceptor.js"></script>
+    <script src="config/security/httpSecurityInterceptor.js"></script>
+</body>
+</html>

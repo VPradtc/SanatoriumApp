@@ -11,10 +11,16 @@ namespace Core.Auth.Services.OAuth2.Tokens
             var properties = new Dictionary<string, string>
             {
                 {
+                    "id", user.Id.ToString()
+                },
+                {
                     "firstName", user.FirstName
                 },
                 {
                     "lastName", user.LastName
+                },
+                {
+                    "role", ((int)user.RoleId).ToString()
                 },
             };
 

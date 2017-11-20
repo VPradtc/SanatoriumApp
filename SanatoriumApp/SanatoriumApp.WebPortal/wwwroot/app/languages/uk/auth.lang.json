@@ -1,0 +1,12 @@
+﻿{
+  "login": "Залогуватись",
+  "logout": "Вилогуватись",
+  "register": "Реєстрація",
+  "password": "Пароль",
+  "repeatPassword": "Повторіть пароль",
+  "role_medicalStaff": "Мед. персонал",
+  "role_utilityStaff": "Допоміжний персонал",
+  "role_admin": "Адміністратор",
+  "alreadyHaveAnAccount": "Вже зареєструвались?",
+  "passwordsDoNotMatch": "Паролі не збігаються"
+}

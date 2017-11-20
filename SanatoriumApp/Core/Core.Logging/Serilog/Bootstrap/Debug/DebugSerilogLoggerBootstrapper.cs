@@ -70,29 +70,6 @@ namespace Core.Logging.Serilog.Bootstrap.Debug
                         r.Headers,
                     })
                .WriteTo.Trace()
-               .WriteTo.RollingFile(
-                    outputTemplate: _errorMessageTemplate
-                    , pathFormat: Path.Combine(logFileDirectory, "errors_{Date}.txt")
-                    , restrictedToMinimumLevel: LogEventLevel.Error
-                    , flushToDiskInterval: TimeSpan.FromSeconds(3)
-                    , retainedFileCountLimit: null
-                    , buffered: true
-                )
-                .WriteTo.RollingFile(
-                    outputTemplate: _errorMessageTemplate
-                    , pathFormat: Path.Combine(logFileDirectory, "info_{Date}.txt")
-                    , restrictedToMinimumLevel: LogEventLevel.Information
-                    , flushToDiskInterval: TimeSpan.FromSeconds(3)
-                    , retainedFileCountLimit: null
-                    , buffered: true
-                )
-                .WriteTo.RollingFile(
-                    pathFormat: Path.Combine(logFileDirectory, "trace_{Date}.txt")
-                    , restrictedToMinimumLevel: LogEventLevel.Verbose
-                    , flushToDiskInterval: TimeSpan.FromSeconds(3)
-                    , retainedFileCountLimit: null
-                    , buffered: true
-                )
                .CreateLogger();
 
             _logFactory.SetLogFactory(coreLogFactory);

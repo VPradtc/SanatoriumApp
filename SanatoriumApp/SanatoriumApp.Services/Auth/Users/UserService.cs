@@ -1,6 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Core.Auth.Services.OAuth2.Users.Security;
+using Core.Domain.Common;
+using SanatoriumApp.Domain.Users;
 using SanatoriumApp.Repositories.Users;
 using SanatoriumApp.Viewmodels.Users;
 
@@ -39,7 +40,29 @@ namespace SanatoriumApp.Services.Auth.Users
         {
             var user = await _userRepository.GetByEmail(email);
 
-            return user == null;
+            return user != null;
+        }
+
+        public async Task Update(UserEditModel request)
+        {
+            await _userRepository.Update(request);
+        }
+
+        public async Task Delete(int id)
+        {
+            await _userRepository.Delete(id);
+        }
+
+        public async Task<KendoGridResponse<UserGetByPageModel>> GetByPage(KendoGridRequest request)
+        {
+            var result = await _userRepository.GetByPage(request);
+            return result;
+        }
+
+        public async Task<UserEditModel> GetById(int id)
+        {
+            var result = await _userRepository.GetById(id);
+            return result;
         }
     }
 }

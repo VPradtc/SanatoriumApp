@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 using Core.DAL.Connections;
 using Core.DAL.Dictionary;

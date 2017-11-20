@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,6 +12,7 @@
     <AssemblyName>SanatoriumApp.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>4185aa13</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,8 +46,13 @@
     <Compile Include="RefreshTokens\RefreshTokensCreateSqlStoredProcedureCommand.cs" />
     <Compile Include="RefreshTokens\RefreshTokensDeleteSqlStoredProcedureCommand.cs" />
     <Compile Include="RefreshTokens\RefreshTokensGetByTokenValueSqlStoredProcedureQuery.cs" />
-    <Compile Include="Users\UsersCreateSqlStoredProcedureQuery.cs" />
+    <Compile Include="Users\UsersGetTotalSqlStoredProcedureScalar.cs" />
+    <Compile Include="Users\UsersUpdateSqlStoredProcedureCommand.cs" />
+    <Compile Include="Users\UsersCreateSqlStoredProcedureCommand.cs" />
+    <Compile Include="Users\UsersDeleteSqlStoredProcedureCommand.cs" />
     <Compile Include="Users\UsersGetByEmailSqlStoredProcedureQuery.cs" />
+    <Compile Include="Users\UsersGetByPageSqlStoredProcedureQuery.cs" />
+    <Compile Include="Users\UsersGetByIdSqlStoredProcedureQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.DAL\Core.DAL.csproj">
@@ -56,8 +63,21 @@
       <Project>{14CB9FCE-4FC5-4A07-A590-E6D6CA12DAE1}</Project>
       <Name>Core.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SanatoriumApp.Domain\SanatoriumApp.Domain.csproj">
+      <Project>{B9543CEC-32F3-4D64-8663-786C10C5C4EA}</Project>
+      <Name>SanatoriumApp.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

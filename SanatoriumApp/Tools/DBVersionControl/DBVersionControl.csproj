@@ -126,6 +126,22 @@
     <Content Include="Scripts\0.0.1\2_TABLE_Users_CREATE.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\0.0.2\1_usp_Users_GetTotal_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.2\1_usp_Users_GetByPage_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.2\1_usp_Users_GetById_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.2\2_TABLE_Roles_SEED.sql" />
+    <Content Include="Scripts\0.0.2\2_usp_Users_Delete_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.2\2_usp_Users_Update_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\_init\Init.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -29,6 +30,7 @@
     <TypeScriptToolsVersion>2.2</TypeScriptToolsVersion>
     <TSLintConfig>tslint.json</TSLintConfig>
     <TSLintBreakBuildOnError>true</TSLintBreakBuildOnError>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,11 +53,17 @@
     <TSLintTimestampFileFixed>$(OutputPath)\$(MSBuildProjectName).TSLint.timestamp.txt</TSLintTimestampFileFixed>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
@@ -110,9 +118,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
@@ -201,6 +206,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Readme\Elmah.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -219,7 +225,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -228,39 +236,344 @@
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="wwwroot\app\app.css">
-      <DependentUpon>app.scss</DependentUpon>
-    </Content>
-    <Content Include="wwwroot\app\app.html" />
-    <Content Include="wwwroot\app\app.min.css">
-      <DependentUpon>app.css</DependentUpon>
-    </Content>
-    <Content Include="wwwroot\app\dialog\_elements\dialog-view.html" />
-    <Content Include="wwwroot\app\dialog\_views\plain-prompt-dialog-view.html" />
-    <Content Include="wwwroot\app\home\home-view.html" />
-    <Content Include="wwwroot\app\_core\controls\ago-date-label-control\ago-date-label-control.html" />
-    <Content Include="wwwroot\app\_core\controls\autocomplete-control\autocomplete-control.html" />
-    <Content Include="wwwroot\app\_core\controls\checkbox-form-control\checkbox-form-control.html" />
-    <Content Include="wwwroot\app\_core\controls\date-picker-form-control\date-picker-form-control.html" />
-    <Content Include="wwwroot\app\_core\controls\decimal-form-control\decimal-form-control.html" />
-    <Content Include="wwwroot\app\_core\controls\file-form-control\file-form-control.html" />
-    <Content Include="wwwroot\app\_core\controls\form-control\form-control-validation-block\form-control-validation-block.html" />
-    <Content Include="wwwroot\app\_core\controls\form-control\form-control.html" />
-    <Content Include="wwwroot\app\_core\controls\grid-control\grid-control.html" />
-    <Content Include="wwwroot\app\_core\controls\grid-control\order-by-icon\order-by-icon.html" />
-    <Content Include="wwwroot\app\_core\controls\integer-form-control\integer-form-control.html" />
-    <Content Include="wwwroot\app\_core\controls\multi-select-form-control\multi-select-form-control.html" />
-    <Content Include="wwwroot\app\_core\controls\pagination\pagination-control.html" />
-    <Content Include="wwwroot\app\_core\controls\phone-number-form-control\phone-number-form-control.html" />
-    <Content Include="wwwroot\app\_core\controls\text-area-form-control\text-area-form-control.html" />
-    <Content Include="wwwroot\app\_directives\restrict-role\restrict-role.html" />
-    <Content Include="wwwroot\app\_elements\footer\app-footer.html" />
-    <Content Include="wwwroot\app\_elements\header\app-header.html" />
-    <Content Include="wwwroot\app\_elements\header\items\header-language-selector\header-language-selector.html" />
-    <Content Include="wwwroot\app\_elements\sidebar\app-sidebar.html" />
-    <Content Include="wwwroot\app\_elements\sidebar\items\app-sidebar-item.html" />
+    <Content Include="wwwroot\app\app.js" />
+    <Content Include="wwwroot\app\config\lazyLoad.config.js" />
+    <Content Include="wwwroot\app\config\route.config.js" />
+    <Content Include="wwwroot\app\config\url.debug.config.js" />
+    <Content Include="wwwroot\app\config\url.publish.config.js" />
+    <Content Include="wwwroot\app\content\css\angular-localization\angular-localization.css" />
+    <Content Include="wwwroot\app\content\css\animate.min.css" />
+    <Content Include="wwwroot\app\content\css\bootstrap\bootstrap.css" />
+    <Content Include="wwwroot\app\content\css\bootstrap\bootstrap.min.css" />
+    <Content Include="wwwroot\app\content\css\bootstrap\bootstrap4.min.css" />
+    <Content Include="wwwroot\app\content\css\font-awesome.min.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\patterns\congruent_pentagon.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\patterns\header-profile-skin-1.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\patterns\header-profile-skin-2.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\patterns\header-profile-skin-3.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\patterns\header-profile.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\patterns\otis_redding.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\patterns\shattered.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\patterns\triangular.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\angular-notify\angular-notify.min.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\blueimp\css\blueimp-gallery-indicator.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\blueimp\css\blueimp-gallery-video.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\blueimp\css\blueimp-gallery.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\blueimp\css\blueimp-gallery.min.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\blueimp\css\demo.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\blueimp\img\error.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\blueimp\img\loading.gif" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\blueimp\img\play-pause.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\blueimp\img\video-play.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\datapicker\angular-datapicker.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\dataTables\dataTables.bootstrap.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\dataTables\dataTables.responsive.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\dataTables\dataTables.tableTools.min.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\dropzone\basic.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\dropzone\dropzone.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\iCheck\custom.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\iCheck\green%402x.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\iCheck\green.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\bootstrap-colorpicker\alpha.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\bootstrap-colorpicker\hue.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\bootstrap-colorpicker\saturation.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\sort.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\sort_asc.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\sort_both.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\sort_desc.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\sprite-skin-flat.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\sprite-skin-flat2.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\sprite-skin-nice.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\sprite-skin-simple.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\spritemap%402x.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\images\spritemap.png" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\social-buttons\social-buttons.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\toastr\toastr.min.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\style.css" />
+    <Content Include="wwwroot\app\content\css\inspinia\style.min.css" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\editor.png" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\imagebrowser.png" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\indeterminate.gif" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\loading-image.gif" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\loading.gif" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\loading_2x.gif" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\markers.png" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\markers_2x.png" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\slider-h.gif" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\slider-v.gif" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\sprite.png" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\sprite_2x.png" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\sprite_kpi.png" />
+    <Content Include="wwwroot\app\content\css\kendo\Default\sprite_kpi_2x.png" />
+    <Content Include="wwwroot\app\content\css\kendo\kendo.common-material.min.css" />
+    <Content Include="wwwroot\app\content\css\kendo\kendo.common.core.min.css" />
+    <Content Include="wwwroot\app\content\css\kendo\kendo.common.min.css" />
+    <Content Include="wwwroot\app\content\css\kendo\kendo.custom.css" />
+    <Content Include="wwwroot\app\content\css\kendo\kendo.default.min.css" />
+    <Content Include="wwwroot\app\content\css\kendo\kendo.default.mobile.min.css" />
+    <Content Include="wwwroot\app\content\css\loader.css" />
+    <Content Include="wwwroot\app\content\css\loader.min.css" />
+    <Content Include="wwwroot\app\content\css\login\style.css" />
+    <Content Include="wwwroot\app\content\css\ngdialog.min.css" />
+    <Content Include="wwwroot\app\content\css\ngDialog\ngDialog-theme-default.min.css" />
+    <Content Include="wwwroot\app\content\css\ngDialog\ngDialog.min.css" />
+    <Content Include="wwwroot\app\content\css\select.min.css" />
+    <Content Include="wwwroot\app\content\css\site.css" />
+    <Content Include="wwwroot\app\content\css\site.min.css" />
+    <Content Include="wwwroot\app\content\css\sweet.css" />
+    <Content Include="wwwroot\app\content\css\sweet.min.css" />
+    <Content Include="wwwroot\app\content\fonts\Open_Sans\font.css" />
+    <Content Include="wwwroot\app\content\fonts\Roboto\font.css" />
+    <Content Include="wwwroot\app\content\images\book.png" />
+    <Content Include="wwwroot\app\controllers\auth\authController.js" />
+    <Content Include="wwwroot\app\controllers\auth\registerController.js" />
+    <Content Include="wwwroot\app\controllers\base\baseController.js" />
+    <Content Include="wwwroot\app\controllers\dialogs\dialogController.js" />
+    <Content Include="wwwroot\app\controllers\home\homeController.js" />
+    <Content Include="wwwroot\app\controllers\user\userController.js" />
+    <Content Include="wwwroot\app\controllers\user\userEditController.js" />
+    <Content Include="wwwroot\app\directives\common\breadcrumb-directive.js" />
+    <Content Include="wwwroot\app\directives\common\breadcrumb\breadcrumb-block-directive.js" />
+    <Content Include="wwwroot\app\directives\common\breadcrumb\breadcrumb-directive.js" />
+    <Content Include="wwwroot\app\directives\common\controls\checkbox-edit-control-directive.js" />
+    <Content Include="wwwroot\app\directives\common\controls\core\edit-control-body-directive.js" />
+    <Content Include="wwwroot\app\directives\common\controls\core\edit-control-validation-block-directive.js" />
+    <Content Include="wwwroot\app\directives\common\controls\dropzone\audio-file-dropzone-directive.js" />
+    <Content Include="wwwroot\app\directives\common\controls\dropzone\dropzone-directive.js" />
+    <Content Include="wwwroot\app\directives\common\controls\edit-control-directive.js" />
+    <Content Include="wwwroot\app\directives\common\controls\header-button-directive.js" />
+    <Content Include="wwwroot\app\directives\common\controls\input-edit-control-directive.js" />
+    <Content Include="wwwroot\app\directives\common\controls\radio-edit-control-directive.js" />
+    <Content Include="wwwroot\app\directives\common\controls\select-edit-control-directive.js" />
+    <Content Include="wwwroot\app\directives\common\controls\select\combobox-edit-control-directive.js" />
+    <Content Include="wwwroot\app\directives\common\controls\select\select-edit-control-controller.js" />
+    <Content Include="wwwroot\app\directives\common\controls\select\select-edit-control-directive.js" />
+    <Content Include="wwwroot\app\directives\common\details-view-directive.js" />
+    <Content Include="wwwroot\app\directives\common\details\details-header-directive.js" />
+    <Content Include="wwwroot\app\directives\common\details\details-view-directive.js" />
+    <Content Include="wwwroot\app\directives\common\details\details-view-file-upload-directive.js" />
+    <Content Include="wwwroot\app\directives\common\form-section-directive.js" />
+    <Content Include="wwwroot\app\directives\common\grid\grid-directive.js" />
+    <Content Include="wwwroot\app\directives\common\grid\grid-view-controller.js" />
+    <Content Include="wwwroot\app\directives\common\grid\grid-view-directive.js" />
+    <Content Include="wwwroot\app\directives\common\grid\grid-view-header-buttons-directive.js" />
+    <Content Include="wwwroot\app\directives\common\grid\grid-view-header-title-directive.js" />
+    <Content Include="wwwroot\app\directives\common\grid\tab-grid-view-directive.js" />
+    <Content Include="wwwroot\app\directives\common\tabs\tab-directive.js" />
+    <Content Include="wwwroot\app\directives\common\tabs\tabs-directive.js" />
+    <Content Include="wwwroot\app\directives\core\attrs-directive.js" />
+    <Content Include="wwwroot\app\directives\core\role-specific-view-directive.js" />
+    <Content Include="wwwroot\app\directives\dialogs\dialog-directive.js" />
+    <Content Include="wwwroot\app\directives\dialogs\plain-dialog-directive.js" />
+    <Content Include="wwwroot\app\directives\inspinia-directives.js" />
+    <Content Include="wwwroot\app\directives\navbar\navbar-directive.js" />
+    <Content Include="wwwroot\app\directives\navbar\navbar-item-directive.js" />
+    <Content Include="wwwroot\app\directives\star-rating-directive.js" />
+    <Content Include="wwwroot\app\directives\switcher-directive.js" />
+    <Content Include="wwwroot\app\directives\topbar\content\app-top-menu-content-directive.js" />
+    <Content Include="wwwroot\app\directives\topbar\top-menu-directive.js" />
+    <Content Include="wwwroot\app\directives\validators\async-validator-directive.js" />
+    <Content Include="wwwroot\app\directives\validators\validator-directive.js" />
+    <Content Include="wwwroot\app\enums\enumRoleIdentifier.js" />
+    <Content Include="wwwroot\app\factory\auth\homeRouteProvider.js" />
+    <Content Include="wwwroot\app\factory\auth\roleDefinitionProvider.js" />
+    <Content Include="wwwroot\app\factory\buttons\buttonTemplateFactory.js" />
+    <Content Include="wwwroot\app\factory\collectionCapacityManager.js" />
+    <Content Include="wwwroot\app\factory\compositePredicateBuilder.js" />
+    <Content Include="wwwroot\app\factory\details\detailsStrategyFactory.js" />
+    <Content Include="wwwroot\app\factory\details\strategies\createDetailsStrategy.js" />
+    <Content Include="wwwroot\app\factory\details\strategies\editDetailsStrategy.js" />
+    <Content Include="wwwroot\app\factory\forms\common\editControlLocator.js" />
+    <Content Include="wwwroot\app\factory\forms\common\indexFieldDecorator.js" />
+    <Content Include="wwwroot\app\factory\forms\common\readonlyFieldDecorator.js" />
+    <Content Include="wwwroot\app\factory\forms\common\validationConfigFactory.js" />
+    <Content Include="wwwroot\app\factory\forms\common\validationTriggerFactory.js" />
+    <Content Include="wwwroot\app\factory\forms\user\detailsUserFormFactory.js" />
+    <Content Include="wwwroot\app\factory\forms\user\registerUserFormFactory.js" />
+    <Content Include="wwwroot\app\factory\forms\user\userFormFactory.js" />
+    <Content Include="wwwroot\app\factory\forms\user\validators\factory\passwordMatchValidatorFactory.js" />
+    <Content Include="wwwroot\app\factory\forms\user\validators\passwordMatchValidator.js" />
+    <Content Include="wwwroot\app\factory\forms\user\validators\uniqueEmailValidator.js" />
+    <Content Include="wwwroot\app\factory\kendo\dataSourceFactory.js" />
+    <Content Include="wwwroot\app\factory\kendo\dropDownListFactory.js" />
+    <Content Include="wwwroot\app\factory\kendo\grid\actionColumnFactory.js" />
+    <Content Include="wwwroot\app\factory\kendo\grid\activateActionFactory.js" />
+    <Content Include="wwwroot\app\factory\kendo\grid\annotateColumnCommand.js" />
+    <Content Include="wwwroot\app\factory\kendo\grid\crudColumnFactory.js" />
+    <Content Include="wwwroot\app\factory\kendo\grid\dateTime\dateTimeColumnTemplateFactory.js" />
+    <Content Include="wwwroot\app\factory\kendo\grid\dateTime\shortDateColumnTemplateFactory.js" />
+    <Content Include="wwwroot\app\factory\kendo\grid\mapBasicActionColumnCommand.js" />
+    <Content Include="wwwroot\app\factory\kendo\grid\mapCustomActionColumnCommand.js" />
+    <Content Include="wwwroot\app\factory\navbar\navbarFactory.js" />
+    <Content Include="wwwroot\app\factory\promiseFactory.js" />
+    <Content Include="wwwroot\app\factory\promiseFactory.min.js" />
+    <Content Include="wwwroot\app\factory\urlBuilder.js" />
+    <Content Include="wwwroot\app\kendo\models\userModel.js" />
+    <Content Include="wwwroot\app\scripts\angular-cookies\angular-cookies.js" />
+    <Content Include="wwwroot\app\scripts\angular-drag-and-drop-lists\angular-drag-and-drop-lists.js" />
+    <Content Include="wwwroot\app\scripts\angular-local-storage.js" />
+    <Content Include="wwwroot\app\scripts\angular-local-storage.min.js" />
+    <Content Include="wwwroot\app\scripts\angular-localization\angular-localization.js" />
+    <Content Include="wwwroot\app\scripts\angular-messages\angular-messages.js" />
+    <Content Include="wwwroot\app\scripts\angular-messages\angular-messages.min.js" />
+    <Content Include="wwwroot\app\scripts\angular-sanitize\angular-sanitize.js" />
+    <Content Include="wwwroot\app\scripts\angular-ui-router.js" />
+    <Content Include="wwwroot\app\scripts\angular-validation-match\angular-validation-match.js" />
+    <Content Include="wwwroot\app\scripts\angular.js" />
+    <Content Include="wwwroot\app\scripts\angular.min.js" />
+    <Content Include="wwwroot\app\scripts\card.js" />
+    <Content Include="wwwroot\app\scripts\card.min.js" />
+    <Content Include="wwwroot\app\scripts\dropzone\dropzone.js" />
+    <Content Include="wwwroot\app\scripts\extensions\stringExtensions.js" />
+    <Content Include="wwwroot\app\scripts\fileupload\FileAPI.flash.swf" />
+    <Content Include="wwwroot\app\scripts\fileupload\FileAPI.js" />
+    <Content Include="wwwroot\app\scripts\fileupload\FileAPI.min.js" />
+    <Content Include="wwwroot\app\scripts\fileupload\ng-file-upload-all.js" />
+    <Content Include="wwwroot\app\scripts\fileupload\ng-file-upload-all.min.js" />
+    <Content Include="wwwroot\app\scripts\fileupload\ng-file-upload-shim.js" />
+    <Content Include="wwwroot\app\scripts\fileupload\ng-file-upload-shim.min.js" />
+    <Content Include="wwwroot\app\scripts\fileupload\ng-file-upload.js" />
+    <Content Include="wwwroot\app\scripts\fileupload\ng-file-upload.min.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\inspinia.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\inspinia.min.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\angular-notify\angular-notify.min.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\blueimp\jquery.blueimp-gallery.min.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\chartJs\angles.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\chartJs\Chart.min.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\datapicker\angular-datepicker.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\dataTables\dataTables.bootstrap.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\dataTables\dataTables.responsive.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\dataTables\jquery.dataTables.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\dataTables\jquery.dataTables.min.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\dataTables\swf\copy_csv_xls.swf" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\dataTables\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\iCheck\icheck.min.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\metisMenu\jquery.metisMenu.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\summernote\angular-summernote.min.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\summernote\summernote.min.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\toastr\toastr.min.js" />
+    <Content Include="wwwroot\app\scripts\inspinia\skin.config.min.js" />
+    <Content Include="wwwroot\app\scripts\jquery.min.js" />
+    <Content Include="wwwroot\app\scripts\jszip\jszip.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-029.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-AU.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-BZ.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-CA.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-GB.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-HK.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-IE.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-IN.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-JM.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-MY.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-NZ.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-PH.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-SG.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-TT.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-US.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-ZA.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en-ZW.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.en.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.ru-RU.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.ru-UA.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.ru.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.uk-UA.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\cultures\kendo.culture.uk.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\kendo.all.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\messages\kendo.messages.en-US.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\messages\kendo.messages.ru-RU.min.js" />
+    <Content Include="wwwroot\app\scripts\kendo\messages\kendo.messages.uk-UA.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\css\keyboard-basic.min.css" />
+    <Content Include="wwwroot\app\scripts\keyboard\css\keyboard-dark.min.css" />
+    <Content Include="wwwroot\app\scripts\keyboard\css\keyboard-previewkeyset.min.css" />
+    <Content Include="wwwroot\app\scripts\keyboard\css\keyboard.min.css" />
+    <Content Include="wwwroot\app\scripts\keyboard\css\materialize.css" />
+    <Content Include="wwwroot\app\scripts\keyboard\js\jquery.keyboard.extension-all.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\js\jquery.keyboard.extension-altkeyspopup.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\js\jquery.keyboard.extension-autocomplete.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\js\jquery.keyboard.extension-caret.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\js\jquery.keyboard.extension-extender.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\js\jquery.keyboard.extension-mobile.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\js\jquery.keyboard.extension-navigation.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\js\jquery.keyboard.extension-previewkeyset.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\js\jquery.keyboard.extension-scramble.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\js\jquery.keyboard.extension-typing.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\js\jquery.keyboard.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\js\jquery.mousewheel.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\layouts\keyboard-layouts-combined.min.js" />
+    <Content Include="wwwroot\app\scripts\keyboard\layouts\keyboard-layouts-greywyvern.min.js" />
+    <Content Include="wwwroot\app\scripts\loader.js" />
+    <Content Include="wwwroot\app\scripts\loader.min.js" />
+    <Content Include="wwwroot\app\scripts\mobile-detect\mobile-detect.js" />
+    <Content Include="wwwroot\app\scripts\moment.min.js" />
+    <Content Include="wwwroot\app\scripts\ng-virtual-keyboard.js" />
+    <Content Include="wwwroot\app\scripts\ng-virtual-keyboard.min.js" />
+    <Content Include="wwwroot\app\scripts\ngDialog\ngDialog.min.js" />
+    <Content Include="wwwroot\app\scripts\ngStorage.min.js" />
+    <Content Include="wwwroot\app\scripts\ocLazyLoad.min.js" />
+    <Content Include="wwwroot\app\scripts\select.js" />
+    <Content Include="wwwroot\app\scripts\select.min.js" />
+    <Content Include="wwwroot\app\scripts\ui-bootstrap-tpls-0.12.0.min.js" />
+    <Content Include="wwwroot\app\services\authInterceptorService.js" />
+    <Content Include="wwwroot\app\services\authInterceptorService.min.js" />
+    <Content Include="wwwroot\app\services\authService.js" />
+    <Content Include="wwwroot\app\services\authService.min.js" />
+    <Content Include="wwwroot\app\services\baseService.js" />
+    <Content Include="wwwroot\app\services\core\roleSpecificViewLocator.js" />
+    <Content Include="wwwroot\app\services\dialogs\dialogService.js" />
+    <Content Include="wwwroot\app\services\loading\loadingService.js" />
+    <Content Include="wwwroot\app\services\mobile\mobileService.js" />
+    <Content Include="wwwroot\app\services\user\userService.js" />
+    <Content Include="wwwroot\app\views\auth\login.html" />
+    <Content Include="wwwroot\app\views\auth\register.html" />
+    <Content Include="wwwroot\app\views\common\breadcrumb.html" />
+    <Content Include="wwwroot\app\views\common\breadcrumb\breadcrumb-block.html" />
+    <Content Include="wwwroot\app\views\common\breadcrumb\breadcrumb.html" />
+    <Content Include="wwwroot\app\views\common\controls\checkbox-edit-control.html" />
+    <Content Include="wwwroot\app\views\common\controls\core\edit-control-body.html" />
+    <Content Include="wwwroot\app\views\common\controls\core\edit-control-validation-block.html" />
+    <Content Include="wwwroot\app\views\common\controls\dropzone.html" />
+    <Content Include="wwwroot\app\views\common\controls\edit-control.html" />
+    <Content Include="wwwroot\app\views\common\controls\header-button.html" />
+    <Content Include="wwwroot\app\views\common\controls\input-edit-control.html" />
+    <Content Include="wwwroot\app\views\common\controls\radio-edit-control.html" />
+    <Content Include="wwwroot\app\views\common\controls\select-edit-control.html" />
+    <Content Include="wwwroot\app\views\common\controls\select\combobox-edit-control.html" />
+    <Content Include="wwwroot\app\views\common\controls\select\select-edit-control.html" />
+    <Content Include="wwwroot\app\views\common\details-view.html" />
+    <Content Include="wwwroot\app\views\common\details\details-header.html" />
+    <Content Include="wwwroot\app\views\common\details\details-view-file-upload.html" />
+    <Content Include="wwwroot\app\views\common\details\details-view.html" />
+    <Content Include="wwwroot\app\views\common\form-section.html" />
+    <Content Include="wwwroot\app\views\common\grid-view.html" />
+    <Content Include="wwwroot\app\views\common\grid.html" />
+    <Content Include="wwwroot\app\views\common\grid\grid-view-header-buttons.html" />
+    <Content Include="wwwroot\app\views\common\grid\grid-view-header-title.html" />
+    <Content Include="wwwroot\app\views\common\grid\grid-view.html" />
+    <Content Include="wwwroot\app\views\common\grid\grid.html" />
+    <Content Include="wwwroot\app\views\common\grid\tab-grid-view.html" />
+    <Content Include="wwwroot\app\views\common\tabs\tab.html" />
+    <Content Include="wwwroot\app\views\common\tabs\tabs.html" />
+    <Content Include="wwwroot\app\views\core\role-specific-view.html" />
+    <Content Include="wwwroot\app\views\dialogs\confirmDialog.html" />
+    <Content Include="wwwroot\app\views\dialogs\dialog.html" />
+    <Content Include="wwwroot\app\views\dialogs\failureDialog.html" />
+    <Content Include="wwwroot\app\views\dialogs\plainDialog.html" />
+    <Content Include="wwwroot\app\views\dialogs\successDialog.html" />
+    <Content Include="wwwroot\app\views\home.html" />
+    <Content Include="wwwroot\app\views\main.html" />
+    <Content Include="wwwroot\app\views\navbar\navbar-item.html" />
+    <Content Include="wwwroot\app\views\navbar\navbar.html" />
+    <Content Include="wwwroot\app\views\template\delete.html" />
+    <Content Include="wwwroot\app\views\template\switcher.html" />
+    <Content Include="wwwroot\app\views\template\template-index-table.html" />
+    <Content Include="wwwroot\app\views\template\top-bar.html" />
+    <Content Include="wwwroot\app\views\topbar\content\app-top-menu-content.html" />
+    <Content Include="wwwroot\app\views\topbar\top-menu.html" />
+    <Content Include="wwwroot\app\views\user\edit.html" />
+    <Content Include="wwwroot\app\views\user\index.html" />
     <Content Include="wwwroot\index.html" />
-    <Content Include="wwwroot\app\app.scss" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.Auth\Core.Auth.csproj">
@@ -279,9 +592,9 @@
       <Project>{A977614E-6F5A-47CD-897E-9B1C9D181E42}</Project>
       <Name>Core.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ExternalServices\SanatoriumApp.ExternalServices.Email\SanatoriumApp.ExternalServices.Email.csproj">
-      <Project>{7B2EA057-C7CC-4295-B310-391582D670CF}</Project>
-      <Name>SanatoriumApp.ExternalServices.Email</Name>
+    <ProjectReference Include="..\SanatoriumApp.Domain\SanatoriumApp.Domain.csproj">
+      <Project>{b9543cec-32f3-4d64-8663-786c10c5c4ea}</Project>
+      <Name>SanatoriumApp.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\SanatoriumApp.Repositories\SanatoriumApp.Repositories.csproj">
       <Project>{16D6A372-E638-4C54-B82A-3D2296524D06}</Project>
@@ -302,117 +615,51 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\typings\angular-ui-router\index.d.ts" />
-    <Content Include="Scripts\typings\angularjs\angular-animate.d.ts" />
-    <Content Include="Scripts\typings\angularjs\angular-component-router.d.ts" />
-    <Content Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
-    <Content Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
-    <Content Include="Scripts\typings\angularjs\angular-resource.d.ts" />
-    <Content Include="Scripts\typings\angularjs\angular-route.d.ts" />
-    <Content Include="Scripts\typings\angularjs\angular-sanitize.d.ts" />
-    <Content Include="Scripts\typings\angularjs\angular.d.ts" />
-    <Content Include="Scripts\typings\jquery\jquery.d.ts" />
-    <Content Include="Scripts\typings\ng-dialog\ng-dialog.d.ts" />
-    <Content Include="Scripts\typings\ngstorage\ngstorage.d.ts" />
-    <Content Include="Scripts\typings\oclazyload\oclazyload.d.ts" />
-    <TypeScriptCompile Include="wwwroot\app.ts" />
-    <TypeScriptCompile Include="wwwroot\app\auth\models\authData.ts" />
-    <TypeScriptCompile Include="wwwroot\app\auth\models\requests\refreshTokenAuthRequest.ts" />
-    <TypeScriptCompile Include="wwwroot\app\auth\models\requests\passwordAuthRequest.ts" />
-    <TypeScriptCompile Include="wwwroot\app\auth\models\requests\authRequest.ts" />
-    <TypeScriptCompile Include="wwwroot\app\auth\services\authService.ts" />
-    <TypeScriptCompile Include="wwwroot\app\dialog\dialogService.ts" />
-    <TypeScriptCompile Include="wwwroot\app\dialog\_elements\dialog-view.ts" />
-    <TypeScriptCompile Include="wwwroot\app\home\home-view.ts" />
-    <TypeScriptCompile Include="wwwroot\app\home\_services\homeRouteProvider.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_constants\appConstants.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\attributes\attrs-directive.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\ago-date-label-control\ago-date-label-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\autocomplete-control\autocomplete-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\checkbox-form-control\checkbox-form-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\date-picker-form-control\date-picker-form-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\decimal-form-control\decimal-form-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\file-form-control\directives\file-model.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\file-form-control\file-form-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\form-control\form-control-validation-block\form-control-validation-block.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\form-control\form-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\grid-control\grid-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\grid-control\grid-page-size-constant.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\grid-control\gridFieldConfigModel.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\grid-control\iGridColumnMetadata.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\grid-control\order-by-icon\order-by-icon.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\integer-form-control\integer-form-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\multi-select-form-control\multi-select-form-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\pagination\pagination-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\pagination\paginationConfigModel.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\phone-number-form-control\phone-number-form-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\controls\text-area-form-control\text-area-form-control.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\filters\infoSizeConverter.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\filters\tailFilter.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\http\baseHttpService.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\http\urlBuilder.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\models\entities\iLanguage.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\models\enums\companyTypeIdentifier.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\models\enums\documentTypeIdentifier.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\models\enums\EnumExtension.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\models\enums\fieldTypesIdentifier.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\models\enums\fieldTypesIdentifierExtension.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\models\enums\languageIdentifier.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\models\enums\privilegeIdentifier.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\models\localization\iApplicationLanguageObserver.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\models\localization\localizationObservable.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\models\observable\observable.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\validation\asyncValidator.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\validation\equalsValidator.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\validation\fieldLengthValidator.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\validation\icontrolValidation.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\validation\ivalidator.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\validation\requiredValidator.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_core\validation\syncValidator.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_directives\restrict-role\restrict-role.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_elements\footer\app-footer.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_elements\header\app-header.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_elements\header\items\header-language-selector\header-language-selector.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_elements\sidebar\app-sidebar.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_elements\sidebar\items\app-sidebar-item.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_models\iCurrentCompanyInfo.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_models\iDropdownModel.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_models\requests\products\iProductsGetMyProductsDocumentRequest.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_services\accountService.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_services\companyInfoService.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_services\localizationService.ts" />
-    <TypeScriptCompile Include="wwwroot\app\_services\routeHistoryService.ts" />
-    <TypeScriptCompile Include="wwwroot\config\customEvents.config.ts" />
-    <TypeScriptCompile Include="wwwroot\config\lazyload.config.ts" />
-    <TypeScriptCompile Include="wwwroot\config\route.config.ts" />
-    <TypeScriptCompile Include="wwwroot\config\routeEvents.config.ts" />
-    <TypeScriptCompile Include="wwwroot\config\security\httpSecurityInterceptor.ts" />
-    <TypeScriptCompile Include="wwwroot\config\security\routeSecurityInterceptor.ts" />
-    <TypeScriptCompile Include="wwwroot\config\stateModes.config.ts" />
-    <TypeScriptCompile Include="wwwroot\config\url.config.ts" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="tsconfig.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="wwwroot\.bowerrc" />
-    <Content Include="wwwroot\bower.json" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\blueimp\img\error.svg" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\blueimp\img\play-pause.svg" />
+    <Content Include="wwwroot\app\content\css\inspinia\plugins\blueimp\img\video-play.svg" />
+    <Content Include="wwwroot\app\content\fonts\fontawesome-webfont.eot" />
+    <Content Include="wwwroot\app\content\fonts\fontawesome-webfont.svg" />
+    <Content Include="wwwroot\app\content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="wwwroot\app\content\fonts\fontawesome-webfont.woff" />
+    <Content Include="wwwroot\app\content\fonts\FontAwesome.otf" />
+    <Content Include="wwwroot\app\content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="wwwroot\app\content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="wwwroot\app\content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="wwwroot\app\content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="wwwroot\app\content\fonts\Open_Sans\Open_Sans_300.woff2" />
+    <Content Include="wwwroot\app\content\fonts\Open_Sans\Open_Sans_400.woff2" />
+    <Content Include="wwwroot\app\content\fonts\Open_Sans\Open_Sans_600.woff2" />
+    <Content Include="wwwroot\app\content\fonts\Open_Sans\Open_Sans_700.woff2" />
+    <Content Include="wwwroot\app\content\fonts\Roboto\Roboto_300.woff2" />
+    <Content Include="wwwroot\app\content\fonts\Roboto\Roboto_400.woff2" />
+    <Content Include="wwwroot\app\content\fonts\Roboto\Roboto_500.woff2" />
+    <Content Include="wwwroot\app\content\fonts\Roboto\Roboto_700.woff2" />
+    <Content Include="wwwroot\app\languages\en-US\auth.lang.json" />
+    <Content Include="wwwroot\app\languages\en-US\common.lang.json" />
+    <Content Include="wwwroot\app\languages\en-US\store.lang.json" />
+    <Content Include="wwwroot\app\languages\en-US\user.lang.json" />
+    <Content Include="wwwroot\app\languages\uk\auth.lang.json" />
+    <Content Include="wwwroot\app\languages\uk\common.lang.json" />
+    <Content Include="wwwroot\app\languages\uk\store.lang.json" />
+    <Content Include="wwwroot\app\languages\uk\user.lang.json" />
+    <Content Include="wwwroot\app\scripts\angular-messages\angular-messages.min.js.map" />
+    <Content Include="wwwroot\app\scripts\angular.min.js.map" />
+    <Content Include="wwwroot\app\scripts\inspinia\inspinia.min.js.map" />
+    <Content Include="wwwroot\app\scripts\inspinia\plugins\dataTables\jquery.dataTables.min.js.map" />
+    <Content Include="wwwroot\app\scripts\jquery.min.map" />
+    <Content Include="wwwroot\app\scripts\kendo\kendo.all.min.js.map" />
+    <Content Include="wwwroot\app\scripts\keyboard\css\images\keyboard.svg" />
+    <Content Include="wwwroot\app\scripts\loader.min.js.map" />
+    <Content Include="wwwroot\app\scripts\select.min.js.map" />
+    <Content Include="wwwroot\app\services\authService.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="wwwroot\languages\en-US\app.lang.json" />
     <Content Include="wwwroot\languages\en-US\common.lang.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="tslint.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="compilerconfig.json" />
-    <None Include="compilerconfig.json.defaults">
-      <DependentUpon>compilerconfig.json</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
@@ -448,10 +695,11 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\BuildWebCompiler.1.11.326\build\BuildWebCompiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildWebCompiler.1.11.326\build\BuildWebCompiler.targets'))" />
     <Error Condition="!Exists('..\packages\TSLint.MSBuild.1.2.1\build\TSLint.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TSLint.MSBuild.1.2.1\build\TSLint.MSBuild.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <Import Project="..\packages\BuildWebCompiler.1.11.326\build\BuildWebCompiler.targets" Condition="Exists('..\packages\BuildWebCompiler.1.11.326\build\BuildWebCompiler.targets')" />
   <Import Project="..\packages\TSLint.MSBuild.1.2.1\build\TSLint.MSBuild.targets" Condition="Exists('..\packages\TSLint.MSBuild.1.2.1\build\TSLint.MSBuild.targets')" />

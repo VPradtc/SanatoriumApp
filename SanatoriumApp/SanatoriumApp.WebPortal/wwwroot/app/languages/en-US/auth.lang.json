@@ -1,0 +1,12 @@
+﻿{
+  "login": "Login",
+  "logout": "Log out",
+  "register": "Register",
+  "password": "Password",
+  "repeatPassword": "Repeat Password",
+  "role_medicalStaff": "Medical Staff",
+  "role_utilityStaff": "Utility Staff",
+  "role_admin": "Admin",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "passwordsDoNotMatch": "Passwords do not match"
+}
