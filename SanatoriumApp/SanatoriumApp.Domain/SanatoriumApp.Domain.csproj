@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MedicalProcedures\MedicalProcedure.cs" />
+    <Compile Include="Rooms\Room.cs" />
+    <Compile Include="Rooms\RoomType.cs" />
     <Compile Include="Users\UserEditModel.cs" />
     <Compile Include="Users\UserGetByPageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

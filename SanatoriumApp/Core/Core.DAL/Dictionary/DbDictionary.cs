@@ -31,6 +31,16 @@
                 public const string GetTotal = "usp_MedicalProcedures_GetTotal";
                 public const string GetById = "usp_MedicalProcedures_GetById";
             }
+
+            public static class Rooms
+            {
+                public const string Create = "usp_Rooms_Create";
+                public const string Delete = "usp_Rooms_Delete";
+                public const string Update = "usp_Rooms_Update";
+                public const string GetByPage = "usp_Rooms_GetByPage";
+                public const string GetTotal = "usp_Rooms_GetTotal";
+                public const string GetById = "usp_Rooms_GetById";
+            }
         }
 
         public static class UDT
