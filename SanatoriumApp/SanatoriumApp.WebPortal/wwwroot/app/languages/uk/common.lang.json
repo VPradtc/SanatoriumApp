@@ -19,5 +19,6 @@
   "unableToDelete": "Неможливо видалити. Спробуйте пізніше.",
   "activate": "Активувати",
   "deactivate": "Деактивувати",
-  "medicalProcedures": "Медичні Процедури"
+  "medicalProcedures": "Медичні Процедури",
+  "rooms": "Готельні номери"
 }

@@ -19,5 +19,6 @@
   "unableToDelete": "Unable to delete. Please try again later.",
   "activate": "Activate",
   "deactivate": "Deactivate",
-  "medicalProcedures": "Medical Procedures"
+  "medicalProcedures": "Medical Procedures",
+  "rooms": "Rooms"
 }

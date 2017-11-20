@@ -104,6 +104,39 @@ angular.module('DataAccessApp').config(['$stateProvider', '$urlRouterProvider',
                 controller: 'medicalProcedureEditController'
             })
 
+            .state('app.main.room', {
+                url: '/room',
+                controller: 'baseController',
+                abstract: true,
+                template: '<div ui-view> </div>',
+                resolve: {
+                    lazyLoadModule: [
+                        '$ocLazyLoad', function ($ocLazyLoad) {
+                            $ocLazyLoad.load('BootstrapUiModule');
+                            $ocLazyLoad.load('BaseModule');
+                            return $ocLazyLoad.load(['kendoModule', 'roomModule']);
+                        }
+                    ]
+                }
+            })
+            .state('app.main.room.index', {
+                url: '/index',
+                templateUrl: 'app/views/room/index.html',
+                controller: 'roomController'
+            })
+            .state('app.main.room.edit', {
+                url: '/edit?id',
+                mode: 'edit',
+                templateUrl: 'app/views/room/edit.html',
+                controller: 'roomEditController'
+            })
+            .state('app.main.room.create', {
+                url: '/create',
+                mode: 'create',
+                templateUrl: 'app/views/room/edit.html',
+                controller: 'roomEditController'
+            })
+
             /// app Main
             .state('app.main', {
                 abstract: true,

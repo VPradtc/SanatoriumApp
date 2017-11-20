@@ -1,0 +1,16 @@
+﻿{
+  "rooms": "Готельні номери",
+  "room": "Готельний номер",
+  "name": "Назва",
+  "capacity": "Кількість спальних місць",
+  "roomType": "Тип Номеру",
+  "selectRoomType": "Виберіть тип номеру...",
+  "deleteThisRoom": "Видалити номер?",
+  "nameIsRequired": "Вкажіть назву.",
+  "capacityIsRequired": "Вкажіть кількість спальних місць.",
+  "roomTypeIsRequired": "Вкажіть тип номеру.",
+  "createRoom": "Створити номер",
+  "editRoom": "Редагувати номер",
+  "type_regular": "Напів-люкс",
+  "type_lux": "Люкс"
+}

@@ -1,0 +1,16 @@
+﻿{
+  "rooms": "Rooms",
+  "room": "Room",
+  "name": "Name",
+  "capacity": "Capacity",
+  "roomType": "Room Type",
+  "selectRoomType": "Select Room Type...",
+  "deleteThisRoom": "Delete this room?",
+  "nameIsRequired": "Name is required.",
+  "capacityIsRequired": "Capacity is required.",
+  "roomTypeIsRequired": "Room Type is required.",
+  "createRoom": "Create Room",
+  "editRoom": "Edit Room",
+  "type_regular": "Regular",
+  "type_lux": "Lux"
+}
