@@ -4,9 +4,8 @@
   "register": "Register",
   "password": "Password",
   "repeatPassword": "Repeat Password",
-  "role_clientRetail": "Retail Client",
-  "role_client": "Bulk Client",
-  "role_manager": "Manager",
+  "role_medicalStaff": "Medical Staff",
+  "role_utilityStaff": "Utility Staff",
   "role_admin": "Admin",
   "alreadyHaveAnAccount": "Already have an account?",
   "passwordsDoNotMatch": "Passwords do not match"

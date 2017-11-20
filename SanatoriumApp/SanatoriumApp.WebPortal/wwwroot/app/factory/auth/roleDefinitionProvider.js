@@ -9,16 +9,12 @@ function RoleDefinitionProvider(enumRoleIdentifier, $filter) {
             name: 'auth.role_admin',
         },
         {
-            identifier: enumRoleIdentifier.manager,
-            name: 'auth.role_manager',
+            identifier: enumRoleIdentifier.medicalStaff,
+            name: 'auth.role_medicalStaff',
         },
         {
-            identifier: enumRoleIdentifier.client,
-            name: 'auth.role_client',
-        },
-        {
-            identifier: enumRoleIdentifier.clientRetail,
-            name: 'auth.role_clientRetail',
+            identifier: enumRoleIdentifier.utilityStaff,
+            name: 'auth.role_utilityStaff',
         },
     ];
 

@@ -9,7 +9,7 @@ function UserService(ngUrlSettings, baseService) {
     return {
         getByPageUrl: api + 'GetByPage',
         getById: function (id) {
-            return baseService.getById(api + 'GetById/', id);
+            return baseService.callGet(api + 'GetById', { id: id });
         },
         update: function (entity) {
             return baseService.callPost(api + 'Update', entity);

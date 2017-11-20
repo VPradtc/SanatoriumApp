@@ -116,9 +116,6 @@ angular.module('DataAccessApp').config(['$stateProvider', '$urlRouterProvider',
      $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
 
          for (var state = toState; state && state.name !== ''; state = $$ParentState(state)) {
-             if (state.authenticate) {
-
-             }
 
              if (toState.redirectTo) {
                  event.preventDefault();

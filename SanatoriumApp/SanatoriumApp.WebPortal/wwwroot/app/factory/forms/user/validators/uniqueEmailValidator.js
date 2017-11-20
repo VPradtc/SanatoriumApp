@@ -9,8 +9,8 @@ function uniqueEmailValidator($q, userService) {
 
         userService.isUniqueEmail(email)
         .then(
-            function (response) {
-                response.isUnique
+            function (isUnique) {
+                isUnique
                     ? deferred.resolve()
                     : deferred.reject();
             },

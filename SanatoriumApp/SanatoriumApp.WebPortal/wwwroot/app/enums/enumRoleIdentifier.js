@@ -4,6 +4,7 @@ function EnumRoleIdentifier() {
 
     return {
         admin: 1,
-        user: 2,
+        medicalStaff: 2,
+        utilityStaff: 3,
     };
 }

@@ -4,9 +4,8 @@
   "register": "Реєстрація",
   "password": "Пароль",
   "repeatPassword": "Повторіть пароль",
-  "role_clientRetail": "Роздрібний клієнт",
-  "role_client": "Оптовий клієнт",
-  "role_manager": "Менеджер",
+  "role_medicalStaff": "Мед. персонал",
+  "role_utilityStaff": "Допоміжний персонал",
   "role_admin": "Адміністратор",
   "alreadyHaveAnAccount": "Вже зареєструвались?",
   "passwordsDoNotMatch": "Паролі не збігаються"
