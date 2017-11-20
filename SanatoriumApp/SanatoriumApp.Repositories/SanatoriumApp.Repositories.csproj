@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Rooms\IRoomRepository.cs" />
+    <Compile Include="Rooms\RoomRepository.cs" />
     <Compile Include="MedicalProcedures\IMedicalProcedureRepository.cs" />
     <Compile Include="MedicalProcedures\MedicalProcedureRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

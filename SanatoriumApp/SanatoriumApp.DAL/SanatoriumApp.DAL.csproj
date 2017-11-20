@@ -42,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Rooms\RoomsCreateSqlStoredProcedureCommand.cs" />
+    <Compile Include="Rooms\RoomsDeleteSqlStoredProcedureCommand.cs" />
+    <Compile Include="Rooms\RoomsGetByIdSqlStoredProcedureQuery.cs" />
+    <Compile Include="Rooms\RoomsGetByPageSqlStoredProcedureQuery.cs" />
+    <Compile Include="Rooms\RoomsGetTotalSqlStoredProcedureScalar.cs" />
+    <Compile Include="Rooms\RoomsUpdateSqlStoredProcedureCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RefreshTokens\RefreshTokensCreateSqlStoredProcedureCommand.cs" />
     <Compile Include="RefreshTokens\RefreshTokensDeleteSqlStoredProcedureCommand.cs" />

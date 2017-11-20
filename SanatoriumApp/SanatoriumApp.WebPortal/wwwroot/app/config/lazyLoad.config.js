@@ -186,6 +186,18 @@ angular.module('DataAccessApp').config(['$ocLazyLoadProvider', function ($ocLazy
                 ]
             },
             {
+                name: 'roomModule',
+                files: [
+                    'app/enums/enumRoomTypeIdentifier.js',
+                    'app/factory/room/roomTypeDefinitionProvider.js',
+                    'app/controllers/room/roomController.js',
+                    'app/controllers/room/roomEditController.js',
+                    'app/services/room/roomService.js',
+                    'app/kendo/models/roomModel.js',
+                    'app/factory/forms/room/roomFormFactory.js',
+                ]
+            },
+            {
                 name: 'loadingModule',
                 files: [
                     'app/services/loading/loadingService.js',
