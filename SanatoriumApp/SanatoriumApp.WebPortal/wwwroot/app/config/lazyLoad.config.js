@@ -198,6 +198,17 @@ angular.module('DataAccessApp').config(['$ocLazyLoadProvider', function ($ocLazy
                 ]
             },
             {
+                name: 'clientModule',
+                files: [
+                    'app/controllers/client/clientController.js',
+                    'app/controllers/client/clientEditController.js',
+                    'app/services/client/clientService.js',
+                    'app/kendo/models/clientModel.js',
+                    'app/factory/forms/client/clientFormFactory.js',
+                    'app/factory/forms/client/validators/uniquePassportValidator.js',
+                ]
+            },
+            {
                 name: 'loadingModule',
                 files: [
                     'app/services/loading/loadingService.js',

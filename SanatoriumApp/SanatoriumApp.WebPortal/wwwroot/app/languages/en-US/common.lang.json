@@ -20,5 +20,6 @@
   "activate": "Activate",
   "deactivate": "Deactivate",
   "medicalProcedures": "Medical Procedures",
-  "rooms": "Rooms"
+  "rooms": "Rooms",
+  "clients": "Clients"
 }

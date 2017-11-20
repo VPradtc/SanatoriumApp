@@ -1,0 +1,13 @@
+﻿{
+  "clients": "Clients",
+  "client": "Client",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "passport": "Passport",
+  "deleteThisClient": "Delete this client?",
+  "firstNameIsRequired": "First name is required.",
+  "lastNameIsRequired": "Last name is required.",
+  "passportIsRequired": "Passport is required.",
+  "createClient": "Create Client",
+  "editClient": "Edit Client"
+}

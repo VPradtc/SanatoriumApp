@@ -18,12 +18,17 @@ function NavbarFactory(enumRoleIdentifier) {
                 {
                     title: 'common.medicalProcedures',
                     state: 'app.main.medicalProcedure.index',
-                    icon: 'fa fa-user',
+                    icon: 'fa fa-plus-circle',
                 },
                 {
                     title: 'common.rooms',
                     state: 'app.main.room.index',
-                    icon: 'fa fa-user',
+                    icon: 'fa fa-building',
+                },
+                {
+                    title: 'common.clients',
+                    state: 'app.main.client.index',
+                    icon: 'fa fa-users',
                 },
             ]
         };
