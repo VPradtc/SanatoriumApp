@@ -142,6 +142,15 @@
     <Content Include="Scripts\0.0.2\2_usp_Users_Update_CREATE.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\0.0.3\1_TABLE_Users_ALTER.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.3\2_usp_Users_Update_ALTER.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.3\2_usp_Users_Create_ALTER.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\_init\Init.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
