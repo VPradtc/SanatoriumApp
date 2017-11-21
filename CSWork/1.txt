@@ -1,0 +1,1490 @@
+﻿
+CREATE DATABASE SanatoriumAppDB
+GO
+CREATE TABLE [_DbVersion] (
+	 [Id] INT PRIMARY KEY IDENTITY (1,1)
+		CONSTRAINT [_DbVersion_OneRowGuard] CHECK(Id = 1)
+	,[Name] VARCHAR(32)
+	,[Value] VARCHAR(16)
+)
+GO
+
+INSERT [_DbVersion] ([Name], [Value])
+VALUES ('Version', '0.0.0')
+GO
+
+IF (
+	NOT EXISTS (
+		SELECT * 
+		FROM INFORMATION_SCHEMA.TABLES 
+		WHERE TABLE_SCHEMA = 'dbo' 
+		AND TABLE_NAME = 'Roles'
+	)
+)
+BEGIN
+	CREATE TABLE Roles (
+		[Id] INT PRIMARY KEY
+		,[Name] NVARCHAR(128)
+	)
+END
+GO
+IF (NOT EXISTS (SELECT * 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'RefreshTokens'))
+BEGIN
+	CREATE TABLE RefreshTokens (
+		 [Id] INT PRIMARY KEY IDENTITY(1,1)
+		,[Subject] NVARCHAR(128)
+		,[TokenValue] UNIQUEIDENTIFIER
+		,[IssuedUtc] DATETIME2
+		,[ExpiresUtc] DATETIME2
+		,[ProtectedTicket] NVARCHAR(1024)
+	)
+END
+GO
+﻿IF NOT EXISTS (
+	SELECT TOP 1 1
+	FROM Roles
+	WHERE Name = N'Admin'
+)
+BEGIN
+	INSERT Roles(
+		 [Id]
+		,[Name]
+	)
+	VALUES(
+			1
+		,N'Admin'
+	)
+END
+
+IF NOT EXISTS (
+	SELECT TOP 1 1
+	FROM Roles
+	WHERE Name = N'User'
+)
+BEGIN
+	INSERT Roles(
+		 [Id]
+		,[Name]
+	)
+	VALUES(
+			2
+		,N'User'
+	)
+END
+GO
+IF (
+	NOT EXISTS (
+		SELECT * 
+		FROM INFORMATION_SCHEMA.TABLES 
+		WHERE TABLE_SCHEMA = 'dbo' 
+		AND TABLE_NAME = 'Users'
+	)
+)
+BEGIN
+	CREATE TABLE Users (
+		 [Id] INT PRIMARY KEY IDENTITY (1,1)
+		,[FirstName] NVARCHAR(128)
+		,[LastName] NVARCHAR(128)
+		,[Email] NVARCHAR(256) NOT NULL
+		,[ApiPasswordHash] NVARCHAR(512)
+		,[ApiPasswordSalt] NVARCHAR(64)
+
+		,CONSTRAINT [UQ_Users_Email]
+			UNIQUE([Email])
+
+		,[RoleId] INT NOT NULL
+		,CONSTRAINT [FK_Users_RoleId_Roles_Id]
+			FOREIGN KEY([RoleId])
+			REFERENCES [Roles]([Id])
+
+		,[CreatedBy] INT NULL
+		,[ModifiedBy] INT NULL
+		,[CreatedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[ModifiedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[IsDeleted] BIT NOT NULL DEFAULT(0)
+	)
+END
+GO
+
+IF (
+	NOT EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS
+		WHERE CONSTRAINT_NAME ='FK_Users_CreatedBy_Users_Id'
+	)
+)
+BEGIN
+	ALTER TABLE Users
+	ADD CONSTRAINT [FK_Users_CreatedBy_Users_Id]
+		FOREIGN KEY([CreatedBy])
+		REFERENCES [Users]([Id])
+END
+
+
+IF (
+	NOT EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS
+		WHERE CONSTRAINT_NAME ='FK_Users_ModifiedBy_Users_Id'
+	)
+)
+BEGIN
+	ALTER TABLE Users
+	ADD CONSTRAINT [FK_Users_ModifiedBy_Users_Id]
+		FOREIGN KEY([ModifiedBy])
+		REFERENCES [Users]([Id])
+END
+﻿IF EXISTS ( SELECT * FROM   sysobjects 
+            WHERE  id = object_id(N'usp_RefreshTokens_Create') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC [usp_RefreshTokens_Create]
+END
+GO
+
+CREATE PROC [usp_RefreshTokens_Create]
+	 @_currentUserId INT
+	,@Subject NVARCHAR(128)
+	,@TokenValue UNIQUEIDENTIFIER
+	,@IssuedUtc DATETIME2
+	,@ExpiresUtc DATETIME2
+	,@ProtectedTicket NVARCHAR(1024)
+AS
+BEGIN
+	INSERT RefreshTokens(
+		 [Subject]
+		,[TokenValue]
+		,[IssuedUtc]
+		,[ExpiresUtc]
+		,[ProtectedTicket]
+	)
+		VALUES(
+			 @Subject
+			,@TokenValue
+			,@IssuedUtc
+			,@ExpiresUtc
+			,@ProtectedTicket
+		)
+
+	RETURN SCOPE_IDENTITY()
+END
+GO
+IF EXISTS ( SELECT * FROM   sysobjects 
+            WHERE  id = object_id(N'usp_RefreshTokens_Delete') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_RefreshTokens_Delete
+END
+GO
+
+CREATE PROC usp_RefreshTokens_Delete
+	 @_currentUserId INT
+	,@Id INT
+AS
+BEGIN
+	DELETE RefreshTokens
+	WHERE [Id] = @Id
+END
+GO
+IF EXISTS ( SELECT * FROM   sysobjects 
+            WHERE  id = object_id(N'usp_RefreshTokens_GetByTokenValue') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_RefreshTokens_GetByTokenValue
+END
+GO
+
+CREATE PROC usp_RefreshTokens_GetByTokenValue
+	 @_currentUserId INT
+	,@TokenValue UNIQUEIDENTIFIER
+AS
+BEGIN
+	SELECT TOP 1 *
+		FROM RefreshTokens rt
+		WHERE rt.TokenValue = @TokenValue
+END
+GO
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Users_Create') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Users_Create
+END
+GO
+
+CREATE PROC usp_Users_Create
+	@_currentUserId INT
+	,@ApiPasswordHash NVARCHAR(512)
+	,@ApiPasswordSalt NVARCHAR(64)
+	,@Email NVARCHAR(256)
+	,@FirstName NVARCHAR(128)
+	,@LastName NVARCHAR(128)
+	,@RoleId INT
+AS
+BEGIN
+	INSERT Users (
+		ApiPasswordHash
+		,ApiPasswordSalt
+		,Email
+		,FirstName
+		,LastName
+		,RoleId
+		,CreatedBy
+		,ModifiedBy
+	)
+	VALUES (
+		@ApiPasswordHash
+		,@ApiPasswordSalt
+		,@Email
+		,@FirstName
+		,@LastName
+		,@RoleId
+		,@_currentUserId
+		,@_currentUserId
+	)
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Users_GetByEmail') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Users_GetByEmail
+END
+GO
+
+CREATE PROC usp_Users_GetByEmail
+	@_currentUserId INT
+	,@Email NVARCHAR(256)
+AS
+BEGIN
+	SELECT TOP 1
+		*
+	FROM Users
+	WHERE Email = @Email
+		AND IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Users_GetById') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Users_GetById
+END
+GO
+
+CREATE PROC usp_Users_GetById
+	@_currentUserId INT
+	,@Id NVARCHAR(256)
+AS
+BEGIN
+	SELECT TOP 1
+		*
+	FROM Users
+	WHERE Id = @Id
+		AND IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Users_GetByPage') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Users_GetByPage
+END
+GO
+
+CREATE PROC usp_Users_GetByPage
+	@_currentUserId INT
+	,@Skip INT
+	,@Take INT
+AS
+BEGIN
+	SELECT
+		*
+	FROM Users
+	WHERE IsDeleted = 0
+	
+	ORDER BY CreatedDate DESC
+	OFFSET     @Skip ROWS
+	FETCH NEXT @Take ROWS ONLY;
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Users_GetTotal') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Users_GetTotal
+END
+GO
+
+CREATE PROC usp_Users_GetTotal
+	@_currentUserId INT
+AS
+BEGIN
+	SELECT
+		COUNT(*)
+	FROM Users
+	WHERE IsDeleted = 0
+END
+﻿IF EXISTS (
+	SELECT TOP 1 1
+	FROM Roles
+	WHERE Name = N'MedicalStaff'
+)
+BEGIN
+	UPDATE Roles
+	SET [Name] = N'MedicalStaff'
+	WHERE Id = 2
+END
+GO
+
+IF NOT EXISTS (
+	SELECT TOP 1 1
+	FROM Roles
+	WHERE Name = N'UtilityStaff'
+)
+BEGIN
+	INSERT Roles(
+		 [Id]
+		,[Name]
+	)
+	VALUES(
+			3
+		,N'UtilityStaff'
+	)
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Users_Delete') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Users_Delete
+END
+GO
+
+CREATE PROC usp_Users_Delete
+	@_currentUserId INT
+	,@Id INT
+AS
+BEGIN
+	UPDATE Users
+	SET
+		 IsDeleted = 1
+	WHERE Id = @Id
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Users_Update') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Users_Update
+END
+GO
+
+CREATE PROC usp_Users_Update
+	@_currentUserId INT
+	,@Id INT
+	,@FirstName NVARCHAR(128)
+	,@LastName NVARCHAR(128)
+	,@RoleId INT
+AS
+BEGIN
+	UPDATE Users
+	SET
+		 FirstName=@FirstName
+		,LastName=@LastName
+		,RoleId=@RoleId
+		,ModifiedDate=GETUTCDATE()
+		,ModifiedBy=@_currentUserId
+	WHERE Id = @Id
+END
+IF NOT EXISTS(SELECT 1 FROM sys.columns 
+          WHERE Name = N'Salary'
+          AND Object_ID = Object_ID(N'dbo.Users'))
+BEGIN
+	ALTER TABLE Users
+	ADD Salary DECIMAL DEFAULT(0)
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Users_Create') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Users_Create
+END
+GO
+
+CREATE PROC usp_Users_Create
+	@_currentUserId INT
+	,@ApiPasswordHash NVARCHAR(512)
+	,@ApiPasswordSalt NVARCHAR(64)
+	,@Email NVARCHAR(256)
+	,@FirstName NVARCHAR(128)
+	,@LastName NVARCHAR(128)
+	,@RoleId INT
+	,@Salary DECIMAL
+AS
+BEGIN
+	INSERT Users (
+		ApiPasswordHash
+		,ApiPasswordSalt
+		,Email
+		,FirstName
+		,LastName
+		,RoleId
+		,Salary
+		,CreatedBy
+		,ModifiedBy
+	)
+	VALUES (
+		@ApiPasswordHash
+		,@ApiPasswordSalt
+		,@Email
+		,@FirstName
+		,@LastName
+		,@RoleId
+		,@Salary
+		,@_currentUserId
+		,@_currentUserId
+	)
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Users_Update') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Users_Update
+END
+GO
+
+CREATE PROC usp_Users_Update
+	@_currentUserId INT
+	,@Id INT
+	,@FirstName NVARCHAR(128)
+	,@LastName NVARCHAR(128)
+	,@RoleId INT
+	,@Salary DECIMAL
+AS
+BEGIN
+	UPDATE Users
+	SET
+		 FirstName=@FirstName
+		,LastName=@LastName
+		,RoleId=@RoleId
+		,Salary=@Salary
+		,ModifiedDate=GETUTCDATE()
+		,ModifiedBy=@_currentUserId
+	WHERE Id = @Id
+END
+IF (
+	NOT EXISTS (
+		SELECT * 
+		FROM INFORMATION_SCHEMA.TABLES 
+		WHERE TABLE_SCHEMA = 'dbo' 
+		AND TABLE_NAME = 'MedicalProcedures'
+	)
+)
+BEGIN
+	CREATE TABLE MedicalProcedures (
+		[Id] INT PRIMARY KEY IDENTITY(1,1)
+		,[Name] NVARCHAR(128)
+		,[BaseCost] DECIMAL
+		
+		,[CreatedBy] INT NOT NULL
+		,[ModifiedBy] INT NOT NULL
+		,[CreatedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[ModifiedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[IsDeleted] BIT NOT NULL DEFAULT(0)
+
+		, CONSTRAINT FK_MedicalProcedures_CreatedBy_Users_Id
+		FOREIGN KEY(CreatedBy) REFERENCES Users(Id)
+
+		, CONSTRAINT FK_MedicalProcedures_ModifiedBy_Users_Id
+		FOREIGN KEY(ModifiedBy) REFERENCES Users(Id)
+	)
+END
+GO
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_MedicalProcedures_GetById') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_MedicalProcedures_GetById
+END
+GO
+
+CREATE PROC usp_MedicalProcedures_GetById
+	@_currentUserId INT
+	,@Id NVARCHAR(256)
+AS
+BEGIN
+	SELECT TOP 1
+		*
+	FROM MedicalProcedures
+	WHERE Id = @Id
+		AND IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_MedicalProcedures_GetByPage') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_MedicalProcedures_GetByPage
+END
+GO
+
+CREATE PROC usp_MedicalProcedures_GetByPage
+	@_currentUserId INT
+	,@Skip INT
+	,@Take INT
+AS
+BEGIN
+	SELECT
+		*
+	FROM MedicalProcedures
+	WHERE IsDeleted = 0
+	
+	ORDER BY CreatedDate DESC
+	OFFSET     @Skip ROWS
+	FETCH NEXT @Take ROWS ONLY;
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_MedicalProcedures_GetTotal') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_MedicalProcedures_GetTotal
+END
+GO
+
+CREATE PROC usp_MedicalProcedures_GetTotal
+	@_currentUserId INT
+AS
+BEGIN
+	SELECT
+		COUNT(*)
+	FROM MedicalProcedures
+	WHERE IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_MedicalProcedures_Create') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_MedicalProcedures_Create
+END
+GO
+
+CREATE PROC usp_MedicalProcedures_Create
+	@_currentUserId INT
+	,@Name NVARCHAR(128)
+	,@BaseCost DECIMAL
+AS
+BEGIN
+	INSERT MedicalProcedures (
+		[Name]
+		,BaseCost
+		,CreatedBy
+		,ModifiedBy
+	)
+	VALUES (
+		@Name
+		,@BaseCost
+		,@_currentUserId
+		,@_currentUserId
+	)
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_MedicalProcedures_Delete') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_MedicalProcedures_Delete
+END
+GO
+
+CREATE PROC usp_MedicalProcedures_Delete
+	@_currentUserId INT
+	,@Id INT
+AS
+BEGIN
+	UPDATE MedicalProcedures
+	SET
+		 IsDeleted = 1
+	WHERE Id = @Id
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_MedicalProcedures_Update') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_MedicalProcedures_Update
+END
+GO
+
+CREATE PROC usp_MedicalProcedures_Update
+	@_currentUserId INT
+	,@Id INT
+	,@Name NVARCHAR(128)
+	,@BaseCost DECIMAL
+AS
+BEGIN
+	UPDATE MedicalProcedures
+	SET
+		 [Name]=@Name
+		,BaseCost=@BaseCost
+		,ModifiedDate=GETUTCDATE()
+		,ModifiedBy=@_currentUserId
+	WHERE Id = @Id
+END
+IF (
+	NOT EXISTS (
+		SELECT * 
+		FROM INFORMATION_SCHEMA.TABLES 
+		WHERE TABLE_SCHEMA = 'dbo' 
+		AND TABLE_NAME = 'RoomTypes'
+	)
+)
+BEGIN
+	CREATE TABLE RoomTypes (
+		[Id] INT PRIMARY KEY
+		,[Name] NVARCHAR(128)
+	)
+END
+GO
+IF (
+	NOT EXISTS (
+		SELECT * 
+		FROM INFORMATION_SCHEMA.TABLES 
+		WHERE TABLE_SCHEMA = 'dbo' 
+		AND TABLE_NAME = 'Rooms'
+	)
+)
+BEGIN
+	CREATE TABLE Rooms (
+		[Id] INT PRIMARY KEY IDENTITY(1,1)
+		,[Name] NVARCHAR(128)
+		,[RoomTypeId] INT NOT NULL
+		,[Capacity] INT NOT NULL
+
+		, CONSTRAINT FK_Rooms_RoomTypeId_RoomTypes_Id
+		FOREIGN KEY([RoomTypeId]) REFERENCES RoomTypes(Id)
+
+		,[CreatedBy] INT NOT NULL
+		,[ModifiedBy] INT NOT NULL
+		,[CreatedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[ModifiedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[IsDeleted] BIT NOT NULL DEFAULT(0)
+
+		, CONSTRAINT FK_Rooms_CreatedBy_Users_Id
+		FOREIGN KEY(CreatedBy) REFERENCES Users(Id)
+
+		, CONSTRAINT FK_Rooms_ModifiedBy_Users_Id
+		FOREIGN KEY(ModifiedBy) REFERENCES Users(Id)
+	)
+END
+GO
+IF (
+	NOT EXISTS (
+		SELECT TOP 1 1
+
+		FROM RoomTypes
+		WHERE [Name] = N'Regular'
+	)
+)
+BEGIN
+	INSERT RoomTypes (
+		[Id]
+		,[Name]
+	)
+	VALUES(
+		1
+		,N'Regular'
+	)
+END
+GO
+
+IF (
+	NOT EXISTS (
+		SELECT TOP 1 1
+
+		FROM RoomTypes
+		WHERE [Name] = N'Lux'
+	)
+)
+BEGIN
+	INSERT RoomTypes (
+		[Id]
+		,[Name]
+	)
+	VALUES(
+		2
+		,N'Lux'
+	)
+END
+GO
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Rooms_GetById') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Rooms_GetById
+END
+GO
+
+CREATE PROC usp_Rooms_GetById
+	@_currentUserId INT
+	,@Id NVARCHAR(256)
+AS
+BEGIN
+	SELECT TOP 1
+		*
+	FROM Rooms
+	WHERE Id = @Id
+		AND IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Rooms_GetByPage') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Rooms_GetByPage
+END
+GO
+
+CREATE PROC usp_Rooms_GetByPage
+	@_currentUserId INT
+	,@Skip INT
+	,@Take INT
+AS
+BEGIN
+	SELECT
+		*
+	FROM Rooms
+	WHERE IsDeleted = 0
+	
+	ORDER BY CreatedDate DESC
+	OFFSET     @Skip ROWS
+	FETCH NEXT @Take ROWS ONLY;
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Rooms_GetTotal') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Rooms_GetTotal
+END
+GO
+
+CREATE PROC usp_Rooms_GetTotal
+	@_currentUserId INT
+AS
+BEGIN
+	SELECT
+		COUNT(*)
+	FROM Rooms
+	WHERE IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Rooms_Create') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Rooms_Create
+END
+GO
+
+CREATE PROC usp_Rooms_Create
+	@_currentUserId INT
+	,@Name NVARCHAR(128)
+	,@RoomTypeId INT
+	,@Capacity INT
+AS
+BEGIN
+	INSERT Rooms (
+		[Name]
+		,[RoomTypeId]
+		,Capacity
+		,CreatedBy
+		,ModifiedBy
+	)
+	VALUES (
+		@Name
+		,@RoomTypeId
+		,@Capacity
+		,@_currentUserId
+		,@_currentUserId
+	)
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Rooms_Delete') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Rooms_Delete
+END
+GO
+
+CREATE PROC usp_Rooms_Delete
+	@_currentUserId INT
+	,@Id INT
+AS
+BEGIN
+	UPDATE Rooms
+	SET
+		 IsDeleted = 1
+	WHERE Id = @Id
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Rooms_Update') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Rooms_Update
+END
+GO
+
+CREATE PROC usp_Rooms_Update
+	@_currentUserId INT
+	,@Id INT
+	,@Name NVARCHAR(128)
+	,@RoomTypeId INT
+	,@Capacity INT
+AS
+BEGIN
+	UPDATE Rooms
+	SET
+		 [Name]=@Name
+		,RoomTypeId=@RoomTypeId
+		,Capacity=@Capacity
+		,ModifiedDate=GETUTCDATE()
+		,ModifiedBy=@_currentUserId
+	WHERE Id = @Id
+END
+IF (
+	NOT EXISTS (
+		SELECT * 
+		FROM INFORMATION_SCHEMA.TABLES 
+		WHERE TABLE_SCHEMA = 'dbo' 
+		AND TABLE_NAME = 'Clients'
+	)
+)
+BEGIN
+	CREATE TABLE Clients (
+		[Id] INT PRIMARY KEY IDENTITY(1,1)
+		,[Passport] NVARCHAR(128)
+		,[FirstName] NVARCHAR(128)
+		,[LastName] NVARCHAR(128)
+
+		, CONSTRAINT UQ_Clients_Passport
+		UNIQUE ([Passport])
+
+		,[CreatedBy] INT NOT NULL
+		,[ModifiedBy] INT NOT NULL
+		,[CreatedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[ModifiedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[IsDeleted] BIT NOT NULL DEFAULT(0)
+
+		, CONSTRAINT FK_Clients_CreatedBy_Users_Id
+		FOREIGN KEY(CreatedBy) REFERENCES Users(Id)
+
+		, CONSTRAINT FK_Clients_ModifiedBy_Users_Id
+		FOREIGN KEY(ModifiedBy) REFERENCES Users(Id)
+	)
+END
+GO
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Clients_GetById') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Clients_GetById
+END
+GO
+
+CREATE PROC usp_Clients_GetById
+	@_currentUserId INT
+	,@Id NVARCHAR(256)
+AS
+BEGIN
+	SELECT TOP 1
+		*
+	FROM Clients
+	WHERE Id = @Id
+		AND IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Clients_GetByPage') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Clients_GetByPage
+END
+GO
+
+CREATE PROC usp_Clients_GetByPage
+	@_currentUserId INT
+	,@Skip INT
+	,@Take INT
+AS
+BEGIN
+	SELECT
+		*
+	FROM Clients
+	WHERE IsDeleted = 0
+	
+	ORDER BY CreatedDate DESC
+	OFFSET     @Skip ROWS
+	FETCH NEXT @Take ROWS ONLY;
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Clients_GetTotal') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Clients_GetTotal
+END
+GO
+
+CREATE PROC usp_Clients_GetTotal
+	@_currentUserId INT
+AS
+BEGIN
+	SELECT
+		COUNT(*)
+	FROM Clients
+	WHERE IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Clients_Create') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Clients_Create
+END
+GO
+
+CREATE PROC usp_Clients_Create
+	@_currentUserId INT
+	,@Passport NVARCHAR(128)
+	,@FirstName NVARCHAR(128)
+	,@LastName NVARCHAR(128)
+AS
+BEGIN
+	INSERT Clients (
+		Passport
+		,FirstName
+		,LastName
+		,CreatedBy
+		,ModifiedBy
+	)
+	VALUES (
+		@Passport
+		,@FirstName
+		,@LastName
+		,@_currentUserId
+		,@_currentUserId
+	)
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Clients_Delete') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Clients_Delete
+END
+GO
+
+CREATE PROC usp_Clients_Delete
+	@_currentUserId INT
+	,@Id INT
+AS
+BEGIN
+	UPDATE Clients
+	SET
+		 IsDeleted = 1
+	WHERE Id = @Id
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Clients_GetByPassport') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Clients_GetByPassport
+END
+GO
+
+CREATE PROC usp_Clients_GetByPassport
+	@_currentUserId INT
+	,@Passport NVARCHAR(128)
+AS
+BEGIN
+	SELECT TOP 1
+		*
+	FROM Clients
+	WHERE Passport = @Passport
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Clients_Update') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Clients_Update
+END
+GO
+
+CREATE PROC usp_Clients_Update
+	@_currentUserId INT
+	,@Id INT
+	,@Passport NVARCHAR(128)
+	,@FirstName NVARCHAR(128)
+	,@LastName NVARCHAR(128)
+AS
+BEGIN
+	UPDATE Clients
+	SET
+		 Passport=@Passport
+		,FirstName=@FirstName
+		,LastName=@LastName
+		,ModifiedDate=GETUTCDATE()
+		,ModifiedBy=@_currentUserId
+	WHERE Id = @Id
+END
+IF (
+	NOT EXISTS (
+		SELECT * 
+		FROM INFORMATION_SCHEMA.TABLES 
+		WHERE TABLE_SCHEMA = 'dbo' 
+		AND TABLE_NAME = 'Bookings'
+	)
+)
+BEGIN
+	CREATE TABLE Bookings (
+		[Id] INT PRIMARY KEY IDENTITY(1,1)
+		,[ClientId] INT
+		, CONSTRAINT FK_Bookings_ClientId_Clients_Id
+		FOREIGN KEY(ClientId) REFERENCES Clients(Id)
+
+		,[RoomId] INT
+		, CONSTRAINT FK_Bookings_RoomId_Rooms_Id
+		FOREIGN KEY([RoomId]) REFERENCES Rooms(Id)
+
+		,[StartDate] DATETIME2 NOT NULL
+		,[EndDate] DATETIME2 NOT NULL
+
+		,[CreatedBy] INT NOT NULL
+		,[ModifiedBy] INT NOT NULL
+		,[CreatedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[ModifiedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[IsDeleted] BIT NOT NULL DEFAULT(0)
+
+		, CONSTRAINT FK_Bookings_CreatedBy_Users_Id
+		FOREIGN KEY(CreatedBy) REFERENCES Users(Id)
+
+		, CONSTRAINT FK_Bookings_ModifiedBy_Users_Id
+		FOREIGN KEY(ModifiedBy) REFERENCES Users(Id)
+	)
+END
+GO
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Bookings_GetById') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Bookings_GetById
+END
+GO
+
+CREATE PROC usp_Bookings_GetById
+	@_currentUserId INT
+	,@Id NVARCHAR(256)
+AS
+BEGIN
+	SELECT TOP 1
+		*
+	FROM Bookings
+	WHERE Id = @Id
+		AND IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Bookings_GetByPage') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Bookings_GetByPage
+END
+GO
+
+CREATE PROC usp_Bookings_GetByPage
+	@_currentUserId INT
+	,@Skip INT
+	,@Take INT
+AS
+BEGIN
+	SELECT
+		b.*
+		, c.LastName + ' ' + c.FirstName AS ClientName
+		, r.Name AS RoomName
+	FROM Bookings b
+	JOIN Clients c
+	ON b.ClientId = c.Id
+	JOIN Rooms r
+	ON b.RoomId = r.Id
+	WHERE b.IsDeleted = 0
+	
+	ORDER BY CreatedDate DESC
+	OFFSET     @Skip ROWS
+	FETCH NEXT @Take ROWS ONLY;
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Bookings_GetTotal') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Bookings_GetTotal
+END
+GO
+
+CREATE PROC usp_Bookings_GetTotal
+	@_currentUserId INT
+AS
+BEGIN
+	SELECT
+		COUNT(*)
+	FROM Bookings
+	WHERE IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Clients_GetAll') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Clients_GetAll
+END
+GO
+
+CREATE PROC usp_Clients_GetAll
+	@_currentUserId INT
+AS
+BEGIN
+	SELECT
+		*
+	FROM Clients
+	WHERE IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Rooms_GetAll') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Rooms_GetAll
+END
+GO
+
+CREATE PROC usp_Rooms_GetAll
+	@_currentUserId INT
+AS
+BEGIN
+	SELECT
+		*
+	FROM Rooms
+	WHERE IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Bookings_Create') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Bookings_Create
+END
+GO
+
+CREATE PROC usp_Bookings_Create
+	@_currentUserId INT
+	,@ClientId INT
+	,@RoomId INT
+	,@StartDate DATETIME2
+	,@EndDate DATETIME2
+AS
+BEGIN
+	INSERT Bookings (
+		ClientId
+		,RoomId
+		,StartDate
+		,EndDate
+		,CreatedBy
+		,ModifiedBy
+	)
+	VALUES (
+		@ClientId
+		,@RoomId
+		,@StartDate
+		,@EndDate
+		,@_currentUserId
+		,@_currentUserId
+	)
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Bookings_Delete') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Bookings_Delete
+END
+GO
+
+CREATE PROC usp_Bookings_Delete
+	@_currentUserId INT
+	,@Id INT
+AS
+BEGIN
+	UPDATE Bookings
+	SET
+		 IsDeleted = 1
+	WHERE Id = @Id
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Bookings_GetByOverlappingDateRange') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Bookings_GetByOverlappingDateRange
+END
+GO
+
+CREATE PROC usp_Bookings_GetByOverlappingDateRange
+	@_currentUserId INT
+	,@StartDate DATETIME2
+	,@EndDate DATETIME2
+	,@RoomId INT
+AS
+BEGIN
+	SELECT
+		*
+	FROM Bookings b
+	WHERE b.RoomId = @RoomId
+	AND (
+		(
+			b.StartDate >= @StartDate
+			AND
+			b.EndDate <= @EndDate
+		)
+		OR
+		(
+			b.EndDate >= @StartDate
+			AND
+			b.EndDate <= @EndDate
+		)
+	)
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Bookings_Update') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Bookings_Update
+END
+GO
+
+CREATE PROC usp_Bookings_Update
+	@_currentUserId INT
+	,@Id INT
+	,@ClientId INT
+	,@RoomId INT
+	,@StartDate DATETIME2
+	,@EndDate DATETIME2
+AS
+BEGIN
+	UPDATE Bookings
+	SET
+		 ClientId=@ClientId
+		,RoomId=@RoomId
+		,StartDate=@StartDate
+		,EndDate=@EndDate
+		,ModifiedDate=GETUTCDATE()
+		,ModifiedBy=@_currentUserId
+	WHERE Id = @Id
+END
+IF (
+	NOT EXISTS (
+		SELECT * 
+		FROM INFORMATION_SCHEMA.TABLES 
+		WHERE TABLE_SCHEMA = 'dbo' 
+		AND TABLE_NAME = 'ScheduledMedicalProcedures'
+	)
+)
+BEGIN
+	CREATE TABLE ScheduledMedicalProcedures (
+		[Id] INT PRIMARY KEY IDENTITY(1,1)
+		,[BookingId] INT NOT NULL
+		, CONSTRAINT FK_ScheduledMedicalProcedures_BookingId_Bookings_Id
+		FOREIGN KEY(BookingId) REFERENCES Bookings(Id)
+
+		,[UserId] INT NOT NULL
+		, CONSTRAINT FK_ScheduledMedicalProcedures_UserId_Users_Id
+		FOREIGN KEY(UserId) REFERENCES Users(Id)
+
+		,[MedicalProcedureId] INT NOT NULL
+		, CONSTRAINT FK_ScheduledMedicalProcedures_MedicalProcedureId_MedicalProcedures_Id
+		FOREIGN KEY(MedicalProcedureId) REFERENCES MedicalProcedures(Id)
+
+		,[ScheduledDate] DATETIME2 NOT NULL
+
+		,[CreatedBy] INT NOT NULL
+		,[ModifiedBy] INT NOT NULL
+		,[CreatedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[ModifiedDate] DATETIME2 NOT NULL DEFAULT(GETUTCDATE())
+		,[IsDeleted] BIT NOT NULL DEFAULT(0)
+
+		, CONSTRAINT FK_ScheduledMedicalProcedures_CreatedBy_Users_Id
+		FOREIGN KEY(CreatedBy) REFERENCES Users(Id)
+
+		, CONSTRAINT FK_ScheduledMedicalProcedures_ModifiedBy_Users_Id
+		FOREIGN KEY(ModifiedBy) REFERENCES Users(Id)
+	)
+END
+GO
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_MedicalProcedures_GetAll') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_MedicalProcedures_GetAll
+END
+GO
+
+CREATE PROC usp_MedicalProcedures_GetAll
+	@_currentUserId INT
+AS
+BEGIN
+	SELECT
+		*
+	FROM MedicalProcedures
+	WHERE IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_ScheduledMedicalProcedures_GetById') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_ScheduledMedicalProcedures_GetById
+END
+GO
+
+CREATE PROC usp_ScheduledMedicalProcedures_GetById
+	@_currentUserId INT
+	,@Id NVARCHAR(256)
+AS
+BEGIN
+	SELECT TOP 1
+		*
+	FROM ScheduledMedicalProcedures
+	WHERE Id = @Id
+		AND IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_ScheduledMedicalProcedures_GetByPage') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_ScheduledMedicalProcedures_GetByPage
+END
+GO
+
+CREATE PROC usp_ScheduledMedicalProcedures_GetByPage
+	@_currentUserId INT
+	,@Skip INT
+	,@Take INT
+
+	,@BookingId INT
+AS
+BEGIN
+	SELECT
+		smp.*
+		,u.LastName + ' ' + u.FirstName AS UserName
+		,mp.Name AS MedicalProcedureName
+	FROM ScheduledMedicalProcedures smp
+	JOIN Users u
+		ON smp.UserId = u.Id
+	JOIN MedicalProcedures mp
+		ON smp.MedicalProcedureId = mp.Id
+	WHERE smp.IsDeleted = 0
+	AND smp.BookingId = @BookingId
+	
+	ORDER BY CreatedDate DESC
+	OFFSET     @Skip ROWS
+	FETCH NEXT @Take ROWS ONLY;
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_ScheduledMedicalProcedures_GetTotal') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_ScheduledMedicalProcedures_GetTotal
+END
+GO
+
+CREATE PROC usp_ScheduledMedicalProcedures_GetTotal
+	@_currentUserId INT
+AS
+BEGIN
+	SELECT
+		COUNT(*)
+	FROM ScheduledMedicalProcedures
+	WHERE IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_Users_GetAll') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_Users_GetAll
+END
+GO
+
+CREATE PROC usp_Users_GetAll
+	@_currentUserId INT
+AS
+BEGIN
+	SELECT
+		*
+	FROM Users
+	WHERE IsDeleted = 0
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_ScheduledMedicalProcedures_Create') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_ScheduledMedicalProcedures_Create
+END
+GO
+
+CREATE PROC usp_ScheduledMedicalProcedures_Create
+	@_currentUserId INT
+	,@BookingId INT
+	,@UserId INT
+	,@MedicalProcedureId INT
+	,@ScheduledDate DATETIME2
+AS
+BEGIN
+	INSERT ScheduledMedicalProcedures (
+		BookingId
+		,UserId
+		,MedicalProcedureId
+		,ScheduledDate
+		,CreatedBy
+		,ModifiedBy
+	)
+	VALUES (
+		@BookingId
+		,@UserId
+		,@MedicalProcedureId
+		,@ScheduledDate
+		,@_currentUserId
+		,@_currentUserId
+	)
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_ScheduledMedicalProcedures_Delete') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_ScheduledMedicalProcedures_Delete
+END
+GO
+
+CREATE PROC usp_ScheduledMedicalProcedures_Delete
+	@_currentUserId INT
+	,@Id INT
+AS
+BEGIN
+	UPDATE ScheduledMedicalProcedures
+	SET
+		 IsDeleted = 1
+	WHERE Id = @Id
+END
+IF EXISTS ( SELECT * FROM   sysobjects
+            WHERE  id = object_id(N'usp_ScheduledMedicalProcedures_Update') 
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROC usp_ScheduledMedicalProcedures_Update
+END
+GO
+
+CREATE PROC usp_ScheduledMedicalProcedures_Update
+	@_currentUserId INT
+	,@Id INT
+	,@UserId INT
+	,@MedicalProcedureId INT
+	,@ScheduledDate DATETIME2
+AS
+BEGIN
+	UPDATE ScheduledMedicalProcedures
+	SET
+		 UserId=@UserId
+		,MedicalProcedureId=@MedicalProcedureId
+		,ScheduledDate=@ScheduledDate
+		,ModifiedDate=GETUTCDATE()
+		,ModifiedBy=@_currentUserId
+	WHERE Id = @Id
+END
