@@ -29,10 +29,10 @@ function EditDetailsStrategy(
         loadingService.startLoading('main');
 
         options.serviceMethods.getById(id)
-            .success(function (response) {
+            .then(function (response) {
                 angular.extend(options.entity, response);
-            })
-            .error(function (responseError) {
+            },
+            function (responseError) {
                 _logError(responseError);
             })
             .finally(function () {

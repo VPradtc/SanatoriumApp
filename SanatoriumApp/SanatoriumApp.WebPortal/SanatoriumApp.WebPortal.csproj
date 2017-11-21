@@ -334,6 +334,8 @@
     <Content Include="wwwroot\app\controllers\auth\authController.js" />
     <Content Include="wwwroot\app\controllers\auth\registerController.js" />
     <Content Include="wwwroot\app\controllers\base\baseController.js" />
+    <Content Include="wwwroot\app\controllers\booking\bookingController.js" />
+    <Content Include="wwwroot\app\controllers\booking\bookingEditController.js" />
     <Content Include="wwwroot\app\controllers\dialogs\dialogController.js" />
     <Content Include="wwwroot\app\controllers\home\homeController.js" />
     <Content Include="wwwroot\app\controllers\client\clientController.js" />
@@ -394,6 +396,7 @@
     <Content Include="wwwroot\app\factory\details\detailsStrategyFactory.js" />
     <Content Include="wwwroot\app\factory\details\strategies\createDetailsStrategy.js" />
     <Content Include="wwwroot\app\factory\details\strategies\editDetailsStrategy.js" />
+    <Content Include="wwwroot\app\factory\forms\booking\validators\vacantBookingValidator.js" />
     <Content Include="wwwroot\app\factory\forms\client\validators\uniquePassportValidator.js" />
     <Content Include="wwwroot\app\factory\forms\common\editControlLocator.js" />
     <Content Include="wwwroot\app\factory\forms\common\indexFieldDecorator.js" />
@@ -401,6 +404,7 @@
     <Content Include="wwwroot\app\factory\forms\common\validationConfigFactory.js" />
     <Content Include="wwwroot\app\factory\forms\common\validationTriggerFactory.js" />
     <Content Include="wwwroot\app\factory\forms\client\clientFormFactory.js" />
+    <Content Include="wwwroot\app\factory\forms\booking\bookingFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\room\roomFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\medicalProcedure\medicalProcedureFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\user\detailsUserFormFactory.js" />
@@ -424,6 +428,7 @@
     <Content Include="wwwroot\app\factory\promiseFactory.min.js" />
     <Content Include="wwwroot\app\factory\room\roomTypeDefinitionProvider.js" />
     <Content Include="wwwroot\app\factory\urlBuilder.js" />
+    <Content Include="wwwroot\app\kendo\models\bookingModel.js" />
     <Content Include="wwwroot\app\kendo\models\clientModel.js" />
     <Content Include="wwwroot\app\kendo\models\medicalProcedureModel.js" />
     <Content Include="wwwroot\app\kendo\models\roomModel.js" />
@@ -680,10 +685,6 @@
     <Content Include="wwwroot\app\scripts\keyboard\css\images\keyboard.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="wwwroot\languages\en-US\app.lang.json" />
-    <Content Include="wwwroot\languages\en-US\common.lang.json" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="wwwroot\app\languages\en-US\medicalProcedure.lang.json" />
   </ItemGroup>
   <ItemGroup>
@@ -697,6 +698,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="wwwroot\app\languages\en-US\client.lang.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\app\languages\en-US\booking.lang.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\app\languages\uk\booking.lang.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

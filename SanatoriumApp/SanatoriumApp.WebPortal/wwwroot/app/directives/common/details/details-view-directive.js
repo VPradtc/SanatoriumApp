@@ -70,6 +70,7 @@ function DetailsController(
 
         vm.options = angular.copy(vm.config);
         vm.options.entity = vm.model.entity;
+        vm.config.entity = vm.model.entity;
 
         vm.headerConfig = angular.merge({ mode: _getCurrentMode(), }, _viewTemplate, vm.options.view);
 
