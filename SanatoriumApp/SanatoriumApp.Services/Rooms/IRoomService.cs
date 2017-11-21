@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core.Domain.Common;
 using SanatoriumApp.Domain.Rooms;
+using SanatoriumApp.Viewmodels.Common;
 
 namespace SanatoriumApp.Services.Rooms
 {
@@ -15,5 +17,6 @@ namespace SanatoriumApp.Services.Rooms
         Task<KendoGridResponse<Room>> GetByPage(KendoGridRequest request);
 
         Task<Room> GetById(int id);
+        Task<ICollection<DropdownModel>> GetAll();
     }
 }

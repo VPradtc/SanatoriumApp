@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="Clients\IClientRepository.cs" />
     <Compile Include="Clients\ClientRepository.cs" />
+    <Compile Include="Bookings\IBookingRepository.cs" />
+    <Compile Include="Bookings\BookingRepository.cs" />
     <Compile Include="Rooms\IRoomRepository.cs" />
     <Compile Include="Rooms\RoomRepository.cs" />
     <Compile Include="MedicalProcedures\IMedicalProcedureRepository.cs" />

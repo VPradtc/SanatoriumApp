@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bookings\BookingsGetByOverlappingDateRangeSqlStoredProcedureQuery.cs" />
     <Compile Include="Clients\ClientsCreateSqlStoredProcedureCommand.cs" />
     <Compile Include="Clients\ClientsDeleteSqlStoredProcedureCommand.cs" />
     <Compile Include="Clients\ClientsGetByIdSqlStoredProcedureQuery.cs" />
@@ -49,9 +50,17 @@
     <Compile Include="Clients\ClientsGetByPageSqlStoredProcedureQuery.cs" />
     <Compile Include="Clients\ClientsGetTotalSqlStoredProcedureScalar.cs" />
     <Compile Include="Clients\ClientsUpdateSqlStoredProcedureCommand.cs" />
+    <Compile Include="Bookings\BookingCreateSqlStoredProcedureCommand.cs" />
+    <Compile Include="Bookings\BookingDeleteSqlStoredProcedureCommand.cs" />
+    <Compile Include="Bookings\BookingGetByIdSqlStoredProcedureQuery.cs" />
+    <Compile Include="Bookings\BookingGetByPageSqlStoredProcedureQuery.cs" />
+    <Compile Include="Bookings\BookingGetTotalSqlStoredProcedureScalar.cs" />
+    <Compile Include="Bookings\BookingUpdateSqlStoredProcedureCommand.cs" />
+    <Compile Include="Clients\ClientsGetAllSqlStoredProcedureQuery.cs" />
     <Compile Include="Rooms\RoomsCreateSqlStoredProcedureCommand.cs" />
     <Compile Include="Rooms\RoomsDeleteSqlStoredProcedureCommand.cs" />
     <Compile Include="Rooms\RoomsGetByIdSqlStoredProcedureQuery.cs" />
+    <Compile Include="Rooms\RoomsGetAllSqlStoredProcedureQuery.cs" />
     <Compile Include="Rooms\RoomsGetByPageSqlStoredProcedureQuery.cs" />
     <Compile Include="Rooms\RoomsGetTotalSqlStoredProcedureScalar.cs" />
     <Compile Include="Rooms\RoomsUpdateSqlStoredProcedureCommand.cs" />

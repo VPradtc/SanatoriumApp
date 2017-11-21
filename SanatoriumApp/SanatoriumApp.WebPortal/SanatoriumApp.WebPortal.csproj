@@ -193,6 +193,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Core\BaseApiController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\MedicalProcedureController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -355,11 +356,9 @@
     <Content Include="wwwroot\app\directives\common\controls\header-button-directive.js" />
     <Content Include="wwwroot\app\directives\common\controls\input-edit-control-directive.js" />
     <Content Include="wwwroot\app\directives\common\controls\radio-edit-control-directive.js" />
-    <Content Include="wwwroot\app\directives\common\controls\select-edit-control-directive.js" />
     <Content Include="wwwroot\app\directives\common\controls\select\combobox-edit-control-directive.js" />
     <Content Include="wwwroot\app\directives\common\controls\select\select-edit-control-controller.js" />
     <Content Include="wwwroot\app\directives\common\controls\select\select-edit-control-directive.js" />
-    <Content Include="wwwroot\app\directives\common\details-view-directive.js" />
     <Content Include="wwwroot\app\directives\common\details\details-header-directive.js" />
     <Content Include="wwwroot\app\directives\common\details\details-view-directive.js" />
     <Content Include="wwwroot\app\directives\common\details\details-view-file-upload-directive.js" />
@@ -542,6 +541,7 @@
     <Content Include="wwwroot\app\services\dialogs\dialogService.js" />
     <Content Include="wwwroot\app\services\loading\loadingService.js" />
     <Content Include="wwwroot\app\services\client\clientService.js" />
+    <Content Include="wwwroot\app\services\booking\bookingService.js" />
     <Content Include="wwwroot\app\services\room\roomService.js" />
     <Content Include="wwwroot\app\services\mobile\mobileService.js" />
     <Content Include="wwwroot\app\services\medicalProcedure\medicalProcedureService.js" />
@@ -559,7 +559,6 @@
     <Content Include="wwwroot\app\views\common\controls\header-button.html" />
     <Content Include="wwwroot\app\views\common\controls\input-edit-control.html" />
     <Content Include="wwwroot\app\views\common\controls\radio-edit-control.html" />
-    <Content Include="wwwroot\app\views\common\controls\select-edit-control.html" />
     <Content Include="wwwroot\app\views\common\controls\select\combobox-edit-control.html" />
     <Content Include="wwwroot\app\views\common\controls\select\select-edit-control.html" />
     <Content Include="wwwroot\app\views\common\details-view.html" />
@@ -586,6 +585,8 @@
     <Content Include="wwwroot\app\views\main.html" />
     <Content Include="wwwroot\app\views\client\edit.html" />
     <Content Include="wwwroot\app\views\client\index.html" />
+    <Content Include="wwwroot\app\views\booking\edit.html" />
+    <Content Include="wwwroot\app\views\booking\index.html" />
     <Content Include="wwwroot\app\views\room\edit.html" />
     <Content Include="wwwroot\app\views\room\index.html" />
     <Content Include="wwwroot\app\views\navbar\navbar-item.html" />
@@ -675,7 +676,6 @@
     <Content Include="wwwroot\app\languages\uk\user.lang.json" />
     <Content Include="wwwroot\app\scripts\angular-messages\angular-messages.min.js.map" />
     <Content Include="wwwroot\app\scripts\inspinia\inspinia.min.js.map" />
-    <Content Include="wwwroot\app\scripts\inspinia\plugins\dataTables\jquery.dataTables.min.js.map" />
     <Content Include="wwwroot\app\scripts\kendo\kendo.all.min.js.map" />
     <Content Include="wwwroot\app\scripts\keyboard\css\images\keyboard.svg" />
   </ItemGroup>

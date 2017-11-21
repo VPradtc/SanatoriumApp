@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Core.Domain.Common;
 using SanatoriumApp.Domain.Clients;
 using SanatoriumApp.Repositories.Clients;
+using SanatoriumApp.Viewmodels.Common;
 
 namespace SanatoriumApp.Services.Clients
 {
@@ -48,6 +51,19 @@ namespace SanatoriumApp.Services.Clients
             var user = await _repository.GetByPassport(passport);
 
             return user != null;
+        }
+
+        public async Task<ICollection<DropdownModel>> GetAll()
+        {
+            var items = await _repository.GetAll();
+
+            var result = items.Select(i => new DropdownModel
+            {
+                Identifier = i.Id,
+                Name = i.LastName + ' ' + i.FirstName,
+            }).ToList();
+
+            return result;
         }
     }
 }

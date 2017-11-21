@@ -47,6 +47,8 @@
     <Compile Include="Auth\SanatoriumAppAuthUserManager.cs" />
     <Compile Include="Auth\Users\IUserService.cs" />
     <Compile Include="Auth\Users\UserService.cs" />
+    <Compile Include="Booking\IBookingService.cs" />
+    <Compile Include="Booking\BookingService.cs" />
     <Compile Include="Clients\IClientService.cs" />
     <Compile Include="Clients\ClientService.cs" />
     <Compile Include="Rooms\IRoomService.cs" />

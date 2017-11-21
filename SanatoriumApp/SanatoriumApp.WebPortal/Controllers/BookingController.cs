@@ -3,34 +3,26 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Core.Domain.Common;
-using SanatoriumApp.Domain.Rooms;
-using SanatoriumApp.Services.Rooms;
+using SanatoriumApp.Domain.Bookings;
+using SanatoriumApp.Services.Bookings;
 using SanatoriumApp.WebPortal.Controllers.Core;
 
 namespace SanatoriumApp.WebPortal.Controllers
 {
     [Authorize]
-    public class RoomController : BaseApiController
+    public class BookingController : BaseApiController
     {
-        private readonly IRoomService _roomService;
+        private readonly IBookingService _bookingService;
 
-        public RoomController(IRoomService roomService)
+        public BookingController(IBookingService bookingService)
         {
-            _roomService = roomService;
-        }
-
-        [HttpGet]
-        public async Task<HttpResponseMessage> GetAll()
-        {
-            var entity = await _roomService.GetAll();
-
-            return Request.CreateResponse(HttpStatusCode.OK, entity);
+            _bookingService = bookingService;
         }
 
         [HttpGet]
         public async Task<HttpResponseMessage> GetById(int id)
         {
-            var entity = await _roomService.GetById(id);
+            var entity = await _bookingService.GetById(id);
 
             return Request.CreateResponse(HttpStatusCode.OK, entity);
         }
@@ -38,33 +30,33 @@ namespace SanatoriumApp.WebPortal.Controllers
         [HttpGet]
         public async Task<HttpResponseMessage> GetByPage([FromUri]KendoGridRequest request)
         {
-            var grid = await _roomService.GetByPage(request);
+            var grid = await _bookingService.GetByPage(request);
 
             return Request.CreateResponse(HttpStatusCode.OK, grid);
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> Create(Room request)
+        public async Task<HttpResponseMessage> Create(Booking request)
         {
             if (request == null)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            await _roomService.Create(request);
+            await _bookingService.Create(request);
 
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> Update(Room request)
+        public async Task<HttpResponseMessage> Update(Booking request)
         {
             if (request == null)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            await _roomService.Update(request);
+            await _bookingService.Update(request);
 
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }
@@ -72,9 +64,17 @@ namespace SanatoriumApp.WebPortal.Controllers
         [HttpPost]
         public async Task<HttpResponseMessage> Delete([FromBody]int id)
         {
-            await _roomService.Delete(id);
+            await _bookingService.Delete(id);
 
             return Request.CreateResponse(HttpStatusCode.NoContent);
+        }
+
+        [HttpGet]
+        public async Task<HttpResponseMessage> IsVacant([FromUri]Booking booking)
+        {
+            bool isVacant = await _bookingService.IsVacant(booking);
+
+            return Request.CreateResponse(HttpStatusCode.OK, isVacant);
         }
     }
 }

@@ -21,5 +21,6 @@
   "deactivate": "Deactivate",
   "medicalProcedures": "Medical Procedures",
   "rooms": "Rooms",
-  "clients": "Clients"
+  "clients": "Clients",
+  "bookings": "Booking"
 }

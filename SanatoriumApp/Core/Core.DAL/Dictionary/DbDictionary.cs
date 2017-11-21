@@ -32,6 +32,17 @@
                 public const string GetById = "usp_MedicalProcedures_GetById";
             }
 
+            public static class Bookings
+            {
+                public const string Create = "usp_Bookings_Create";
+                public const string Delete = "usp_Bookings_Delete";
+                public const string Update = "usp_Bookings_Update";
+                public const string GetByPage = "usp_Bookings_GetByPage";
+                public const string GetTotal = "usp_Bookings_GetTotal";
+                public const string GetById = "usp_Bookings_GetById";
+                public const string GetByOverlappingDateRange = "usp_Bookings_GetByOverlappingDateRange";
+            }
+
             public static class Rooms
             {
                 public const string Create = "usp_Rooms_Create";
@@ -40,6 +51,7 @@
                 public const string GetByPage = "usp_Rooms_GetByPage";
                 public const string GetTotal = "usp_Rooms_GetTotal";
                 public const string GetById = "usp_Rooms_GetById";
+                public const string GetAll = "usp_Rooms_GetAll";
             }
 
             public static class Clients
@@ -51,6 +63,7 @@
                 public const string GetTotal = "usp_Clients_GetTotal";
                 public const string GetById = "usp_Clients_GetById";
                 public const string GetByPassport = "usp_Clients_GetByPassport";
+                public const string GetAll = "usp_Clients_GetAll";
             }
         }
 

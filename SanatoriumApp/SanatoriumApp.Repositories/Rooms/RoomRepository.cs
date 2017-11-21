@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Domain.Common;
 using SanatoriumApp.DAL.Rooms;
@@ -14,6 +15,7 @@ namespace SanatoriumApp.Repositories.Rooms
         private readonly RoomsDeleteSqlStoredProcedureCommand _deleteCommand;
         private readonly RoomsUpdateSqlStoredProcedureCommand _updateCommand;
         private readonly RoomsGetTotalSqlStoredProcedureScalar _getTotalCommand;
+        private readonly RoomsGetAllSqlStoredProcedureQuery _getAllCommand;
 
         public RoomRepository(
             RoomsCreateSqlStoredProcedureCommand createCommand
@@ -22,6 +24,7 @@ namespace SanatoriumApp.Repositories.Rooms
             , RoomsGetTotalSqlStoredProcedureScalar getTotalCommand
             , RoomsDeleteSqlStoredProcedureCommand deleteCommand
             , RoomsUpdateSqlStoredProcedureCommand updateCommand
+            , RoomsGetAllSqlStoredProcedureQuery getAllCommand
             )
         {
             _createCommand = createCommand;
@@ -30,6 +33,7 @@ namespace SanatoriumApp.Repositories.Rooms
             _deleteCommand = deleteCommand;
             _updateCommand = updateCommand;
             _getTotalCommand = getTotalCommand;
+            _getAllCommand = getAllCommand;
         }
 
         public Task Create(Room Room)
@@ -65,6 +69,12 @@ namespace SanatoriumApp.Repositories.Rooms
         public async Task Update(Room request)
         {
             await _updateCommand.ExecuteAsync(request);
+        }
+
+        public async Task<ICollection<Room>> GetAll()
+        {
+            var dbResult = await _getAllCommand.ExecuteAsync();
+            return dbResult;
         }
     }
 }

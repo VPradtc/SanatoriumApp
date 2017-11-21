@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Domain.Common;
 using SanatoriumApp.DAL.Clients;
@@ -15,6 +16,7 @@ namespace SanatoriumApp.Repositories.Clients
         private readonly ClientsUpdateSqlStoredProcedureCommand _updateCommand;
         private readonly ClientsGetTotalSqlStoredProcedureScalar _getTotalCommand;
         private readonly ClientsGetByPassportSqlStoredProcedureQuery _getByPassportCommand;
+        private readonly ClientsGetAllSqlStoredProcedureQuery _getAllCommand;
 
         public ClientRepository(
             ClientsCreateSqlStoredProcedureCommand createCommand
@@ -24,6 +26,7 @@ namespace SanatoriumApp.Repositories.Clients
             , ClientsDeleteSqlStoredProcedureCommand deleteCommand
             , ClientsUpdateSqlStoredProcedureCommand updateCommand
             , ClientsGetByPassportSqlStoredProcedureQuery getByPassportCommand
+            , ClientsGetAllSqlStoredProcedureQuery getAllCommand
             )
         {
             _createCommand = createCommand;
@@ -33,6 +36,7 @@ namespace SanatoriumApp.Repositories.Clients
             _updateCommand = updateCommand;
             _getTotalCommand = getTotalCommand;
             _getByPassportCommand = getByPassportCommand;
+            _getAllCommand = getAllCommand;
         }
 
         public Task Create(Client Client)
@@ -74,6 +78,12 @@ namespace SanatoriumApp.Repositories.Clients
         {
             var dbResult = await _getByPassportCommand.ExecuteAsync(passport);
             return dbResult.FirstOrDefault();
+        }
+
+        public async Task<ICollection<Client>> GetAll()
+        {
+            var dbResult = await _getAllCommand.ExecuteAsync();
+            return dbResult;
         }
     }
 }

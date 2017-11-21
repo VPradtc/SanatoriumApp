@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bookings\Booking.cs" />
+    <Compile Include="Bookings\BookingGetByPageModel.cs" />
     <Compile Include="Clients\Client.cs" />
     <Compile Include="MedicalProcedures\MedicalProcedure.cs" />
     <Compile Include="Rooms\Room.cs" />
