@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bookings\BookingsGetByOverlappingDateRangeSqlStoredProcedureQuery.cs" />
     <Compile Include="Clients\ClientsCreateSqlStoredProcedureCommand.cs" />
     <Compile Include="Clients\ClientsDeleteSqlStoredProcedureCommand.cs" />
     <Compile Include="Clients\ClientsGetByIdSqlStoredProcedureQuery.cs" />
@@ -49,9 +50,24 @@
     <Compile Include="Clients\ClientsGetByPageSqlStoredProcedureQuery.cs" />
     <Compile Include="Clients\ClientsGetTotalSqlStoredProcedureScalar.cs" />
     <Compile Include="Clients\ClientsUpdateSqlStoredProcedureCommand.cs" />
+    <Compile Include="Bookings\BookingCreateSqlStoredProcedureCommand.cs" />
+    <Compile Include="Bookings\BookingDeleteSqlStoredProcedureCommand.cs" />
+    <Compile Include="Bookings\BookingGetByIdSqlStoredProcedureQuery.cs" />
+    <Compile Include="Bookings\BookingGetByPageSqlStoredProcedureQuery.cs" />
+    <Compile Include="Bookings\BookingGetTotalSqlStoredProcedureScalar.cs" />
+    <Compile Include="Bookings\BookingUpdateSqlStoredProcedureCommand.cs" />
+    <Compile Include="Clients\ClientsGetAllSqlStoredProcedureQuery.cs" />
+    <Compile Include="MedicalProcedures\MedicalProceduresGetAllSqlStoredProcedureQuery.cs" />
+    <Compile Include="ScheduledMedicalProcedures\ScheduledMedicalProceduresCreateSqlStoredProcedureCommand.cs" />
+    <Compile Include="ScheduledMedicalProcedures\ScheduledMedicalProceduresDeleteSqlStoredProcedureCommand.cs" />
+    <Compile Include="ScheduledMedicalProcedures\ScheduledMedicalProceduresGetByIdSqlStoredProcedureQuery.cs" />
+    <Compile Include="ScheduledMedicalProcedures\ScheduledMedicalProceduresGetByPageSqlStoredProcedureQuery.cs" />
+    <Compile Include="ScheduledMedicalProcedures\ScheduledMedicalProceduresGetTotalSqlStoredProcedureScalar.cs" />
+    <Compile Include="ScheduledMedicalProcedures\ScheduledMedicalProceduresUpdateSqlStoredProcedureCommand.cs" />
     <Compile Include="Rooms\RoomsCreateSqlStoredProcedureCommand.cs" />
     <Compile Include="Rooms\RoomsDeleteSqlStoredProcedureCommand.cs" />
     <Compile Include="Rooms\RoomsGetByIdSqlStoredProcedureQuery.cs" />
+    <Compile Include="Rooms\RoomsGetAllSqlStoredProcedureQuery.cs" />
     <Compile Include="Rooms\RoomsGetByPageSqlStoredProcedureQuery.cs" />
     <Compile Include="Rooms\RoomsGetTotalSqlStoredProcedureScalar.cs" />
     <Compile Include="Rooms\RoomsUpdateSqlStoredProcedureCommand.cs" />
@@ -65,6 +81,7 @@
     <Compile Include="MedicalProcedures\MedicalProceduresGetByPageSqlStoredProcedureQuery.cs" />
     <Compile Include="MedicalProcedures\MedicalProceduresGetTotalSqlStoredProcedureScalar.cs" />
     <Compile Include="MedicalProcedures\MedicalProceduresUpdateSqlStoredProcedureCommand.cs" />
+    <Compile Include="Users\UsersGetAllSqlStoredProcedureQuery.cs" />
     <Compile Include="Users\UsersGetTotalSqlStoredProcedureScalar.cs" />
     <Compile Include="Users\UsersUpdateSqlStoredProcedureCommand.cs" />
     <Compile Include="Users\UsersCreateSqlStoredProcedureCommand.cs" />

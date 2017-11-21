@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core.Domain.Common;
 using SanatoriumApp.Domain.Clients;
 
@@ -17,5 +18,6 @@ namespace SanatoriumApp.Repositories.Clients
         Task Update(Client request);
 
         Task<Client> GetByPassport(string passport);
+        Task<ICollection<Client>> GetAll();
     }
 }

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Domain.Common;
 using SanatoriumApp.Domain.Users;
+using SanatoriumApp.Viewmodels.Common;
 using SanatoriumApp.Viewmodels.Users;
 
 namespace SanatoriumApp.Services.Auth.Users
@@ -18,5 +19,6 @@ namespace SanatoriumApp.Services.Auth.Users
         Task<KendoGridResponse<UserGetByPageModel>> GetByPage(KendoGridRequest request);
 
         Task<UserEditModel> GetById(int id);
+        Task<ICollection<DropdownModel>> GetAll();
     }
 }

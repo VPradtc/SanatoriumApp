@@ -1,0 +1,18 @@
+﻿{
+  "bookings": "Путівки",
+  "booking": "Путівка",
+  "startDate": "Дата заїзду",
+  "endDate": "Дата виїзду",
+  "deleteThisBooking": "Видалити путівку?",
+  "startDateIsRequired": "Вкажіть дату заїзду.",
+  "endDateIsRequired": "Вкажіть дату виїзду.",
+  "clientIsRequired": "Вкажіть клієнта.",
+  "roomIsRequired": "Вкажіть кімнату.",
+  "createBooking": "Створити Путівку",
+  "editBooking": "Редагувати Путівку",
+  "room": "Готельний номер",
+  "client": "Клієнт",
+  "selectRoom": "Виберіть номер...",
+  "selectClient": "Виберіть клієнта...",
+  "roomIsInUse": "Кімната зайнята."
+}

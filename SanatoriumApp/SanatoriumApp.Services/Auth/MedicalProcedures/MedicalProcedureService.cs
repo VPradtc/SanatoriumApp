@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Core.Domain.Common;
 using SanatoriumApp.Domain.MedicalProcedures;
 using SanatoriumApp.Repositories.MedicalProcedures;
+using SanatoriumApp.Viewmodels.Common;
 
 namespace SanatoriumApp.Services.Auth.MedicalProcedures
 {
@@ -40,6 +43,19 @@ namespace SanatoriumApp.Services.Auth.MedicalProcedures
         public async Task<MedicalProcedure> GetById(int id)
         {
             var result = await _repository.GetById(id);
+            return result;
+        }
+
+        public async Task<ICollection<DropdownModel>> GetAll()
+        {
+            var items = await _repository.GetAll();
+
+            var result = items.Select(i => new DropdownModel
+            {
+                Identifier = i.Id,
+                Name = i.Name,
+            }).ToList();
+
             return result;
         }
     }

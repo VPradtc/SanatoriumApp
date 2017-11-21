@@ -30,6 +30,11 @@ function NavbarFactory(enumRoleIdentifier) {
                     state: 'app.main.client.index',
                     icon: 'fa fa-users',
                 },
+                {
+                    title: 'common.bookings',
+                    state: 'app.main.booking.index',
+                    icon: 'fa fa-ship',
+                },
             ]
         };
 

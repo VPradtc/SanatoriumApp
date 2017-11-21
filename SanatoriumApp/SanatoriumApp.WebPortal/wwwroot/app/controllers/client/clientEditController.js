@@ -18,7 +18,7 @@ function ClientEditController($scope, clientService, $state, formFactory, $q, un
         return _labelMap[$state.current.mode];
     };
 
-    var _init = function () {
+    var _init = function (userModel) {
 
         var passportValidator = function (passport) {
 

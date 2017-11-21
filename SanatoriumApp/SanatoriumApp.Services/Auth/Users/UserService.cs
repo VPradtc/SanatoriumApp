@@ -1,8 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Core.Auth.Services.OAuth2.Users.Security;
 using Core.Domain.Common;
 using SanatoriumApp.Domain.Users;
 using SanatoriumApp.Repositories.Users;
+using SanatoriumApp.Viewmodels.Common;
 using SanatoriumApp.Viewmodels.Users;
 
 namespace SanatoriumApp.Services.Auth.Users
@@ -62,6 +65,19 @@ namespace SanatoriumApp.Services.Auth.Users
         public async Task<UserEditModel> GetById(int id)
         {
             var result = await _userRepository.GetById(id);
+            return result;
+        }
+
+        public async Task<ICollection<DropdownModel>> GetAll()
+        {
+            var items = await _userRepository.GetAll();
+
+            var result = items.Select(i => new DropdownModel
+            {
+                Identifier = i.Id,
+                Name = i.LastName + ' ' + i.FirstName,
+            }).ToList();
+
             return result;
         }
     }

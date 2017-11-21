@@ -1,0 +1,14 @@
+﻿{
+  "clients": "Клієнти",
+  "client": "Клієнт",
+  "firstName": "Ім'я",
+  "lastName": "Прізвище",
+  "passport": "Серія/номер паспорту",
+  "deleteThisClient": "Видалити клієнта?",
+  "firstNameIsRequired": "Вкажіть ім'я.",
+  "lastNameIsRequired": "Вкажіть прізвище.",
+  "passportIsRequired": "Вкажіть серію та номер паспорту.",
+  "createClient": "Створити клієнта",
+  "editClient": "Редагувати клієнта",
+  "clientWithSuchPassportAlreadyExists": "Такий паспорт вже зареєстровано."
+}

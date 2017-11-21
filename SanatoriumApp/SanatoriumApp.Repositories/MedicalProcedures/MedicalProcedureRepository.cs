@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Domain.Common;
 using SanatoriumApp.DAL.MedicalProcedures;
@@ -14,6 +15,7 @@ namespace SanatoriumApp.Repositories.MedicalProcedures
         private readonly MedicalProceduresDeleteSqlStoredProcedureCommand _deleteCommand;
         private readonly MedicalProceduresUpdateSqlStoredProcedureCommand _updateCommand;
         private readonly MedicalProceduresGetTotalSqlStoredProcedureScalar _getTotalCommand;
+        private readonly MedicalProceduresGetAllSqlStoredProcedureQuery _getAllCommand;
 
         public MedicalProcedureRepository(
             MedicalProceduresCreateSqlStoredProcedureCommand createCommand
@@ -22,6 +24,7 @@ namespace SanatoriumApp.Repositories.MedicalProcedures
             , MedicalProceduresGetTotalSqlStoredProcedureScalar getTotalCommand
             , MedicalProceduresDeleteSqlStoredProcedureCommand deleteCommand
             , MedicalProceduresUpdateSqlStoredProcedureCommand updateCommand
+            , MedicalProceduresGetAllSqlStoredProcedureQuery getAllCommand
             )
         {
             _createCommand = createCommand;
@@ -30,6 +33,7 @@ namespace SanatoriumApp.Repositories.MedicalProcedures
             _deleteCommand = deleteCommand;
             _updateCommand = updateCommand;
             _getTotalCommand = getTotalCommand;
+            _getAllCommand = getAllCommand;
         }
 
         public Task Create(MedicalProcedure MedicalProcedure)
@@ -65,6 +69,12 @@ namespace SanatoriumApp.Repositories.MedicalProcedures
         public async Task Update(MedicalProcedure request)
         {
             await _updateCommand.ExecuteAsync(request);
+        }
+
+        public async Task<ICollection<MedicalProcedure>> GetAll()
+        {
+            var dbResult = await _getAllCommand.ExecuteAsync();
+            return dbResult;
         }
     }
 }

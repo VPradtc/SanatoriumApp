@@ -1,0 +1,18 @@
+﻿{
+  "bookings": "Bookings",
+  "booking": "Booking",
+  "startDate": "Start Date",
+  "endDate": "End Date",
+  "deleteThisBooking": "Delete this booking?",
+  "startDateIsRequired": "Start Date is required.",
+  "endDateIsRequired": "End Date is required.",
+  "clientIsRequired": "Client is required.",
+  "roomIsRequired": "Room is required.",
+  "createBooking": "Create Booking",
+  "editBooking": "Edit Booking",
+  "room": "Room",
+  "client": "Client",
+  "selectRoom": "Select room...",
+  "selectClient": "Select client...",
+  "roomIsInUse": "This room is already in use."
+}

@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core.Domain.Common;
 using SanatoriumApp.Domain.MedicalProcedures;
+using SanatoriumApp.Viewmodels.Common;
 
 namespace SanatoriumApp.Services.Auth.MedicalProcedures
 {
@@ -15,5 +17,7 @@ namespace SanatoriumApp.Services.Auth.MedicalProcedures
         Task<KendoGridResponse<MedicalProcedure>> GetByPage(KendoGridRequest request);
 
         Task<MedicalProcedure> GetById(int id);
+
+        Task<ICollection<DropdownModel>> GetAll();
     }
 }

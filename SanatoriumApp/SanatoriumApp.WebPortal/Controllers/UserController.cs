@@ -21,6 +21,14 @@ namespace SanatoriumApp.WebPortal.Controllers
         }
 
         [HttpGet]
+        public async Task<HttpResponseMessage> GetAll()
+        {
+            var entity = await _userService.GetAll();
+
+            return Request.CreateResponse(HttpStatusCode.OK, entity);
+        }
+
+        [HttpGet]
         public async Task<HttpResponseMessage> GetById(int id)
         {
             var entity = await _userService.GetById(id);

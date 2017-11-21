@@ -1,0 +1,16 @@
+﻿{
+  "procedures": "Procedures",
+  "procedure": "Procedure",
+  "scheduledDate": "Scheduled Date",
+  "employee": "Employee",
+  "medicalProcedure": "Medical Procedures",
+  "deleteThisProcedure": "Delete this procedure?",
+  "createProcedure": "Schedule Procedure",
+  "editProcedure": "Edit Procedure",
+  "selectClient": "Select employee...",
+  "selectMedicalProcedure": "Select med. procedure...",
+
+  "scheduledDateIsRequired": "Scheduled Date is required.",
+  "medicalProcedureIsRequired": "Med. Procedure is required.",
+  "employeeIsRequired": "Employee is required."
+}

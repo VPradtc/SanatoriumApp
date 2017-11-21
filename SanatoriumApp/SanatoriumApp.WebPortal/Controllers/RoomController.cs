@@ -12,17 +12,25 @@ namespace SanatoriumApp.WebPortal.Controllers
     [Authorize]
     public class RoomController : BaseApiController
     {
-        private readonly IRoomService _medicalProcedureService;
+        private readonly IRoomService _roomService;
 
-        public RoomController(IRoomService medicalProcedureService)
+        public RoomController(IRoomService roomService)
         {
-            _medicalProcedureService = medicalProcedureService;
+            _roomService = roomService;
+        }
+
+        [HttpGet]
+        public async Task<HttpResponseMessage> GetAll()
+        {
+            var entity = await _roomService.GetAll();
+
+            return Request.CreateResponse(HttpStatusCode.OK, entity);
         }
 
         [HttpGet]
         public async Task<HttpResponseMessage> GetById(int id)
         {
-            var entity = await _medicalProcedureService.GetById(id);
+            var entity = await _roomService.GetById(id);
 
             return Request.CreateResponse(HttpStatusCode.OK, entity);
         }
@@ -30,7 +38,7 @@ namespace SanatoriumApp.WebPortal.Controllers
         [HttpGet]
         public async Task<HttpResponseMessage> GetByPage([FromUri]KendoGridRequest request)
         {
-            var grid = await _medicalProcedureService.GetByPage(request);
+            var grid = await _roomService.GetByPage(request);
 
             return Request.CreateResponse(HttpStatusCode.OK, grid);
         }
@@ -43,7 +51,7 @@ namespace SanatoriumApp.WebPortal.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            await _medicalProcedureService.Create(request);
+            await _roomService.Create(request);
 
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }
@@ -56,7 +64,7 @@ namespace SanatoriumApp.WebPortal.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            await _medicalProcedureService.Update(request);
+            await _roomService.Update(request);
 
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }
@@ -64,7 +72,7 @@ namespace SanatoriumApp.WebPortal.Controllers
         [HttpPost]
         public async Task<HttpResponseMessage> Delete([FromBody]int id)
         {
-            await _medicalProcedureService.Delete(id);
+            await _roomService.Delete(id);
 
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }

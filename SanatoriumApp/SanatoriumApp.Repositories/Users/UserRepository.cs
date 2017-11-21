@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Domain.Auth;
 using Core.Domain.Common;
@@ -16,6 +17,7 @@ namespace SanatoriumApp.Repositories.Users
         private readonly UsersDeleteSqlStoredProcedureCommand _deleteCommand;
         private readonly UsersUpdateSqlStoredProcedureCommand _updateCommand;
         private readonly UsersGetTotalSqlStoredProcedureScalar _getTotalCommand;
+        private readonly UsersGetAllSqlStoredProcedureQuery _getAllCommand;
 
         public UserRepository(
             UsersGetByEmailSqlStoredProcedureQuery getByEmailCommand
@@ -25,6 +27,7 @@ namespace SanatoriumApp.Repositories.Users
             , UsersGetTotalSqlStoredProcedureScalar getTotalCommand
             , UsersDeleteSqlStoredProcedureCommand deleteCommand
             , UsersUpdateSqlStoredProcedureCommand updateCommand
+            , UsersGetAllSqlStoredProcedureQuery getAllCommand
             )
         {
             _getByEmailCommand = getByEmailCommand;
@@ -34,6 +37,7 @@ namespace SanatoriumApp.Repositories.Users
             _deleteCommand = deleteCommand;
             _updateCommand = updateCommand;
             _getTotalCommand = getTotalCommand;
+            _getAllCommand = getAllCommand;
         }
 
         public Task Create(User user)
@@ -89,6 +93,12 @@ namespace SanatoriumApp.Repositories.Users
         public async Task Update(UserEditModel request)
         {
             await _updateCommand.ExecuteAsync(request);
+        }
+
+        public async Task<ICollection<User>> GetAll()
+        {
+            var dbResult = await _getAllCommand.ExecuteAsync();
+            return dbResult;
         }
     }
 }

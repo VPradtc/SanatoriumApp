@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core.Domain.Common;
 using SanatoriumApp.Domain.Rooms;
 
@@ -15,5 +16,6 @@ namespace SanatoriumApp.Repositories.Rooms
         Task Delete(int id);
 
         Task Update(Room request);
+        Task<ICollection<Room>> GetAll();
     }
 }

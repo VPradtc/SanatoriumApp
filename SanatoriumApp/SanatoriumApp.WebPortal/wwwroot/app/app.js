@@ -33,6 +33,5 @@ var app = angular.module('DataAccessApp', [
     })
     .value('localeSupported', [
         'uk',
-        'en-US',
     ])
     .value('localeFallbacks', {});

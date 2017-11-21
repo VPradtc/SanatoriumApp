@@ -21,5 +21,6 @@
   "deactivate": "Деактивувати",
   "medicalProcedures": "Медичні Процедури",
   "rooms": "Готельні номери",
-  "clients": "Клієнти"
+  "clients": "Клієнти",
+  "bookings": "Путівки"
 }
