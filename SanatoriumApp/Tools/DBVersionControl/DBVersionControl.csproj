@@ -223,6 +223,39 @@
     <Content Include="Scripts\0.0.4\2_usp_MedicalProcedures_Update_CREATE.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\0.0.7\1_usp_Clients_GetAll_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.7\1_usp_Rooms_GetAll_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.8\1_TABLE_ScheduledMedicalProcedures_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.7\1_TABLE_Bookings_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.7\1_usp_Bookings_GetById_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.7\1_usp_Bookings_GetByPage_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.7\1_usp_Bookings_GetTotal_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.7\2_usp_Bookings_Create_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.7\2_usp_Bookings_Delete_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.7\2_usp_Bookings_GetByOverlappingDateRange_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\0.0.7\2_usp_Bookings_Update_CREATE.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\_init\Init.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
