@@ -22,21 +22,6 @@ BEGIN
 		FOREIGN KEY(MedicalProcedureId) REFERENCES MedicalProcedures(Id)
 
 		,[ScheduledDate] DATETIME2 NOT NULL
-		, CONSTRAINT CK_ScheduledMedicalProcedures_ScheduledDate_InBookingRange
-		 CHECK (
-			ScheduledDate IN (
-				(
-					SELECT TOP 1 StartDate
-					FROM Bookings b
-					WHERE b.Id = BookingId
-				)
-				,(
-					SELECT TOP 1 EndDate
-					FROM Bookings b
-					WHERE b.Id = BookingId
-				)
-			)
-		)
 
 		,[CreatedBy] INT NOT NULL
 		,[ModifiedBy] INT NOT NULL
