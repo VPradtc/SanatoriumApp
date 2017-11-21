@@ -13,6 +13,7 @@
                 public const string GetByPage = "usp_Users_GetByPage";
                 public const string GetTotal = "usp_Users_GetTotal";
                 public const string GetById = "usp_Users_GetById";
+                public const string GetAll = "usp_Users_GetAll";
             }
 
             public static class RefreshTokens
@@ -30,6 +31,17 @@
                 public const string GetByPage = "usp_MedicalProcedures_GetByPage";
                 public const string GetTotal = "usp_MedicalProcedures_GetTotal";
                 public const string GetById = "usp_MedicalProcedures_GetById";
+                public const string GetAll = "usp_MedicalProcedures_GetAll";
+            }
+
+            public static class ScheduledMedicalProcedures
+            {
+                public const string Create = "usp_ScheduledMedicalProcedures_Create";
+                public const string Delete = "usp_ScheduledMedicalProcedures_Delete";
+                public const string Update = "usp_ScheduledMedicalProcedures_Update";
+                public const string GetByPage = "usp_ScheduledMedicalProcedures_GetByPage";
+                public const string GetTotal = "usp_ScheduledMedicalProcedures_GetTotal";
+                public const string GetById = "usp_ScheduledMedicalProcedures_GetById";
             }
 
             public static class Bookings

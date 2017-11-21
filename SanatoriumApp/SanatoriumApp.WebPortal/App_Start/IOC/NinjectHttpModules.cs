@@ -21,12 +21,14 @@ using SanatoriumApp.Repositories.Bookings;
 using SanatoriumApp.Repositories.Clients;
 using SanatoriumApp.Repositories.MedicalProcedures;
 using SanatoriumApp.Repositories.Rooms;
+using SanatoriumApp.Repositories.ScheduledMedicalProcedures;
 using SanatoriumApp.Repositories.Users;
 using SanatoriumApp.Services.Auth.MedicalProcedures;
 using SanatoriumApp.Services.Auth.Users;
 using SanatoriumApp.Services.Bookings;
 using SanatoriumApp.Services.Clients;
 using SanatoriumApp.Services.Rooms;
+using SanatoriumApp.Services.ScheduledMedicalProcedures;
 using SanatoriumApp.WebPortal.App_Start.ErrorPolicy;
 using SanatoriumApp.WebPortal.Auth;
 using SanatoriumApp.WebPortal.Filters.Errors;
@@ -78,6 +80,7 @@ namespace SanatoriumApp.IOC
                 Kernel.Bind<IClientRepository>().To<ClientRepository>();
                 Kernel.Bind<IBookingRepository>().To<BookingRepository>();
                 Kernel.Bind<IRefreshTokenRepository>().To<RefreshTokenRepository>();
+                Kernel.Bind<IScheduledMedicalProcedureRepository>().To<ScheduledMedicalProcedureRepository>();
             }
         }
 
@@ -122,6 +125,7 @@ namespace SanatoriumApp.IOC
                 Kernel.Bind<IRoomService>().To<RoomService>();
                 Kernel.Bind<IClientService>().To<ClientService>();
                 Kernel.Bind<IBookingService>().To<BookingService>();
+                Kernel.Bind<IScheduledMedicalProcedureService>().To<ScheduledMedicalProcedureService>();
             }
         }
 

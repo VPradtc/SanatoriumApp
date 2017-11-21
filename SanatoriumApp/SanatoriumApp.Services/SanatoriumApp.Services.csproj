@@ -51,6 +51,8 @@
     <Compile Include="Booking\BookingService.cs" />
     <Compile Include="Clients\IClientService.cs" />
     <Compile Include="Clients\ClientService.cs" />
+    <Compile Include="ScheduledMedicalProcedures\IScheduledMedicalProcedureService.cs" />
+    <Compile Include="ScheduledMedicalProcedures\ScheduledMedicalProcedureService.cs" />
     <Compile Include="Rooms\IRoomService.cs" />
     <Compile Include="Rooms\RoomService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

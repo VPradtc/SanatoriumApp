@@ -1,9 +1,8 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Domain.Auth;
 using Core.Domain.Common;
 using SanatoriumApp.Domain.Users;
-using SanatoriumApp.Viewmodels.Users;
 
 namespace SanatoriumApp.Repositories.Users
 {
@@ -19,5 +18,6 @@ namespace SanatoriumApp.Repositories.Users
         Task Delete(int id);
 
         Task Update(UserEditModel request);
+        Task<ICollection<User>> GetAll();
     }
 }

@@ -46,6 +46,8 @@
     <Compile Include="Clients\ClientRepository.cs" />
     <Compile Include="Bookings\IBookingRepository.cs" />
     <Compile Include="Bookings\BookingRepository.cs" />
+    <Compile Include="ScheduledMedicalProcedures\IScheduledMedicalProcedureRepository.cs" />
+    <Compile Include="ScheduledMedicalProcedures\ScheduledMedicalProcedureRepository.cs" />
     <Compile Include="Rooms\IRoomRepository.cs" />
     <Compile Include="Rooms\RoomRepository.cs" />
     <Compile Include="MedicalProcedures\IMedicalProcedureRepository.cs" />

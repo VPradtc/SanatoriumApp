@@ -194,6 +194,7 @@
     <Compile Include="Controllers\Core\BaseApiController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\ScheduledMedicalProcedureController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\MedicalProcedureController.cs" />
     <Compile Include="Controllers\UserController.cs" />
