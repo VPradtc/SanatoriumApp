@@ -1,8 +1,12 @@
 ﻿'use strict';
 angular.module('DataAccessApp').controller('bookingController',
-    ['$scope', 'bookingService', 'bookingModel', 'shortDateColumnTemplateFactory', BookingController]);
+    ['$scope', '$state', 'bookingService', 'bookingModel', 'shortDateColumnTemplateFactory', BookingController]);
 
-function BookingController($scope, bookingService, bookingModel, shortDateColumnTemplateFactory) {
+function BookingController($scope, $state, bookingService, bookingModel, shortDateColumnTemplateFactory) {
+    $scope.goToProcedures = function (dataItem) {
+        $state.go('app.main.booking.procedure.index', { bookingId: dataItem.id })
+    }
+
     $scope.gridConfig = {
         grid: {
             getDataUrl: bookingService.getByPageUrl,
@@ -25,6 +29,17 @@ function BookingController($scope, bookingService, bookingModel, shortDateColumn
                     field: 'endDate',
                     title: 'booking.endDate',
                     template: shortDateColumnTemplateFactory.create('endDate'),
+                },
+                {
+                    type: 'action',
+                    value: {
+                        template: '<button class="btn default" style="margin-left: 5px;" i18n="common.medicalProcedures"></button>',
+                        click: {
+                            method: $scope.goToProcedures,
+                            name: 'goToProcedures',
+                            call: 'goToProcedures(dataItem)',
+                        }
+                    },
                 },
                 {
                     type: 'action',

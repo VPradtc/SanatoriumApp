@@ -9,5 +9,6 @@
   "lastNameIsRequired": "Last name is required.",
   "passportIsRequired": "Passport is required.",
   "createClient": "Create Client",
-  "editClient": "Edit Client"
+  "editClient": "Edit Client",
+  "clientWithSuchPassportAlreadyExists": "Client with such passport already exists"
 }

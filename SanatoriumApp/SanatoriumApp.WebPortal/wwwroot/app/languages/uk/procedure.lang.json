@@ -1,0 +1,16 @@
+﻿{
+  "procedures": "Процедури",
+  "procedure": "Процедура",
+  "scheduledDate": "Назначена дата",
+  "employee": "Працівник",
+  "medicalProcedure": "Медична Процедура",
+  "deleteThisProcedure": "Видалити назначену процедуру?",
+  "createProcedure": "Назначити нову процедуру",
+  "editProcedure": "Редагувати назначену процедуру",
+  "selectClient": "Виберіть працівника...",
+  "selectMedicalProcedure": "Виберіть процедуру...",
+
+  "scheduledDateIsRequired": "Вкажіть назначену дату.",
+  "medicalProcedureIsRequired": "Вкажіть мед. процедуру.",
+  "employeeIsRequired": "Вкажіть працівника."
+}

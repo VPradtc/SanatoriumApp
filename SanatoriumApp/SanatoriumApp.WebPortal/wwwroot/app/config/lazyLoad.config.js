@@ -217,6 +217,12 @@ angular.module('DataAccessApp').config(['$ocLazyLoadProvider', function ($ocLazy
                     'app/kendo/models/bookingModel.js',
                     'app/factory/forms/booking/bookingFormFactory.js',
                     'app/factory/forms/booking/validators/vacantBookingValidator.js',
+
+                    'app/controllers/booking/procedure/procedureController.js',
+                    'app/controllers/booking/procedure/procedureEditController.js',
+                    'app/services/booking/procedure/procedureService.js',
+                    'app/kendo/models/procedureModel.js',
+                    'app/factory/forms/booking/procedure/procedureFormFactory.js',
                 ]
             },
             {

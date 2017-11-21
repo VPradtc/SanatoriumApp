@@ -335,6 +335,8 @@
     <Content Include="wwwroot\app\controllers\auth\authController.js" />
     <Content Include="wwwroot\app\controllers\auth\registerController.js" />
     <Content Include="wwwroot\app\controllers\base\baseController.js" />
+    <Content Include="wwwroot\app\controllers\booking\procedure\procedureController.js" />
+    <Content Include="wwwroot\app\controllers\booking\procedure\procedureEditController.js" />
     <Content Include="wwwroot\app\controllers\booking\bookingController.js" />
     <Content Include="wwwroot\app\controllers\booking\bookingEditController.js" />
     <Content Include="wwwroot\app\controllers\dialogs\dialogController.js" />
@@ -397,6 +399,7 @@
     <Content Include="wwwroot\app\factory\details\detailsStrategyFactory.js" />
     <Content Include="wwwroot\app\factory\details\strategies\createDetailsStrategy.js" />
     <Content Include="wwwroot\app\factory\details\strategies\editDetailsStrategy.js" />
+    <Content Include="wwwroot\app\factory\forms\booking\procedure\procedureFormFactory.js" />
     <Content Include="wwwroot\app\factory\forms\booking\validators\vacantBookingValidator.js" />
     <Content Include="wwwroot\app\factory\forms\client\validators\uniquePassportValidator.js" />
     <Content Include="wwwroot\app\factory\forms\common\editControlLocator.js" />
@@ -432,6 +435,7 @@
     <Content Include="wwwroot\app\kendo\models\bookingModel.js" />
     <Content Include="wwwroot\app\kendo\models\clientModel.js" />
     <Content Include="wwwroot\app\kendo\models\medicalProcedureModel.js" />
+    <Content Include="wwwroot\app\kendo\models\procedureModel.js" />
     <Content Include="wwwroot\app\kendo\models\roomModel.js" />
     <Content Include="wwwroot\app\kendo\models\userModel.js" />
     <Content Include="wwwroot\app\scripts\angular-cookies\angular-cookies.js" />
@@ -543,6 +547,7 @@
     <Content Include="wwwroot\app\services\authService.js" />
     <Content Include="wwwroot\app\services\authService.min.js" />
     <Content Include="wwwroot\app\services\baseService.js" />
+    <Content Include="wwwroot\app\services\booking\procedure\procedureService.js" />
     <Content Include="wwwroot\app\services\core\roleSpecificViewLocator.js" />
     <Content Include="wwwroot\app\services\dialogs\dialogService.js" />
     <Content Include="wwwroot\app\services\loading\loadingService.js" />
@@ -554,6 +559,8 @@
     <Content Include="wwwroot\app\services\user\userService.js" />
     <Content Include="wwwroot\app\views\auth\login.html" />
     <Content Include="wwwroot\app\views\auth\register.html" />
+    <Content Include="wwwroot\app\views\booking\procedure\edit.html" />
+    <Content Include="wwwroot\app\views\booking\procedure\index.html" />
     <Content Include="wwwroot\app\views\common\breadcrumb.html" />
     <Content Include="wwwroot\app\views\common\breadcrumb\breadcrumb-block.html" />
     <Content Include="wwwroot\app\views\common\breadcrumb\breadcrumb.html" />
@@ -705,6 +712,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="wwwroot\app\languages\uk\booking.lang.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\app\languages\en-US\procedure.lang.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\app\languages\uk\procedure.lang.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\app\languages\uk\client.lang.json" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
